@@ -23,9 +23,9 @@ public class Simulator : MonoBehaviour
         Octree.Subdivide(this.octree_root);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void FixedUpdate()
     {
-        
+        this.octree_root = new Octree(this.items);
+        Octree.Subdivide(this.octree_root);
     }
 }

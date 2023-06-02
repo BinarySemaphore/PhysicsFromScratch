@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 1495528055}
   - component: {fileID: 1495528053}
   m_Layer: 0
-  m_Name: DrawBB
+  m_Name: DebugDrawBB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

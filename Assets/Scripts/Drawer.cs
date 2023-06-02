@@ -16,8 +16,8 @@ public class Drawer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cache_index = 0;
-        cache_objects = new List<GameObject>();
+        this.cache_index = 0;
+        this.cache_objects = new List<GameObject>();
     }
 
     // Update is called once per frame
@@ -37,10 +37,12 @@ public class Drawer : MonoBehaviour
     /// <param name="bounding_box"></param>
     public void DrawAABB(AABB bounding_box)
     {
+        /*
         foreach (Vector3 point in bounding_box.GetDrawPoints())
         {
-            DrawCircle(point, 0.075f, width: 0.1f);
-        }
+            this.DrawCircle(point, 0.075f, width: 0.1f);
+        }*/
+        this.DrawBox(bounding_box.GetDrawPoints(), width: 0.1f);
     }
 
     /// <summary>
@@ -49,10 +51,10 @@ public class Drawer : MonoBehaviour
     /// <param name="current"></param>
     public void DrawOctree(Octree current)
     {
-        if (current != null) DrawAABB(current);
+        if (current != null) this.DrawAABB(current);
         foreach (Octree child in current.children)
         {
-            DrawOctree(child);
+            this.DrawOctree(child);
         }
     }
 
@@ -65,7 +67,7 @@ public class Drawer : MonoBehaviour
     /// <param name="width">Line width.</param>
     void DrawCircle(Vector3 center, float radius, int steps = 20, float width = 1.0f)
     {
-        LineRenderer renderer = GetRenderer();
+        LineRenderer renderer = this.GetRenderer();
         float angle_step = 2 * Mathf.PI / steps;
         renderer.positionCount = steps + 2;
         renderer.startWidth = width;
@@ -75,6 +77,20 @@ public class Drawer : MonoBehaviour
             float x = radius * Mathf.Cos(i * angle_step);
             float y = radius * Mathf.Sin(i * angle_step);
             renderer.SetPosition(i, new Vector3(x, y, 0) + center);
+        }
+    }
+
+    void DrawBox(List<Vector3> corners, float width=1.0f)
+    {
+        LineRenderer renderer = this.GetRenderer();
+        renderer.positionCount = 16;
+        renderer.startWidth = width;
+        renderer.endWidth = width;
+
+        int[] indices = { 1, 0, 2, 3, 1, 5, 4, 6, 7, 5, 4, 0, 2, 6, 7, 3 };
+        for (int i = 0; i < indices.Length; i++)
+        {
+            renderer.SetPosition(i, corners[indices[i]]);
         }
     }
 
