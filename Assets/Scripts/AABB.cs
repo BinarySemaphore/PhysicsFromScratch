@@ -16,7 +16,7 @@ public class AABB
     public Vector3 dimensions = Vector3.zero;
 
     /// <summary>
-    /// Manually defined AABB
+    /// Manually defined Axis Aligned Bounding Box.
     /// </summary>
     /// <param name="center"></param>
     /// <param name="dimensions"></param>
@@ -58,11 +58,17 @@ public class AABB
         }
     }
 
-    public bool IsOverlapping(AABB a, AABB b)
+    /// <summary>
+    /// Check if <paramref name="A"/> and <paramref name="B"/> are overlapping.
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="B"></param>
+    /// <returns></returns>
+    public static bool IsOverlapping(AABB A, AABB B)
     {
         bool overlapping = true;
-        Vector3 distance = a.center - b.center;
-        Vector3 combined_dims = a.dimensions + b.dimensions;
+        Vector3 distance = A.center - B.center;
+        Vector3 combined_dims = A.dimensions + B.dimensions;
         if(Mathf.Abs(distance.x) > combined_dims.x)
         {
             overlapping = true;
@@ -78,6 +84,10 @@ public class AABB
         return overlapping;
     }
 
+    /// <summary>
+    /// Get corner points for drawing.
+    /// </summary>
+    /// <returns>List of eight corner points</returns>
     public List<Vector3> GetDrawPoints()
     {
         List<Vector3> points = new List<Vector3>();

@@ -11,7 +11,7 @@ public class Drawer : MonoBehaviour
     private List<GameObject> cache_objects;
 
     public new Camera camera;
-    public List<AABB_Object> objects_to_draw;
+    public Simulator sim;
 
     // Start is called before the first frame update
     void Start()
@@ -23,14 +23,37 @@ public class Drawer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (AABB_Object item in objects_to_draw)
+        this.DrawOctree(this.sim.octree_root);
+        foreach (OctreeItem item in this.sim.items)
         {
-            foreach (Vector3 point in item.bounding_box.GetDrawPoints())
-            {
-                DrawCircle(point, 0.075f, width:0.1f);
-            }
+            this.DrawAABB(item);
         }
-        CleanCache();
+        this.CleanCache();
+    }
+
+    /// <summary>
+    /// Draw <see cref="AABB"/> corners.
+    /// </summary>
+    /// <param name="bounding_box"></param>
+    public void DrawAABB(AABB bounding_box)
+    {
+        foreach (Vector3 point in bounding_box.GetDrawPoints())
+        {
+            DrawCircle(point, 0.075f, width: 0.1f);
+        }
+    }
+
+    /// <summary>
+    /// Draw <see cref="Octree"/> corners and its children.
+    /// </summary>
+    /// <param name="current"></param>
+    public void DrawOctree(Octree current)
+    {
+        if (current != null) DrawAABB(current);
+        foreach (Octree child in current.children)
+        {
+            DrawOctree(child);
+        }
     }
 
     /// <summary>
@@ -61,12 +84,12 @@ public class Drawer : MonoBehaviour
     /// </summary>
     void CleanCache()
     {
-        for (int i = cache_index; i < cache_objects.Count; i++)
+        for (int i = this.cache_index; i < this.cache_objects.Count; i++)
         {
-            GameObject.Destroy(cache_objects[cache_index]);
-            cache_objects.RemoveAt(cache_index);
+            GameObject.Destroy(this.cache_objects[this.cache_index]);
+            this.cache_objects.RemoveAt(this.cache_index);
         }
-        cache_index = 0;
+        this.cache_index = 0;
     }
 
     /// <summary>
@@ -77,20 +100,20 @@ public class Drawer : MonoBehaviour
     LineRenderer GetRenderer()
     {
         LineRenderer renderer = null;
-        if (cache_index == cache_objects.Count)
+        if (this.cache_index == this.cache_objects.Count)
         {
             GameObject new_object = new GameObject();
             new_object.transform.parent = this.transform;
             renderer = new_object.AddComponent<LineRenderer>();
             renderer.receiveShadows = false;
             renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            cache_objects.Add(new_object);
+            this.cache_objects.Add(new_object);
         }
         if (renderer == null)
         {
-            renderer = cache_objects[cache_index].GetComponent<LineRenderer>();
+            renderer = this.cache_objects[this.cache_index].GetComponent<LineRenderer>();
         }
-        cache_index++;
+        this.cache_index++;
         return renderer;
     }
 }
