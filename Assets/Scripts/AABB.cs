@@ -93,6 +93,17 @@ public class AABB
         List<Vector3> points = new List<Vector3>();
         for (int i=0; i < 8; i++)
         {
+            /*
+             * Dimension Expression Order:
+             * 0:  1,  1,  1
+             * 1: -1,  1,  1
+             * 2:  1, -1,  1
+             * 3: -1, -1,  1
+             * 4:  1,  1, -1
+             * 5: -1,  1, -1
+             * 6:  1, -1, -1
+             * 7: -1, -1, -1
+             */
             Vector3 modifier = Vector3.one;
             if (i % 2 == 1) modifier.x = -1;
             if (Mathf.Floor((i % 4) / 2) == 1) modifier.y = -1;

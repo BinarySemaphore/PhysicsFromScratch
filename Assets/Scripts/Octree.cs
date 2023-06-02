@@ -135,7 +135,7 @@ public class Octree : AABB
 
         // Check subdivision min constraints
         if (current.items.Count <= 3) return;
-        if (current.dimensions.magnitude < 3.0f) return;
+        if (current.dimensions.x < 3.0f || current.dimensions.y < 3.0f || current.dimensions.z < 3.0f) return;
 
         // Check if subdividing required
         foreach (Octree subdivision in Octree.OctreesFromParent(current))

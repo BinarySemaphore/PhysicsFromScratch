@@ -25,6 +25,11 @@ public class Simulator : MonoBehaviour
 
     private void FixedUpdate()
     {
+        this.items = new List<OctreeItem>();
+        foreach (GameObject game_object in to_simulate)
+        {
+            this.items.Add(new OctreeItem(game_object));
+        }
         this.octree_root = new Octree(this.items);
         Octree.Subdivide(this.octree_root);
     }
