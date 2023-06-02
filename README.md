@@ -1,3 +1,3 @@
 # PhysicsFromScratch
 
-See [documentation](../blob/main/Docs/html/index.html).
+See [documentation](../main/Docs/html/index.html).
