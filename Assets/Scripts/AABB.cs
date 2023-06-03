@@ -71,15 +71,15 @@ public class AABB
         Vector3 combined_dims = A.dimensions + B.dimensions;
         if(Mathf.Abs(distance.x) > combined_dims.x)
         {
-            overlapping = true;
+            overlapping = false;
         }
         if (Mathf.Abs(distance.y) > combined_dims.y)
         {
-            overlapping = true;
+            overlapping = false;
         }
         if (Mathf.Abs(distance.z) > combined_dims.z)
         {
-            overlapping = true;
+            overlapping = false;
         }
         return overlapping;
     }

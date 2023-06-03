@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Simulator : MonoBehaviour
 {
-    public List<GameObject> to_simulate;
+    public string objects_tag;
 
     [HideInInspector]
     public Octree octree_root;
@@ -14,19 +14,18 @@ public class Simulator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        this.items = new List<OctreeItem>();
-        foreach (GameObject game_object in to_simulate)
-        {
-            this.items.Add(new OctreeItem(game_object));
-        }
-        this.octree_root = new Octree(this.items);
-        Octree.Subdivide(this.octree_root);
+        this.Initalize();
     }
 
     private void FixedUpdate()
     {
+        this.Initalize();
+    }
+
+    void Initalize()
+    {
         this.items = new List<OctreeItem>();
-        foreach (GameObject game_object in to_simulate)
+        foreach (GameObject game_object in GameObject.FindGameObjectsWithTag(this.objects_tag))
         {
             this.items.Add(new OctreeItem(game_object));
         }

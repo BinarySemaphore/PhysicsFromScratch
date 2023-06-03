@@ -119,7 +119,7 @@ public class Octree : AABB
     /// <para>Constraints:
     /// <list type="bullet">
     ///     <item>Five or fewer <see cref="items"/></item>
-    ///     <item>Magnitude of <see cref="AABB.dimensions"/> less than 3.0f</item>
+    ///     <item>Any axis of <see cref="AABB.dimensions"/> less than 5.0f</item>
     /// </list></para>
     /// </summary>
     /// <remarks>Refuses to subdivide if <see cref="items"/> do not reduce.</remarks>
@@ -135,7 +135,7 @@ public class Octree : AABB
 
         // Check subdivision min constraints
         if (current.items.Count <= 3) return;
-        if (current.dimensions.x < 3.0f || current.dimensions.y < 3.0f || current.dimensions.z < 3.0f) return;
+        if (current.dimensions.x < 5.0f || current.dimensions.y < 5.0f || current.dimensions.z < 5.0f) return;
 
         // Check if subdividing required
         foreach (Octree subdivision in Octree.OctreesFromParent(current))
