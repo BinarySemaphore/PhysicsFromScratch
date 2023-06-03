@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('class_drawer.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a> &#124;
@@ -91,7 +92,7 @@ $(document).ready(function(){initNavTree('class_drawer.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>Will draw circles around points of <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> from given list of <a class="el" href="class_drawer.html#a69c0758c4b811b998b0692d113bad111">objects_to_draw</a>.  
+<p>Will draw circles around points of <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> from given list of objects_to_draw.  
  <a href="class_drawer.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Drawer:</div>
@@ -100,12 +101,21 @@ Inheritance diagram for Drawer:</div>
   <img src="class_drawer.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ab591671ff2a7d6a8444f4922dcdada37"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#ab591671ff2a7d6a8444f4922dcdada37">DrawAABB</a> (<a class="el" href="class_a_a_b_b.html">AABB</a> bounding_box)</td></tr>
+<tr class="memdesc:ab591671ff2a7d6a8444f4922dcdada37"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> corners.  <a href="class_drawer.html#ab591671ff2a7d6a8444f4922dcdada37">More...</a><br /></td></tr>
+<tr class="separator:ab591671ff2a7d6a8444f4922dcdada37"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ef94e3bea892b1813a21bca2bd9c925"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a0ef94e3bea892b1813a21bca2bd9c925">DrawOctree</a> (<a class="el" href="class_octree.html">Octree</a> current)</td></tr>
+<tr class="memdesc:a0ef94e3bea892b1813a21bca2bd9c925"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw <a class="el" href="class_octree.html" title="Octree AABB spacial structure.">Octree</a> corners and its children.  <a href="class_drawer.html#a0ef94e3bea892b1813a21bca2bd9c925">More...</a><br /></td></tr>
+<tr class="separator:a0ef94e3bea892b1813a21bca2bd9c925"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a163429a90ca907e274bc1470ff1465dc"><td class="memItemLeft" align="right" valign="top">new Camera&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a163429a90ca907e274bc1470ff1465dc">camera</a></td></tr>
 <tr class="separator:a163429a90ca907e274bc1470ff1465dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a69c0758c4b811b998b0692d113bad111"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_a_a_b_b___object.html">AABB_Object</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a69c0758c4b811b998b0692d113bad111">objects_to_draw</a></td></tr>
-<tr class="separator:a69c0758c4b811b998b0692d113bad111"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cedb81f6ebe303e6af6348c28461c64"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simulator.html">Simulator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a3cedb81f6ebe303e6af6348c28461c64">sim</a></td></tr>
+<tr class="separator:a3cedb81f6ebe303e6af6348c28461c64"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -116,6 +126,8 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a7ed577eab57bd6cbd61b46fe17240c6e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a7ed577eab57bd6cbd61b46fe17240c6e">DrawCircle</a> (Vector3 center, float radius, int steps=20, float width=1.0f)</td></tr>
 <tr class="memdesc:a7ed577eab57bd6cbd61b46fe17240c6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a circle at <em>center</em>  with <em>radius</em> .  <a href="class_drawer.html#a7ed577eab57bd6cbd61b46fe17240c6e">More...</a><br /></td></tr>
 <tr class="separator:a7ed577eab57bd6cbd61b46fe17240c6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669eb2a20f81eb2f2d0125b51eab4c14"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#a669eb2a20f81eb2f2d0125b51eab4c14">DrawBox</a> (List&lt; Vector3 &gt; corners, float width=1.0f)</td></tr>
+<tr class="separator:a669eb2a20f81eb2f2d0125b51eab4c14"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa50706663da531ef082eceb899ed35f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_drawer.html#aa50706663da531ef082eceb899ed35f6">CleanCache</a> ()</td></tr>
 <tr class="memdesc:aa50706663da531ef082eceb899ed35f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call at end of update method to clean cache. Culls any drawing object not used.  <a href="class_drawer.html#aa50706663da531ef082eceb899ed35f6">More...</a><br /></td></tr>
 <tr class="separator:aa50706663da531ef082eceb899ed35f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -131,7 +143,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:af5ea54dd3edf700708c9283386075744"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Will draw circles around points of <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> from given list of <a class="el" href="class_drawer.html#a69c0758c4b811b998b0692d113bad111">objects_to_draw</a>. </p>
+<div class="textblock"><p >Will draw circles around points of <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> from given list of objects_to_draw. </p>
 
 <p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00008">8</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -160,7 +172,73 @@ Private Attributes</h2></td></tr>
 
 <p>Call at end of update method to clean cache. Culls any drawing object not used. </p>
 
-<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00062">62</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00101">101</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+
+</div>
+</div>
+<a id="ab591671ff2a7d6a8444f4922dcdada37" name="ab591671ff2a7d6a8444f4922dcdada37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab591671ff2a7d6a8444f4922dcdada37">&#9670;&nbsp;</a></span>DrawAABB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drawer.DrawAABB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td>
+          <td class="paramname"><em>bounding_box</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> corners. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bounding_box</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00038">38</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+
+</div>
+</div>
+<a id="a669eb2a20f81eb2f2d0125b51eab4c14" name="a669eb2a20f81eb2f2d0125b51eab4c14"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669eb2a20f81eb2f2d0125b51eab4c14">&#9670;&nbsp;</a></span>DrawBox()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drawer.DrawBox </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; Vector3 &gt;&#160;</td>
+          <td class="paramname"><em>corners</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>width</em> = <code>1.0f</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00083">83</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
 
 </div>
 </div>
@@ -221,7 +299,35 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00043">43</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00068">68</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+
+</div>
+</div>
+<a id="a0ef94e3bea892b1813a21bca2bd9c925" name="a0ef94e3bea892b1813a21bca2bd9c925"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ef94e3bea892b1813a21bca2bd9c925">&#9670;&nbsp;</a></span>DrawOctree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Drawer.DrawOctree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_octree.html">Octree</a>&#160;</td>
+          <td class="paramname"><em>current</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Draw <a class="el" href="class_octree.html" title="Octree AABB spacial structure.">Octree</a> corners and its children. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00052">52</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
 
 </div>
 </div>
@@ -278,7 +384,7 @@ Private Attributes</h2></td></tr>
 <p>Get existing or new rendering object, cache if new. Requires <a class="el" href="class_drawer.html#aa50706663da531ef082eceb899ed35f6" title="Call at end of update method to clean cache. Culls any drawing object not used.">CleanCache</a>. </p>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00077">77</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_drawer_8cs_source.html#l00116">116</a> of file <a class="el" href="_drawer_8cs_source.html">Drawer.cs</a>.</p>
 
 </div>
 </div>
@@ -374,14 +480,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a69c0758c4b811b998b0692d113bad111" name="a69c0758c4b811b998b0692d113bad111"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69c0758c4b811b998b0692d113bad111">&#9670;&nbsp;</a></span>objects_to_draw</h2>
+<a id="a3cedb81f6ebe303e6af6348c28461c64" name="a3cedb81f6ebe303e6af6348c28461c64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cedb81f6ebe303e6af6348c28461c64">&#9670;&nbsp;</a></span>sim</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_a_a_b_b___object.html">AABB_Object</a>&gt; Drawer.objects_to_draw</td>
+          <td class="memname"><a class="el" href="class_simulator.html">Simulator</a> Drawer.sim</td>
         </tr>
       </table>
 </div><div class="memdoc">
