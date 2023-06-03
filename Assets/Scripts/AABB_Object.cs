@@ -7,15 +7,16 @@ using UnityEngine;
 /// </summary>
 public class AABB_Object : MonoBehaviour
 {
-    public AABB bounding_box;
+    public float mass;
+    public float friction;
+    public float elasticity;
+    public Vector3 starting_velocity;
     // Start is called before the first frame update
     void Start()
     {
-        bounding_box = new AABB(this.gameObject, AABB.Containment.smallest);
     }
 
     private void FixedUpdate()
     {
-        bounding_box = new AABB(this.gameObject, AABB.Containment.smallest);
     }
 }

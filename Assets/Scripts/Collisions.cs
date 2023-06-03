@@ -98,8 +98,8 @@ public class Collision
         reactive_velocity_B = reactive_velocity_B / total_mass;
 
         // Update velocities: planar friction + reactive
-        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A;
-        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B;
+        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A - acting_velocity_A;
+        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - acting_velocity_B;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_A);
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 

@@ -66,6 +66,9 @@ public class Body : OctreeItem
     /// <param name="delta_time"></param>
     public void Update(float delta_time)
     {
+        // Update BB to current position
+        this.center = this.entity.transform.position;
+
         if (!this.awake)
         {
             if (this.velocity.magnitude > 0.1f) this.awake = true;
@@ -77,9 +80,6 @@ public class Body : OctreeItem
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
         this.entity.transform.position += applied_velocity;
         this.entity.transform.rotation = Quaternion.Euler(applied_r_velocity) * this.entity.transform.rotation;
-
-        // Update BB to current position
-        this.center = this.entity.transform.position;
 
         // Check and handle collisions
         foreach (Collision collision in this.GetCollisions(delta_time))
@@ -96,11 +96,10 @@ public class Body : OctreeItem
     /// </summary>
     public void Update_End(float delta_time)
     {
+        this.ApplyAccumulations();
         if (!this.awake) return;
 
-        this.ApplyAccumulations();
-
-        if ((this.last_postion - this.center).magnitude <= 0.001f) this.idle_count += 1;
+        if ((this.last_postion - this.entity.transform.position).magnitude <= 0.001f) this.idle_count += 1;
         else this.idle_count = 0;
 
         if (this.idle_count > 10)
@@ -109,8 +108,9 @@ public class Body : OctreeItem
             this.awake = false;
             this.velocity = Vector3.zero;
             this.r_velocity = Vector3.zero;
-            this.accumulator = new List<Accumulation>();
         }
+
+        this.last_postion = this.entity.transform.position;
     }
 
     /// <summary>
@@ -125,7 +125,7 @@ public class Body : OctreeItem
 
         // Get neighbors from subdivisions in octree
         List<Body> neighbors = new List<Body>();
-        foreach (Octree subdivision in this.subdivisions[-1])
+        foreach (Octree subdivision in this.subdivisions[this.subdivisions.Count - 1])
         {
             foreach (Body neighbor in subdivision.items)
             {
@@ -196,12 +196,15 @@ public class Body : OctreeItem
         }
 
         // Averages or whatever
-        total_detla_position = total_detla_position / count_delta_positions;
+        if (count_delta_positions > 0) total_detla_position = total_detla_position / count_delta_positions;
 
         this.entity.transform.position += total_detla_position;
         this.center = this.entity.transform.position;
         this.velocity += total_delta_velocity;
         this.r_velocity += total_delta_r_velocity;
+
+        // Clear accumulations
+        this.accumulator = new List<Accumulation>();
     }
 
     /// <summary>

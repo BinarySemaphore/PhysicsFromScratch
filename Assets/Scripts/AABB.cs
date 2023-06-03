@@ -133,7 +133,7 @@ public class AABB
             if (Mathf.Floor(i / 4) == 1) modifier.z = -1;
 
             Vector3 new_point = Vector3.Scale(this.dimensions, modifier);
-            points.Add(new_point + center);
+            points.Add(new_point + this.center);
         }
         return points;
     }

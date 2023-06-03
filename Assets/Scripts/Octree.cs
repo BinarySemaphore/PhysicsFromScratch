@@ -33,7 +33,7 @@ public class Octree : AABB
 {
     public int index;
     public List<Octree> children;
-    public List<OctreeItem> items;
+    public List<Body> items;
 
     /// <summary>
     /// Manually creates empty Octree node
@@ -44,22 +44,24 @@ public class Octree : AABB
     {
         this.index = 0;
         this.children = new List<Octree>();
-        this.items = new List<OctreeItem>();
+        this.items = new List<Body>();
     }
 
     /// <summary>
     /// Creates Octree root containing all <paramref name="items"/>.
     /// </summary>
     /// <param name="items"></param>
-    public Octree(List<OctreeItem> items) : base(Vector3.zero, Vector3.zero)
+    public Octree(List<Body> items) : base(Vector3.zero, Vector3.zero)
     {
         Vector3 max = Vector3.zero;
         Vector3 min = Vector3.zero;
 
-        foreach (OctreeItem item in items)
+        this.items = new List<Body>();
+        foreach (Body body in items)
         {
-            Vector3 max_corner = item.center + item.dimensions;
-            Vector3 min_corner = item.center - item.dimensions;
+            this.items.Add(body);
+            Vector3 max_corner = body.center + body.dimensions;
+            Vector3 min_corner = body.center - body.dimensions;
 
             if (max == Vector3.zero)
             {
@@ -88,7 +90,6 @@ public class Octree : AABB
         this.dimensions = 0.5f * (max - min);
         this.index = 0;
         this.children = new List<Octree>();
-        this.items = items;
     }
 
     /// <summary>
@@ -133,9 +134,9 @@ public class Octree : AABB
     public static void Subdivide(Octree current, int depth = 0)
     {
         // Update items' subdivision awareness
-        foreach (OctreeItem item in current.items)
+        foreach (Body body in current.items)
         {
-            item.AddSubdivision(depth, current);
+            body.AddSubdivision(depth, current);
         }
 
         // Check subdivision min constraints
@@ -145,12 +146,12 @@ public class Octree : AABB
         // Check if subdividing required
         foreach (Octree subdivision in Octree.OctreesFromParent(current))
         {
-            List<OctreeItem> found_items = subdivision.items;
-            foreach (OctreeItem item in current.items)
+            List<Body> found_items = subdivision.items;
+            foreach (Body body in current.items)
             {
-                if (AABB.IsOverlapping(item, subdivision))
+                if (AABB.IsOverlapping(body, subdivision))
                 {
-                    found_items.Add(item);
+                    found_items.Add(body);
                 }
             }
 
