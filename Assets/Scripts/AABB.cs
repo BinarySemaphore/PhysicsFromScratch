@@ -63,7 +63,7 @@ public class AABB
     /// </summary>
     /// <param name="A"></param>
     /// <param name="B"></param>
-    /// <returns></returns>
+    /// <returns><see cref="System.Boolean"/> overlapping status.</returns>
     public static bool IsOverlapping(AABB A, AABB B)
     {
         bool overlapping = true;
@@ -82,6 +82,29 @@ public class AABB
             overlapping = false;
         }
         return overlapping;
+    }
+
+    /// <summary>
+    /// Return a face normal of overlapping <see cref="AABB"/>s.
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="B"></param>
+    /// <returns>face axis normal <see cref="Vector3"/>.</returns>
+    public static Vector3 NormalOfOverlapping(AABB A, AABB B)
+    {
+        Vector3 normal = Vector3.zero;
+        Vector3 distance = A.center - B.center;
+        Vector3 combined_dims = A.dimensions + B.dimensions;
+        float x_diff = combined_dims.x - Mathf.Abs(distance.x);
+        float y_diff = combined_dims.y - Mathf.Abs(distance.y);
+        float z_diff = combined_dims.z - Mathf.Abs(distance.z);
+        float min_diff = Mathf.Min(x_diff, y_diff, z_diff);
+
+        if (x_diff == min_diff) normal.x = 1.0f;
+        else if (y_diff == min_diff) normal.y = 1.0f;
+        else if (z_diff == min_diff) normal.z = 1.0f;
+        
+        return normal;
     }
 
     /// <summary>

@@ -19,6 +19,11 @@ public class OctreeItem : AABB
         if (this.subdivisions.Count <= depth) this.subdivisions.Add(new List<Octree>());
         this.subdivisions[depth].Add(subdivision);
     }
+
+    public void ResetSubdivisions()
+    {
+        this.subdivisions = new List<List<Octree>>();
+    }
 }
 
 /// <summary>
