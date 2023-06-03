@@ -99,9 +99,15 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ac5c701befcb658d5c82602aff6ad2629"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="class_collision.html">Collision</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision.html#ac5c701befcb658d5c82602aff6ad2629">GetCollisionsForGround</a> (<a class="el" href="class_body.html">Body</a> <a class="el" href="class_collision.html#ad69d371c63b60e2082359f0e65b8aacf">A</a>, float delta_time)</td></tr>
+<tr class="memdesc:ac5c701befcb658d5c82602aff6ad2629"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="class_collision.html">Collision</a>s between <em>A</em>  and ground tagged GameObjects.  <a href="class_collision.html#ac5c701befcb658d5c82602aff6ad2629">More...</a><br /></td></tr>
+<tr class="separator:ac5c701befcb658d5c82602aff6ad2629"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1059298a96bf5519c6c12c730f7b1919"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="class_collision.html">Collision</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision.html#a1059298a96bf5519c6c12c730f7b1919">GetCollisionsForDynamicNeighbors</a> (<a class="el" href="class_body.html">Body</a> <a class="el" href="class_collision.html#ad69d371c63b60e2082359f0e65b8aacf">A</a>, List&lt; <a class="el" href="class_body.html">Body</a> &gt; neighbors)</td></tr>
 <tr class="memdesc:a1059298a96bf5519c6c12c730f7b1919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get <a class="el" href="class_collision.html">Collision</a>s between <em>A</em>  and <em>neighbors</em> .  <a href="class_collision.html#a1059298a96bf5519c6c12c730f7b1919">More...</a><br /></td></tr>
 <tr class="separator:a1059298a96bf5519c6c12c730f7b1919"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a874f836ed15d601a47a7851f7347e741"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision.html#a874f836ed15d601a47a7851f7347e741">ResolveImpulseDynamicAGroundB</a> (<a class="el" href="class_body.html">Body</a> <a class="el" href="class_collision.html#ad69d371c63b60e2082359f0e65b8aacf">A</a>, Vector3 position, Vector3 <a class="el" href="class_collision.html#a13d222a29e2f183d0d51b129ae71ca28">normal</a>, float delta_time)</td></tr>
+<tr class="memdesc:a874f836ed15d601a47a7851f7347e741"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve collision by applying Body.AccumulationType to <a class="el" href="class_body.html" title="Physics Body">Body</a>.  <a href="class_collision.html#a874f836ed15d601a47a7851f7347e741">More...</a><br /></td></tr>
+<tr class="separator:a874f836ed15d601a47a7851f7347e741"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6567fe5854c74dd69c53e22001e756be"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_collision.html#a6567fe5854c74dd69c53e22001e756be">ResolveImpulseDynamicADynamicB</a> (<a class="el" href="class_body.html">Body</a> <a class="el" href="class_collision.html#ad69d371c63b60e2082359f0e65b8aacf">A</a>, <a class="el" href="class_body.html">Body</a> <a class="el" href="class_collision.html#aae18eccf6516d1279078b8fd90406b00">B</a>, Vector3 position, Vector3 <a class="el" href="class_collision.html#a13d222a29e2f183d0d51b129ae71ca28">normal</a>, float delta_time)</td></tr>
 <tr class="memdesc:a6567fe5854c74dd69c53e22001e756be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resolve collision by applying Body.AccumulationType to <a class="el" href="class_body.html" title="Physics Body">Body</a>.  <a href="class_collision.html#a6567fe5854c74dd69c53e22001e756be">More...</a><br /></td></tr>
 <tr class="separator:a6567fe5854c74dd69c53e22001e756be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +225,54 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List&lt;Collision&gt; any collisions</dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_collisions_8cs_source.html#l00061">61</a> of file <a class="el" href="_collisions_8cs_source.html">Collisions.cs</a>.</p>
+
+</div>
+</div>
+<a id="ac5c701befcb658d5c82602aff6ad2629" name="ac5c701befcb658d5c82602aff6ad2629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5c701befcb658d5c82602aff6ad2629">&#9670;&nbsp;</a></span>GetCollisionsForGround()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static List&lt; <a class="el" href="class_collision.html">Collision</a> &gt; Collision.GetCollisionsForGround </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_body.html">Body</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get <a class="el" href="class_collision.html">Collision</a>s between <em>A</em>  and ground tagged GameObjects. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td></td></tr>
+    <tr><td class="paramname">delta_time</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>List&lt;Collision&gt; any collisions</dd></dl>
+
 <p class="definition">Definition at line <a class="el" href="_collisions_8cs_source.html#l00033">33</a> of file <a class="el" href="_collisions_8cs_source.html">Collisions.cs</a>.</p>
 
 </div>
@@ -287,7 +341,68 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_collisions_8cs_source.html#l00063">63</a> of file <a class="el" href="_collisions_8cs_source.html">Collisions.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_collisions_8cs_source.html#l00122">122</a> of file <a class="el" href="_collisions_8cs_source.html">Collisions.cs</a>.</p>
+
+</div>
+</div>
+<a id="a874f836ed15d601a47a7851f7347e741" name="a874f836ed15d601a47a7851f7347e741"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a874f836ed15d601a47a7851f7347e741">&#9670;&nbsp;</a></span>ResolveImpulseDynamicAGroundB()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Collision.ResolveImpulseDynamicAGroundB </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_body.html">Body</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>normal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Resolve collision by applying Body.AccumulationType to <a class="el" href="class_body.html" title="Physics Body">Body</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td></td></tr>
+    <tr><td class="paramname">position</td><td></td></tr>
+    <tr><td class="paramname">normal</td><td></td></tr>
+    <tr><td class="paramname">delta_time</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="_collisions_8cs_source.html#l00090">90</a> of file <a class="el" href="_collisions_8cs_source.html">Collisions.cs</a>.</p>
 
 </div>
 </div>

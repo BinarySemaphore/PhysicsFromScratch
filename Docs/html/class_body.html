@@ -115,6 +115,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afadeaa61fb41a7fa8d269bb158aaba13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#afadeaa61fb41a7fa8d269bb158aaba13">Update_End</a> (float delta_time)</td></tr>
 <tr class="memdesc:afadeaa61fb41a7fa8d269bb158aaba13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call once per simulation update after <a class="el" href="class_body.html#aa5bacb02bb6471551f91fe2f2036b5c4" title="Call first once per simulation update. Follow up updates with Update_End">Update(float)</a>  <a href="class_body.html#afadeaa61fb41a7fa8d269bb158aaba13">More...</a><br /></td></tr>
 <tr class="separator:afadeaa61fb41a7fa8d269bb158aaba13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e4d179f6cf4afa3d41fa58709946f22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#a3e4d179f6cf4afa3d41fa58709946f22">ApplyAcceleration</a> (Vector3 acceleration, float delta_time, bool no_wake)</td></tr>
+<tr class="separator:a3e4d179f6cf4afa3d41fa58709946f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a516047aa6caf8289357c26b98ece17e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#a516047aa6caf8289357c26b98ece17e2">AddToAccumulator</a> (<a class="el" href="class_accumulation.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a> type, Vector3 value)</td></tr>
 <tr class="memdesc:a516047aa6caf8289357c26b98ece17e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add accumulation of type <a class="el" href="class_accumulation.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a>.  <a href="class_body.html#a516047aa6caf8289357c26b98ece17e2">More...</a><br /></td></tr>
 <tr class="separator:a516047aa6caf8289357c26b98ece17e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -160,6 +162,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8966a345b58548a96b6bd11c43e6d805"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa632c82d881b571dc00615615a03e84"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_accumulation.html">Accumulation</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#afa632c82d881b571dc00615615a03e84">accumulator</a></td></tr>
 <tr class="separator:afa632c82d881b571dc00615615a03e84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a7e511aae37ad7e91b0c9992802941c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_simulator.html">Simulator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_body.html#a5a7e511aae37ad7e91b0c9992802941c">sim</a></td></tr>
+<tr class="separator:a5a7e511aae37ad7e91b0c9992802941c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_class_octree_item"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_class_octree_item')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="class_octree_item.html">OctreeItem</a></td></tr>
 <tr class="memitem:ad938eeb60d69d9019caed6469327f450 inherit pub_attribs_class_octree_item"><td class="memItemLeft" align="right" valign="top">List&lt; List&lt; <a class="el" href="class_octree.html">Octree</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_octree_item.html#ad938eeb60d69d9019caed6469327f450">subdivisions</a></td></tr>
 <tr class="separator:ad938eeb60d69d9019caed6469327f450 inherit pub_attribs_class_octree_item"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -225,7 +229,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00047">47</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00048">48</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -266,7 +270,43 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00213">213</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00229">229</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+
+</div>
+</div>
+<a id="a3e4d179f6cf4afa3d41fa58709946f22" name="a3e4d179f6cf4afa3d41fa58709946f22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e4d179f6cf4afa3d41fa58709946f22">&#9670;&nbsp;</a></span>ApplyAcceleration()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Body.ApplyAcceleration </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>acceleration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>no_wake</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00117">117</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -296,7 +336,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Apply accumulations of <a class="el" href="class_accumulation.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a>. </p>
 <p >Called in <a class="el" href="class_body.html#afadeaa61fb41a7fa8d269bb158aaba13" title="Call once per simulation update after Update(float)">Update_End(float)</a></p>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00173">173</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00183">183</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -333,7 +373,7 @@ Additional Inherited Members</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List&lt;Collision&gt; collisions</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00122">122</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00132">132</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -380,7 +420,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00152">152</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00162">162</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -408,7 +448,7 @@ Additional Inherited Members</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00067">67</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00068">68</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -430,7 +470,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Call once per simulation update after <a class="el" href="class_body.html#aa5bacb02bb6471551f91fe2f2036b5c4" title="Call first once per simulation update. Follow up updates with Update_End">Update(float)</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00097">97</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00098">98</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -592,6 +632,22 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00037">37</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
+
+</div>
+</div>
+<a id="a5a7e511aae37ad7e91b0c9992802941c" name="a5a7e511aae37ad7e91b0c9992802941c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a7e511aae37ad7e91b0c9992802941c">&#9670;&nbsp;</a></span>sim</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_simulator.html">Simulator</a> Body.sim</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_body_8cs_source.html#l00042">42</a> of file <a class="el" href="_body_8cs_source.html">Body.cs</a>.</p>
 
 </div>
 </div>

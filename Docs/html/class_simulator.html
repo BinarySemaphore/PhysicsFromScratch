@@ -98,12 +98,18 @@ Inheritance diagram for Simulator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a5ee95f46ecac4704d07d9f08abb35c55"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a5ee95f46ecac4704d07d9f08abb35c55">simulation_speed</a></td></tr>
+<tr class="separator:a5ee95f46ecac4704d07d9f08abb35c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a0d2992ddba3afe4f0ce227d6edc19"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a86a0d2992ddba3afe4f0ce227d6edc19">objects_tag</a></td></tr>
 <tr class="separator:a86a0d2992ddba3afe4f0ce227d6edc19"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7a282fb6a646000eabbe2031e411b46"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#af7a282fb6a646000eabbe2031e411b46">grounds_tag</a></td></tr>
+<tr class="separator:af7a282fb6a646000eabbe2031e411b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af882ef9893d820f5a9a1c1238475cc15"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#af882ef9893d820f5a9a1c1238475cc15">gravity</a></td></tr>
+<tr class="separator:af882ef9893d820f5a9a1c1238475cc15"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91ffe131ee897e6afd4d95a49aa48afa"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_octree.html">Octree</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a91ffe131ee897e6afd4d95a49aa48afa">octree_root</a></td></tr>
 <tr class="separator:a91ffe131ee897e6afd4d95a49aa48afa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5bceda1dfbed920b66a740a1868e40b1"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_octree_item.html">OctreeItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a5bceda1dfbed920b66a740a1868e40b1">items</a></td></tr>
-<tr class="separator:a5bceda1dfbed920b66a740a1868e40b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a784c6caf63e4c41edf093137f439a05d"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_body.html">Body</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a784c6caf63e4c41edf093137f439a05d">bodies</a></td></tr>
+<tr class="separator:a784c6caf63e4c41edf093137f439a05d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -113,6 +119,8 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a1454c4cad65d3974a5a18169a5afdf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae875733c01b3076498715b22aaad32d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#ae875733c01b3076498715b22aaad32d0">Initalize</a> ()</td></tr>
 <tr class="separator:ae875733c01b3076498715b22aaad32d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551c9b517e70a1ae8a079a09a78b04fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simulator.html#a551c9b517e70a1ae8a079a09a78b04fc">UpdateSim</a> (float delta_time)</td></tr>
+<tr class="separator:a551c9b517e70a1ae8a079a09a78b04fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -141,7 +149,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00020">20</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00023">23</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -168,7 +176,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00025">25</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00029">29</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -195,24 +203,84 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00015">15</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00018">18</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="a551c9b517e70a1ae8a079a09a78b04fc" name="a551c9b517e70a1ae8a079a09a78b04fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551c9b517e70a1ae8a079a09a78b04fc">&#9670;&nbsp;</a></span>UpdateSim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulator.UpdateSim </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00047">47</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a5bceda1dfbed920b66a740a1868e40b1" name="a5bceda1dfbed920b66a740a1868e40b1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5bceda1dfbed920b66a740a1868e40b1">&#9670;&nbsp;</a></span>items</h2>
+<a id="a784c6caf63e4c41edf093137f439a05d" name="a784c6caf63e4c41edf093137f439a05d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a784c6caf63e4c41edf093137f439a05d">&#9670;&nbsp;</a></span>bodies</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">List&lt;<a class="el" href="class_octree_item.html">OctreeItem</a>&gt; Simulator.items</td>
+          <td class="memname">List&lt;<a class="el" href="class_body.html">Body</a>&gt; Simulator.bodies</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00012">12</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00015">15</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="af882ef9893d820f5a9a1c1238475cc15" name="af882ef9893d820f5a9a1c1238475cc15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af882ef9893d820f5a9a1c1238475cc15">&#9670;&nbsp;</a></span>gravity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3 Simulator.gravity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00010">10</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="af7a282fb6a646000eabbe2031e411b46" name="af7a282fb6a646000eabbe2031e411b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7a282fb6a646000eabbe2031e411b46">&#9670;&nbsp;</a></span>grounds_tag</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string Simulator.grounds_tag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00009">9</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -228,7 +296,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00007">7</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00008">8</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -244,7 +312,23 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00010">10</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00013">13</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="a5ee95f46ecac4704d07d9f08abb35c55" name="a5ee95f46ecac4704d07d9f08abb35c55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ee95f46ecac4704d07d9f08abb35c55">&#9670;&nbsp;</a></span>simulation_speed</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Simulator.simulation_speed</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_simulator_8cs_source.html#l00007">7</a> of file <a class="el" href="_simulator_8cs_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>

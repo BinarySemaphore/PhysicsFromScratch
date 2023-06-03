@@ -9,6 +9,8 @@ var searchData=
   ['accumulator_6',['accumulator',['../class_body.html#afa632c82d881b571dc00615615a03e84',1,'Body']]],
   ['addsubdivision_7',['AddSubdivision',['../class_octree_item.html#a21da9d4dba999140ee7d562ad89372a7',1,'OctreeItem']]],
   ['addtoaccumulator_8',['AddToAccumulator',['../class_body.html#a516047aa6caf8289357c26b98ece17e2',1,'Body']]],
-  ['applyaccumulations_9',['ApplyAccumulations',['../class_body.html#a196d75d2e171ee20e66d37d33b493304',1,'Body']]],
-  ['awake_10',['awake',['../class_body.html#ab41f09d3fc6d5d5a4728af394726eebc',1,'Body']]]
+  ['apply_5fgravity_9',['apply_gravity',['../class_a_a_b_b___object.html#a8169ed0345465840b84dfbd533078646',1,'AABB_Object']]],
+  ['applyacceleration_10',['ApplyAcceleration',['../class_body.html#a3e4d179f6cf4afa3d41fa58709946f22',1,'Body']]],
+  ['applyaccumulations_11',['ApplyAccumulations',['../class_body.html#a196d75d2e171ee20e66d37d33b493304',1,'Body']]],
+  ['awake_12',['awake',['../class_body.html#ab41f09d3fc6d5d5a4728af394726eebc',1,'Body']]]
 ];

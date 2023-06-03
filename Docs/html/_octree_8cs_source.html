@@ -114,122 +114,124 @@ $(document).ready(function(){initNavTree('_octree_8cs_source.html',''); initResi
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="class_octree.html#a77df912c32ea75829b5300431a185905">   34</a></span>    <span class="keyword">public</span> <span class="keywordtype">int</span> <a class="code hl_variable" href="class_octree.html#a77df912c32ea75829b5300431a185905">index</a>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno"><a class="line" href="class_octree.html#a6472f0344c35178320af82ef698afe49">   35</a></span>    <span class="keyword">public</span> List&lt;Octree&gt; <a class="code hl_variable" href="class_octree.html#a6472f0344c35178320af82ef698afe49">children</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">   36</a></span>    <span class="keyword">public</span> List&lt;OctreeItem&gt; <a class="code hl_variable" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">items</a>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="class_octree.html#a014c005a592c2583822491e3885989ac">   36</a></span>    <span class="keyword">public</span> List&lt;Body&gt; <a class="code hl_variable" href="class_octree.html#a014c005a592c2583822491e3885989ac">items</a>;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_octree.html#a02e350d42b266df63bebf88c9a4990a5">   43</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_octree.html#a02e350d42b266df63bebf88c9a4990a5">Octree</a>(Vector3 <a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a>, Vector3 <a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>) : base(<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a>, <a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>)</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        this.index = 0;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        this.children = <span class="keyword">new</span> List&lt;Octree&gt;();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        this.items = <span class="keyword">new</span> List&lt;OctreeItem&gt;();</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        this.items = <span class="keyword">new</span> List&lt;Body&gt;();</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_octree.html#ac45c340a78f60ae9f2fb409f3fe8e3cd">   54</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_octree.html#ac45c340a78f60ae9f2fb409f3fe8e3cd">Octree</a>(List&lt;OctreeItem&gt; <a class="code hl_variable" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">items</a>) : base(Vector3.zero, Vector3.zero)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="class_octree.html#ab224e29c44a8b9df1c623f20e55701ab">   54</a></span>    <span class="keyword">public</span> <a class="code hl_function" href="class_octree.html#ab224e29c44a8b9df1c623f20e55701ab">Octree</a>(List&lt;Body&gt; <a class="code hl_variable" href="class_octree.html#a014c005a592c2583822491e3885989ac">items</a>) : base(Vector3.zero, Vector3.zero)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        Vector3 max = Vector3.zero;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        Vector3 min = Vector3.zero;</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_octree_item.html">OctreeItem</a> item <span class="keywordflow">in</span> <a class="code hl_variable" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">items</a>)</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        {</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            Vector3 max_corner = item.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> + item.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            Vector3 min_corner = item.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> - item.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            <span class="keywordflow">if</span> (max == Vector3.zero)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>            {</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                max = max_corner;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            }</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                <span class="keywordflow">if</span> (max_corner.x &gt; max.x) max.x = max_corner.x;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <span class="keywordflow">if</span> (max_corner.y &gt; max.y) max.y = max_corner.y;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">if</span> (max_corner.z &gt; max.z) max.z = max_corner.z;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            <span class="keywordflow">if</span> (min == Vector3.zero)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>            {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                min = min_corner;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            }</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            {</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <span class="keywordflow">if</span> (min_corner.x &lt; min.x) min.x = min_corner.x;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">if</span> (min_corner.y &lt; min.y) min.y = min_corner.y;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordflow">if</span> (min_corner.z &lt; min.z) min.z = min_corner.z;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        this.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> = 0.5f * (max + min);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>        this.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a> = 0.5f * (max - min);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        this.index = 0;</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        this.children = <span class="keyword">new</span> List&lt;Octree&gt;();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this.items = <a class="code hl_variable" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">items</a>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>    }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno"><a class="line" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">  100</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Octree&gt; <a class="code hl_function" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">OctreesFromParent</a>(<a class="code hl_class" href="class_octree.html">Octree</a> parent)</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    {</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        List&lt;Octree&gt; new_octrees = <span class="keyword">new</span> List&lt;Octree&gt;();</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        Vector3 half_dimensions = 0.5f * parent.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 8; i++)</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        {</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>            Vector3 scale = Vector3.one;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            <span class="keywordflow">if</span> (i % 2 == 1) scale.x = -1.0f;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">if</span> (Mathf.Floor((i % 4) / 2) == 1) scale.y = -1.0f;</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">if</span> (Mathf.Floor(i / 4) == 1) scale.z = -1.0f;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>            Vector3 offset = Vector3.Scale(half_dimensions, scale);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            <a class="code hl_class" href="class_octree.html">Octree</a> new_octree = <span class="keyword">new</span> <a class="code hl_function" href="class_octree.html#a02e350d42b266df63bebf88c9a4990a5">Octree</a>(parent.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> + offset, half_dimensions);</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            new_octree.<a class="code hl_variable" href="class_octree.html#a77df912c32ea75829b5300431a185905">index</a> = i;</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            parent.<a class="code hl_variable" href="class_octree.html#a6472f0344c35178320af82ef698afe49">children</a>.Add(new_octree);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            new_octrees.Add(new_octree);</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>        <span class="keywordflow">return</span> new_octrees;</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>    }</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">  133</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Subdivide</a>(<a class="code hl_class" href="class_octree.html">Octree</a> current, <span class="keywordtype">int</span> depth = 0)</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>    {</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        <span class="comment">// Update items&#39; subdivision awareness</span></div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_octree_item.html">OctreeItem</a> item <span class="keywordflow">in</span> current.items)</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        {</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>            item.<a class="code hl_function" href="class_octree_item.html#a21da9d4dba999140ee7d562ad89372a7">AddSubdivision</a>(depth, current);</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        }</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>        <span class="comment">// Check subdivision min constraints</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="keywordflow">if</span> (current.items.Count &lt;= 3) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span> (current.dimensions.x &lt; 5.0f || current.dimensions.y &lt; 5.0f || current.dimensions.z &lt; 5.0f) <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="comment">// Check if subdividing required</span></div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_octree.html">Octree</a> subdivision <span class="keywordflow">in</span> <a class="code hl_class" href="class_octree.html">Octree</a>.<a class="code hl_function" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">OctreesFromParent</a>(current))</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        {</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            List&lt;OctreeItem&gt; found_items = subdivision.<a class="code hl_variable" href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">items</a>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_octree_item.html">OctreeItem</a> item <span class="keywordflow">in</span> current.items)</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            {</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>                <span class="keywordflow">if</span> (<a class="code hl_class" href="class_a_a_b_b.html">AABB</a>.<a class="code hl_function" href="class_a_a_b_b.html#a3682e25805a14373a2266e7d0b1e4088">IsOverlapping</a>(item, subdivision))</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                {</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                    found_items.Add(item);</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                }</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>            }</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>            <span class="comment">// If items reduced by subdivision, then vaild subdivision and continue</span></div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="keywordflow">if</span> (found_items.Count &lt; current.items.Count)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            {</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>                <a class="code hl_class" href="class_octree.html">Octree</a>.<a class="code hl_function" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Subdivide</a>(subdivision, depth + 1);</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>            }</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        }</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>    }</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>}</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        this.items = <span class="keyword">new</span> List&lt;Body&gt;();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_body.html">Body</a> body <span class="keywordflow">in</span> <a class="code hl_variable" href="class_octree.html#a014c005a592c2583822491e3885989ac">items</a>)</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        {</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>            this.items.Add(body);</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            Vector3 max_corner = body.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> + body.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            Vector3 min_corner = body.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> - body.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>            <span class="keywordflow">if</span> (max == Vector3.zero)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                max = max_corner;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            }</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>            {</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">if</span> (max_corner.x &gt; max.x) max.x = max_corner.x;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">if</span> (max_corner.y &gt; max.y) max.y = max_corner.y;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                <span class="keywordflow">if</span> (max_corner.z &gt; max.z) max.z = max_corner.z;</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>            }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            <span class="keywordflow">if</span> (min == Vector3.zero)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            {</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                min = min_corner;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            }</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>            <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>            {</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordflow">if</span> (min_corner.x &lt; min.x) min.x = min_corner.x;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                <span class="keywordflow">if</span> (min_corner.y &lt; min.y) min.y = min_corner.y;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                <span class="keywordflow">if</span> (min_corner.z &lt; min.z) min.z = min_corner.z;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>            }</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        }</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>        this.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> = 0.5f * (max + min);</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>        this.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a> = 0.5f * (max - min);</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>        this.index = 0;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        this.children = <span class="keyword">new</span> List&lt;Octree&gt;();</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    }</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span> </div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno"><a class="line" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">  101</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Octree&gt; <a class="code hl_function" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">OctreesFromParent</a>(<a class="code hl_class" href="class_octree.html">Octree</a> parent)</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    {</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        List&lt;Octree&gt; new_octrees = <span class="keyword">new</span> List&lt;Octree&gt;();</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>        Vector3 half_dimensions = 0.5f * parent.<a class="code hl_variable" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>;</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; 8; i++)</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        {</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>            Vector3 scale = Vector3.one;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>            <span class="keywordflow">if</span> (i % 2 == 1) scale.x = -1.0f;</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>            <span class="keywordflow">if</span> (Mathf.Floor((i % 4) / 2) == 1) scale.y = -1.0f;</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            <span class="keywordflow">if</span> (Mathf.Floor(i / 4) == 1) scale.z = -1.0f;</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            Vector3 offset = Vector3.Scale(half_dimensions, scale);</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>            <a class="code hl_class" href="class_octree.html">Octree</a> new_octree = <span class="keyword">new</span> <a class="code hl_function" href="class_octree.html#a02e350d42b266df63bebf88c9a4990a5">Octree</a>(parent.<a class="code hl_variable" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> + offset, half_dimensions);</div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>            new_octree.<a class="code hl_variable" href="class_octree.html#a77df912c32ea75829b5300431a185905">index</a> = i;</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>            parent.<a class="code hl_variable" href="class_octree.html#a6472f0344c35178320af82ef698afe49">children</a>.Add(new_octree);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>            new_octrees.Add(new_octree);</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>        }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>        <span class="keywordflow">return</span> new_octrees;</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno"><a class="line" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">  134</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Subdivide</a>(<a class="code hl_class" href="class_octree.html">Octree</a> current, <span class="keywordtype">int</span> depth = 0)</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>    {</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="comment">// Update items&#39; subdivision awareness</span></div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_body.html">Body</a> body <span class="keywordflow">in</span> current.items)</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        {</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            body.<a class="code hl_function" href="class_octree_item.html#a21da9d4dba999140ee7d562ad89372a7">AddSubdivision</a>(depth, current);</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>        }</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>        <span class="comment">// Check subdivision min constraints</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        <span class="keywordflow">if</span> (current.items.Count &lt;= 3) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">if</span> (current.dimensions.x &lt; 5.0f || current.dimensions.y &lt; 5.0f || current.dimensions.z &lt; 5.0f) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        <span class="comment">// Check if subdividing required</span></div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_octree.html">Octree</a> subdivision <span class="keywordflow">in</span> <a class="code hl_class" href="class_octree.html">Octree</a>.<a class="code hl_function" href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">OctreesFromParent</a>(current))</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        {</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            List&lt;Body&gt; found_items = subdivision.<a class="code hl_variable" href="class_octree.html#a014c005a592c2583822491e3885989ac">items</a>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="class_body.html">Body</a> body <span class="keywordflow">in</span> current.items)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            {</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>                <span class="keywordflow">if</span> (<a class="code hl_class" href="class_a_a_b_b.html">AABB</a>.<a class="code hl_function" href="class_a_a_b_b.html#a3682e25805a14373a2266e7d0b1e4088">IsOverlapping</a>(body, subdivision))</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>                {</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>                    found_items.Add(body);</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>                }</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            }</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            <span class="comment">// If items reduced by subdivision, then vaild subdivision and continue</span></div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>            <span class="keywordflow">if</span> (found_items.Count &lt; current.items.Count)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>            {</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>                <a class="code hl_class" href="class_octree.html">Octree</a>.<a class="code hl_function" href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Subdivide</a>(subdivision, depth + 1);</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>            }</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        }</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>}</div>
 <div class="ttc" id="aclass_a_a_b_b_html"><div class="ttname"><a href="class_a_a_b_b.html">AABB</a></div><div class="ttdoc">Axis Aligned Bounding Box</div><div class="ttdef"><b>Definition:</b> <a href="_a_a_b_b_8cs_source.html#l00009">AABB.cs:10</a></div></div>
 <div class="ttc" id="aclass_a_a_b_b_html_a1561b4e35491cf02361333b7bce0ecc1"><div class="ttname"><a href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">AABB.center</a></div><div class="ttdeci">Vector3 center</div><div class="ttdef"><b>Definition:</b> <a href="_a_a_b_b_8cs_source.html#l00015">AABB.cs:15</a></div></div>
 <div class="ttc" id="aclass_a_a_b_b_html_a3682e25805a14373a2266e7d0b1e4088"><div class="ttname"><a href="class_a_a_b_b.html#a3682e25805a14373a2266e7d0b1e4088">AABB.IsOverlapping</a></div><div class="ttdeci">static bool IsOverlapping(AABB A, AABB B)</div><div class="ttdoc">Check if A  and B  are overlapping.</div><div class="ttdef"><b>Definition:</b> <a href="_a_a_b_b_8cs_source.html#l00067">AABB.cs:67</a></div></div>
 <div class="ttc" id="aclass_a_a_b_b_html_a905a383c4185a0f82472fe6a09558b5f"><div class="ttname"><a href="class_a_a_b_b.html#a905a383c4185a0f82472fe6a09558b5f">AABB.Containment</a></div><div class="ttdeci">Containment</div><div class="ttdef"><b>Definition:</b> <a href="_a_a_b_b_8cs_source.html#l00011">AABB.cs:11</a></div></div>
 <div class="ttc" id="aclass_a_a_b_b_html_ade07fca6147a2abb213f16df53c5a7de"><div class="ttname"><a href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">AABB.dimensions</a></div><div class="ttdeci">Vector3 dimensions</div><div class="ttdef"><b>Definition:</b> <a href="_a_a_b_b_8cs_source.html#l00016">AABB.cs:16</a></div></div>
+<div class="ttc" id="aclass_body_html"><div class="ttname"><a href="class_body.html">Body</a></div><div class="ttdoc">Physics Body</div><div class="ttdef"><b>Definition:</b> <a href="_body_8cs_source.html#l00027">Body.cs:28</a></div></div>
 <div class="ttc" id="aclass_octree_html"><div class="ttname"><a href="class_octree.html">Octree</a></div><div class="ttdoc">Octree AABB spacial structure.</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00032">Octree.cs:33</a></div></div>
+<div class="ttc" id="aclass_octree_html_a014c005a592c2583822491e3885989ac"><div class="ttname"><a href="class_octree.html#a014c005a592c2583822491e3885989ac">Octree.items</a></div><div class="ttdeci">List&lt; Body &gt; items</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00036">Octree.cs:36</a></div></div>
 <div class="ttc" id="aclass_octree_html_a02e350d42b266df63bebf88c9a4990a5"><div class="ttname"><a href="class_octree.html#a02e350d42b266df63bebf88c9a4990a5">Octree.Octree</a></div><div class="ttdeci">Octree(Vector3 center, Vector3 dimensions)</div><div class="ttdoc">Manually creates empty Octree node</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00043">Octree.cs:43</a></div></div>
-<div class="ttc" id="aclass_octree_html_a1ffde1962011c0a0c5efbf21318da8c1"><div class="ttname"><a href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Octree.Subdivide</a></div><div class="ttdeci">static void Subdivide(Octree current, int depth=0)</div><div class="ttdoc">Recursively subdivide current  until constraints are met.</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00133">Octree.cs:133</a></div></div>
-<div class="ttc" id="aclass_octree_html_a3a277cf853c47663cae1dcd50e6958d1"><div class="ttname"><a href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">Octree.OctreesFromParent</a></div><div class="ttdeci">static List&lt; Octree &gt; OctreesFromParent(Octree parent)</div><div class="ttdoc">Generates eight child Octree nodes equally dividing the parent .</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00100">Octree.cs:100</a></div></div>
+<div class="ttc" id="aclass_octree_html_a1ffde1962011c0a0c5efbf21318da8c1"><div class="ttname"><a href="class_octree.html#a1ffde1962011c0a0c5efbf21318da8c1">Octree.Subdivide</a></div><div class="ttdeci">static void Subdivide(Octree current, int depth=0)</div><div class="ttdoc">Recursively subdivide current  until constraints are met.</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00134">Octree.cs:134</a></div></div>
+<div class="ttc" id="aclass_octree_html_a3a277cf853c47663cae1dcd50e6958d1"><div class="ttname"><a href="class_octree.html#a3a277cf853c47663cae1dcd50e6958d1">Octree.OctreesFromParent</a></div><div class="ttdeci">static List&lt; Octree &gt; OctreesFromParent(Octree parent)</div><div class="ttdoc">Generates eight child Octree nodes equally dividing the parent .</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00101">Octree.cs:101</a></div></div>
 <div class="ttc" id="aclass_octree_html_a6472f0344c35178320af82ef698afe49"><div class="ttname"><a href="class_octree.html#a6472f0344c35178320af82ef698afe49">Octree.children</a></div><div class="ttdeci">List&lt; Octree &gt; children</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00035">Octree.cs:35</a></div></div>
 <div class="ttc" id="aclass_octree_html_a77df912c32ea75829b5300431a185905"><div class="ttname"><a href="class_octree.html#a77df912c32ea75829b5300431a185905">Octree.index</a></div><div class="ttdeci">int index</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00034">Octree.cs:34</a></div></div>
-<div class="ttc" id="aclass_octree_html_abd3c9d2dfc1a9276d229031fa0c9904f"><div class="ttname"><a href="class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f">Octree.items</a></div><div class="ttdeci">List&lt; OctreeItem &gt; items</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00036">Octree.cs:36</a></div></div>
-<div class="ttc" id="aclass_octree_html_ac45c340a78f60ae9f2fb409f3fe8e3cd"><div class="ttname"><a href="class_octree.html#ac45c340a78f60ae9f2fb409f3fe8e3cd">Octree.Octree</a></div><div class="ttdeci">Octree(List&lt; OctreeItem &gt; items)</div><div class="ttdoc">Creates Octree root containing all items .</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00054">Octree.cs:54</a></div></div>
+<div class="ttc" id="aclass_octree_html_ab224e29c44a8b9df1c623f20e55701ab"><div class="ttname"><a href="class_octree.html#ab224e29c44a8b9df1c623f20e55701ab">Octree.Octree</a></div><div class="ttdeci">Octree(List&lt; Body &gt; items)</div><div class="ttdoc">Creates Octree root containing all items .</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00054">Octree.cs:54</a></div></div>
 <div class="ttc" id="aclass_octree_item_html"><div class="ttname"><a href="class_octree_item.html">OctreeItem</a></div><div class="ttdoc">Wraps AABB for subdivision awareness.</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00008">Octree.cs:9</a></div></div>
 <div class="ttc" id="aclass_octree_item_html_a21da9d4dba999140ee7d562ad89372a7"><div class="ttname"><a href="class_octree_item.html#a21da9d4dba999140ee7d562ad89372a7">OctreeItem.AddSubdivision</a></div><div class="ttdeci">void AddSubdivision(int depth, Octree subdivision)</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00017">Octree.cs:17</a></div></div>
 <div class="ttc" id="aclass_octree_item_html_a8874ddbac1dbc78577665ce120f2b0fa"><div class="ttname"><a href="class_octree_item.html#a8874ddbac1dbc78577665ce120f2b0fa">OctreeItem.ResetSubdivisions</a></div><div class="ttdeci">void ResetSubdivisions()</div><div class="ttdef"><b>Definition:</b> <a href="_octree_8cs_source.html#l00023">Octree.cs:23</a></div></div>

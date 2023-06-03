@@ -1,8 +1,8 @@
 var class_octree =
 [
     [ "Octree", "class_octree.html#a02e350d42b266df63bebf88c9a4990a5", null ],
-    [ "Octree", "class_octree.html#ac45c340a78f60ae9f2fb409f3fe8e3cd", null ],
+    [ "Octree", "class_octree.html#ab224e29c44a8b9df1c623f20e55701ab", null ],
     [ "children", "class_octree.html#a6472f0344c35178320af82ef698afe49", null ],
     [ "index", "class_octree.html#a77df912c32ea75829b5300431a185905", null ],
-    [ "items", "class_octree.html#abd3c9d2dfc1a9276d229031fa0c9904f", null ]
+    [ "items", "class_octree.html#a014c005a592c2583822491e3885989ac", null ]
 ];
