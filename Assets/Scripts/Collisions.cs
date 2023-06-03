@@ -25,6 +25,34 @@ public class Collision
     }
 
     /// <summary>
+    /// Get <see cref="Collision"/>s between <paramref name="A"/> and ground tagged GameObjects.
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="delta_time"></param>
+    /// <returns><see cref="List{Collision}"/> any collisions</returns>
+    public static List<Collision> GetCollisionsForGround(Body A, float delta_time)
+    {
+        List<Collision> collisions = new List<Collision>();
+        float velocity_down = -1 * delta_time * A.velocity.y;
+        float dims_y = 0.5f * Mathf.Abs((A.entity.transform.rotation * A.entity.transform.localScale).y);
+        Vector3 origin = A.center;
+        origin.y += dims_y + velocity_down;
+        float distance = 2 * (dims_y + velocity_down);
+        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance))
+        {
+            if (hit.collider.tag == A.sim.grounds_tag)
+            {
+                collisions.Add(new Collision(
+                    A, null,
+                    new Vector3(A.center.x, hit.point.y + dims_y, A.center.z),
+                    hit.normal
+                ));
+            }
+        }
+        return collisions;
+    }
+
+    /// <summary>
     /// Get <see cref="Collision"/>s between <paramref name="A"/> and <paramref name="neighbors"/>. 
     /// </summary>
     /// <param name="A"></param>
@@ -50,6 +78,37 @@ public class Collision
             }
         }
         return collisions;
+    }
+
+    /// <summary>
+    /// Resolve collision by applying <see cref="Body.AccumulationType"/> to <see cref="Body"/>.
+    /// </summary>
+    /// <param name="A"></param>
+    /// <param name="position"></param>
+    /// <param name="normal"></param>
+    /// <param name="delta_time"></param>
+    public static void ResolveImpulseDynamicAGroundB(Body A, Vector3 position, Vector3 normal, float delta_time)
+    {
+        float friction = A.friction;
+        float elasticity = A.elasticity;
+
+        Vector3 acting_velocity = Vector3.Project(A.velocity, normal);
+        Vector3 planar_velocity = A.velocity - acting_velocity;
+
+        // Get velocity change due to friction
+        Vector3 planar_friction = -1.0f * friction * planar_velocity;
+
+        // Get velocity change due to impact reaction
+        Vector3 reactive_velocity = -1.0f * elasticity * acting_velocity;
+
+        // Update velocities: planar friction + reactive - acting
+        Vector3 delta_velocity = planar_friction + reactive_velocity - acting_velocity;
+        A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity);
+
+        // Undo collision in space along normal
+        Vector3 delta_position = position - A.entity.transform.position;
+        A.entity.transform.position = position;
+        //A.AddToAccumulator(Accumulation.Type.position, delta_position);
     }
 
     /// <summary>
@@ -104,9 +163,11 @@ public class Collision
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 
         // Undo collision in space along normal for most energetic body(s)
-        Vector3 delta_position_A = -1.0f * delta_time * acting_velocity_A;
-        Vector3 delta_position_B = -1.0f * delta_time * acting_velocity_B;
-        if (acting_velocity_A.magnitude > acting_velocity_B.magnitude)
+        //Vector3 delta_position_A = -1.005f * delta_time * acting_velocity_A;
+        //Vector3 delta_position_B = -1.005f * delta_time * acting_velocity_B;
+        Vector3 delta_position_A = A.last_postion - A.entity.transform.position;
+        Vector3 delta_position_B = B.last_postion - B.entity.transform.position;
+        /*if (acting_velocity_A.magnitude > acting_velocity_B.magnitude)
         {
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
         }
@@ -114,7 +175,7 @@ public class Collision
         {
             B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
         }
-        else
+        else*/
         {
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
             B.AddToAccumulator(Accumulation.Type.position, delta_position_B);

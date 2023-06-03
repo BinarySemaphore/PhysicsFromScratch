@@ -39,6 +39,7 @@ public class Body : OctreeItem
     public Quaternion last_rotation;
     public GameObject entity;
     public List<Accumulation> accumulator;
+    public Simulator sim;
 
     /// <summary>
     /// Create <see cref="Body"/> from <paramref name="entity"/>.
@@ -113,6 +114,15 @@ public class Body : OctreeItem
         this.last_postion = this.entity.transform.position;
     }
 
+    public void ApplyAcceleration(Vector3 acceleration, float delta_time, bool no_wake)
+    {
+        //if (!this.awake && no_wake) return;
+        Vector3 applied_acceleration = delta_time * acceleration;
+        // TODO: Should use accumulator?
+        this.velocity += applied_acceleration;
+        //this.AddToAccumulator(Accumulation.Type.velocity, applied_acceleration);
+    }
+
     /// <summary>
     /// Use octree local subdivision to find dynamic collisions.
     /// Use ... to find static collisions.
@@ -137,7 +147,7 @@ public class Body : OctreeItem
 
         // Find collisions
         collisions.AddRange(Collision.GetCollisionsForDynamicNeighbors(this, neighbors));
-        // TODO: Terrain/non-dynamic collisions
+        collisions.AddRange(Collision.GetCollisionsForGround(this, delta_time));
 
         return collisions;
     }
@@ -157,7 +167,7 @@ public class Body : OctreeItem
         // Dyanamic A and Static B
         if (B == null)
         {
-            // TODO: ResolveImpulseDynamicAStaticB
+            Collision.ResolveImpulseDynamicAGroundB(A, collision.location, collision.normal, delta_time);
         }
         // Dynamic A and B
         else
@@ -173,6 +183,7 @@ public class Body : OctreeItem
     private void ApplyAccumulations()
     {
         int count_delta_positions = 0;
+        int count_delta_velocity = 0;
         Vector3 total_detla_position = Vector3.zero;
         Vector3 total_delta_velocity = Vector3.zero;
         Vector3 total_delta_r_velocity = Vector3.zero;
@@ -187,6 +198,7 @@ public class Body : OctreeItem
                     total_detla_position += a.value;
                     break;
                 case Accumulation.Type.velocity:
+                    count_delta_velocity += 1;
                     total_delta_velocity += a.value;
                     break;
                 case Accumulation.Type.r_velocity:
@@ -196,7 +208,8 @@ public class Body : OctreeItem
         }
 
         // Averages or whatever
-        if (count_delta_positions > 0) total_detla_position = total_detla_position / count_delta_positions;
+        if (count_delta_positions > 0) total_detla_position /= count_delta_positions;
+        if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
 
         this.entity.transform.position += total_detla_position;
         this.center = this.entity.transform.position;

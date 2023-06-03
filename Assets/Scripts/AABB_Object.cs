@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public class AABB_Object : MonoBehaviour
 {
+    public bool apply_gravity;
     public float mass;
     public float friction;
     public float elasticity;
