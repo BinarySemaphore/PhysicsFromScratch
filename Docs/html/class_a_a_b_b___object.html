@@ -101,8 +101,16 @@ Inheritance diagram for AABB_Object:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a2dbb6c3c225e6fa22e00ada855f903ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#a2dbb6c3c225e6fa22e00ada855f903ba">bounding_box</a></td></tr>
-<tr class="separator:a2dbb6c3c225e6fa22e00ada855f903ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8169ed0345465840b84dfbd533078646"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#a8169ed0345465840b84dfbd533078646">apply_gravity</a></td></tr>
+<tr class="separator:a8169ed0345465840b84dfbd533078646"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a932e4ad728849b1c3b12503b9ddb0e"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#a0a932e4ad728849b1c3b12503b9ddb0e">mass</a></td></tr>
+<tr class="separator:a0a932e4ad728849b1c3b12503b9ddb0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3584e471f4fbb76d211b3c3bd8427a6"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#ae3584e471f4fbb76d211b3c3bd8427a6">friction</a></td></tr>
+<tr class="separator:ae3584e471f4fbb76d211b3c3bd8427a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaceb57cd499212888a5b8b2ba6e694f"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#aeaceb57cd499212888a5b8b2ba6e694f">elasticity</a></td></tr>
+<tr class="separator:aeaceb57cd499212888a5b8b2ba6e694f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c7ebf8aa2cf3a93f6fc2cc05efb1a85"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b___object.html#a6c7ebf8aa2cf3a93f6fc2cc05efb1a85">starting_velocity</a></td></tr>
+<tr class="separator:a6c7ebf8aa2cf3a93f6fc2cc05efb1a85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -139,7 +147,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00017">17</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00020">20</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
 
 </div>
 </div>
@@ -166,24 +174,88 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00012">12</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00016">16</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a2dbb6c3c225e6fa22e00ada855f903ba" name="a2dbb6c3c225e6fa22e00ada855f903ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2dbb6c3c225e6fa22e00ada855f903ba">&#9670;&nbsp;</a></span>bounding_box</h2>
+<a id="a8169ed0345465840b84dfbd533078646" name="a8169ed0345465840b84dfbd533078646"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8169ed0345465840b84dfbd533078646">&#9670;&nbsp;</a></span>apply_gravity</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="class_a_a_b_b.html">AABB</a> AABB_Object.bounding_box</td>
+          <td class="memname">bool AABB_Object.apply_gravity</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00010">10</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+
+</div>
+</div>
+<a id="aeaceb57cd499212888a5b8b2ba6e694f" name="aeaceb57cd499212888a5b8b2ba6e694f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaceb57cd499212888a5b8b2ba6e694f">&#9670;&nbsp;</a></span>elasticity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float AABB_Object.elasticity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00013">13</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+
+</div>
+</div>
+<a id="ae3584e471f4fbb76d211b3c3bd8427a6" name="ae3584e471f4fbb76d211b3c3bd8427a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3584e471f4fbb76d211b3c3bd8427a6">&#9670;&nbsp;</a></span>friction</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float AABB_Object.friction</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00012">12</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+
+</div>
+</div>
+<a id="a0a932e4ad728849b1c3b12503b9ddb0e" name="a0a932e4ad728849b1c3b12503b9ddb0e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a932e4ad728849b1c3b12503b9ddb0e">&#9670;&nbsp;</a></span>mass</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float AABB_Object.mass</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00011">11</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
+
+</div>
+</div>
+<a id="a6c7ebf8aa2cf3a93f6fc2cc05efb1a85" name="a6c7ebf8aa2cf3a93f6fc2cc05efb1a85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c7ebf8aa2cf3a93f6fc2cc05efb1a85">&#9670;&nbsp;</a></span>starting_velocity</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3 AABB_Object.starting_velocity</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b___object_8cs_source.html#l00014">14</a> of file <a class="el" href="_a_a_b_b___object_8cs_source.html">AABB_Object.cs</a>.</p>
 
 </div>
 </div>

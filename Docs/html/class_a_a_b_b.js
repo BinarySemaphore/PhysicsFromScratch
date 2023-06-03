@@ -7,7 +7,6 @@ var class_a_a_b_b =
     [ "AABB", "class_a_a_b_b.html#a731974a295f03ceb441bfc05bfc77f78", null ],
     [ "AABB", "class_a_a_b_b.html#a26b6ce986f5c0cf9b8c376031f2de018", null ],
     [ "GetDrawPoints", "class_a_a_b_b.html#adf954dc6f32d847f3776b65490cab5a6", null ],
-    [ "IsOverlapping", "class_a_a_b_b.html#a3dc5575bbc9e81b0dfacf1b009a2a0cb", null ],
     [ "center", "class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1", null ],
     [ "dimensions", "class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de", null ]
 ];

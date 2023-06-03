@@ -11,26 +11,51 @@ public class Drawer : MonoBehaviour
     private List<GameObject> cache_objects;
 
     public new Camera camera;
-    public List<AABB_Object> objects_to_draw;
+    public Simulator sim;
 
     // Start is called before the first frame update
     void Start()
     {
-        cache_index = 0;
-        cache_objects = new List<GameObject>();
+        this.cache_index = 0;
+        this.cache_objects = new List<GameObject>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        foreach (AABB_Object item in objects_to_draw)
+        this.DrawOctree(this.sim.octree_root);
+        foreach (OctreeItem item in this.sim.bodies)
         {
-            foreach (Vector3 point in item.bounding_box.GetDrawPoints())
-            {
-                DrawCircle(point, 0.075f, width:0.1f);
-            }
+            this.DrawAABB(item);
         }
-        CleanCache();
+        this.CleanCache();
+    }
+
+    /// <summary>
+    /// Draw <see cref="AABB"/> corners.
+    /// </summary>
+    /// <param name="bounding_box"></param>
+    public void DrawAABB(AABB bounding_box)
+    {
+        /*
+        foreach (Vector3 point in bounding_box.GetDrawPoints())
+        {
+            this.DrawCircle(point, 0.075f, width: 0.1f);
+        }*/
+        this.DrawBox(bounding_box.GetDrawPoints(), width: 0.1f);
+    }
+
+    /// <summary>
+    /// Draw <see cref="Octree"/> corners and its children.
+    /// </summary>
+    /// <param name="current"></param>
+    public void DrawOctree(Octree current)
+    {
+        if (current != null) this.DrawAABB(current);
+        foreach (Octree child in current.children)
+        {
+            this.DrawOctree(child);
+        }
     }
 
     /// <summary>
@@ -42,7 +67,7 @@ public class Drawer : MonoBehaviour
     /// <param name="width">Line width.</param>
     void DrawCircle(Vector3 center, float radius, int steps = 20, float width = 1.0f)
     {
-        LineRenderer renderer = GetRenderer();
+        LineRenderer renderer = this.GetRenderer();
         float angle_step = 2 * Mathf.PI / steps;
         renderer.positionCount = steps + 2;
         renderer.startWidth = width;
@@ -55,18 +80,32 @@ public class Drawer : MonoBehaviour
         }
     }
 
+    void DrawBox(List<Vector3> corners, float width=1.0f)
+    {
+        LineRenderer renderer = this.GetRenderer();
+        renderer.positionCount = 16;
+        renderer.startWidth = width;
+        renderer.endWidth = width;
+
+        int[] indices = { 1, 0, 2, 3, 1, 5, 4, 6, 7, 5, 4, 0, 2, 6, 7, 3 };
+        for (int i = 0; i < indices.Length; i++)
+        {
+            renderer.SetPosition(i, corners[indices[i]]);
+        }
+    }
+
     /// <summary>
     /// Call at end of update method to clean cache.
     /// Culls any drawing object not used.
     /// </summary>
     void CleanCache()
     {
-        for (int i = cache_index; i < cache_objects.Count; i++)
+        for (int i = this.cache_index; i < this.cache_objects.Count; i++)
         {
-            GameObject.Destroy(cache_objects[cache_index]);
-            cache_objects.RemoveAt(cache_index);
+            GameObject.Destroy(this.cache_objects[this.cache_index]);
+            this.cache_objects.RemoveAt(this.cache_index);
         }
-        cache_index = 0;
+        this.cache_index = 0;
     }
 
     /// <summary>
@@ -77,20 +116,20 @@ public class Drawer : MonoBehaviour
     LineRenderer GetRenderer()
     {
         LineRenderer renderer = null;
-        if (cache_index == cache_objects.Count)
+        if (this.cache_index == this.cache_objects.Count)
         {
             GameObject new_object = new GameObject();
             new_object.transform.parent = this.transform;
             renderer = new_object.AddComponent<LineRenderer>();
             renderer.receiveShadows = false;
             renderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-            cache_objects.Add(new_object);
+            this.cache_objects.Add(new_object);
         }
         if (renderer == null)
         {
-            renderer = cache_objects[cache_index].GetComponent<LineRenderer>();
+            renderer = this.cache_objects[this.cache_index].GetComponent<LineRenderer>();
         }
-        cache_index++;
+        this.cache_index++;
         return renderer;
     }
 }

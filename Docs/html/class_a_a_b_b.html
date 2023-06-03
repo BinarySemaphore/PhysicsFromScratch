@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('class_a_a_b_b.html',''); initResizable
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="class_a_a_b_b-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">AABB Class Reference</div></div>
@@ -93,6 +94,17 @@ $(document).ready(function(){initNavTree('class_a_a_b_b.html',''); initResizable
 
 <p>Axis Aligned Bounding Box  
  <a href="class_a_a_b_b.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for AABB:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="class_a_a_b_b.png" usemap="#AABB_map" alt=""/>
+  <map id="AABB_map" name="AABB_map">
+<area href="class_octree.html" title="Octree AABB spacial structure." alt="Octree" shape="rect" coords="0,56,73,80"/>
+<area href="class_octree_item.html" title="Wraps AABB for subdivision awareness." alt="OctreeItem" shape="rect" coords="83,56,156,80"/>
+<area href="class_body.html" title="Physics Body" alt="Body" shape="rect" coords="83,112,156,136"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -104,15 +116,23 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a731974a295f03ceb441bfc05bfc77f78"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#a731974a295f03ceb441bfc05bfc77f78">AABB</a> (Vector3 <a class="el" href="class_a_a_b_b.html#a1561b4e35491cf02361333b7bce0ecc1">center</a>, Vector3 <a class="el" href="class_a_a_b_b.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>)</td></tr>
-<tr class="memdesc:a731974a295f03ceb441bfc05bfc77f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually defined <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a>  <a href="class_a_a_b_b.html#a731974a295f03ceb441bfc05bfc77f78">More...</a><br /></td></tr>
+<tr class="memdesc:a731974a295f03ceb441bfc05bfc77f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually defined Axis Aligned Bounding Box.  <a href="class_a_a_b_b.html#a731974a295f03ceb441bfc05bfc77f78">More...</a><br /></td></tr>
 <tr class="separator:a731974a295f03ceb441bfc05bfc77f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26b6ce986f5c0cf9b8c376031f2de018"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#a26b6ce986f5c0cf9b8c376031f2de018">AABB</a> (GameObject entity, <a class="el" href="class_a_a_b_b.html#a905a383c4185a0f82472fe6a09558b5f">Containment</a> type)</td></tr>
 <tr class="memdesc:a26b6ce986f5c0cf9b8c376031f2de018"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> for <em>entity</em> .  <a href="class_a_a_b_b.html#a26b6ce986f5c0cf9b8c376031f2de018">More...</a><br /></td></tr>
 <tr class="separator:a26b6ce986f5c0cf9b8c376031f2de018"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3dc5575bbc9e81b0dfacf1b009a2a0cb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#a3dc5575bbc9e81b0dfacf1b009a2a0cb">IsOverlapping</a> (<a class="el" href="class_a_a_b_b.html">AABB</a> a, <a class="el" href="class_a_a_b_b.html">AABB</a> b)</td></tr>
-<tr class="separator:a3dc5575bbc9e81b0dfacf1b009a2a0cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf954dc6f32d847f3776b65490cab5a6"><td class="memItemLeft" align="right" valign="top">List&lt; Vector3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#adf954dc6f32d847f3776b65490cab5a6">GetDrawPoints</a> ()</td></tr>
+<tr class="memdesc:adf954dc6f32d847f3776b65490cab5a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get corner points for drawing.  <a href="class_a_a_b_b.html#adf954dc6f32d847f3776b65490cab5a6">More...</a><br /></td></tr>
 <tr class="separator:adf954dc6f32d847f3776b65490cab5a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a3682e25805a14373a2266e7d0b1e4088"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#a3682e25805a14373a2266e7d0b1e4088">IsOverlapping</a> (<a class="el" href="class_a_a_b_b.html">AABB</a> A, <a class="el" href="class_a_a_b_b.html">AABB</a> B)</td></tr>
+<tr class="memdesc:a3682e25805a14373a2266e7d0b1e4088"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <em>A</em>  and <em>B</em>  are overlapping.  <a href="class_a_a_b_b.html#a3682e25805a14373a2266e7d0b1e4088">More...</a><br /></td></tr>
+<tr class="separator:a3682e25805a14373a2266e7d0b1e4088"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5372303fed38406efd00ede9ae347e49"><td class="memItemLeft" align="right" valign="top">static Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_a_b_b.html#a5372303fed38406efd00ede9ae347e49">NormalOfOverlapping</a> (<a class="el" href="class_a_a_b_b.html">AABB</a> A, <a class="el" href="class_a_a_b_b.html">AABB</a> B)</td></tr>
+<tr class="memdesc:a5372303fed38406efd00ede9ae347e49"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a face normal of overlapping <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a>s.  <a href="class_a_a_b_b.html#a5372303fed38406efd00ede9ae347e49">More...</a><br /></td></tr>
+<tr class="separator:a5372303fed38406efd00ede9ae347e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -173,7 +193,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Manually defined <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a> </p>
+<p>Manually defined Axis Aligned Bounding Box. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">center</td><td></td></tr>
@@ -241,27 +261,33 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_a_b_b_8cs_source.html#l00081">81</a> of file <a class="el" href="_a_a_b_b_8cs_source.html">AABB.cs</a>.</p>
+<p>Get corner points for drawing. </p>
+<dl class="section return"><dt>Returns</dt><dd>List of eight corner points</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b_8cs_source.html#l00114">114</a> of file <a class="el" href="_a_a_b_b_8cs_source.html">AABB.cs</a>.</p>
 
 </div>
 </div>
-<a id="a3dc5575bbc9e81b0dfacf1b009a2a0cb" name="a3dc5575bbc9e81b0dfacf1b009a2a0cb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3dc5575bbc9e81b0dfacf1b009a2a0cb">&#9670;&nbsp;</a></span>IsOverlapping()</h2>
+<a id="a3682e25805a14373a2266e7d0b1e4088" name="a3682e25805a14373a2266e7d0b1e4088"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3682e25805a14373a2266e7d0b1e4088">&#9670;&nbsp;</a></span>IsOverlapping()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool AABB.IsOverlapping </td>
+          <td class="memname">static bool AABB.IsOverlapping </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td>
-          <td class="paramname"><em>a</em>, </td>
+          <td class="paramname"><em>A</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td>
-          <td class="paramname"><em>b</em>&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -269,9 +295,72 @@ Public Attributes</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_a_a_b_b_8cs_source.html#l00061">61</a> of file <a class="el" href="_a_a_b_b_8cs_source.html">AABB.cs</a>.</p>
+<p>Check if <em>A</em>  and <em>B</em>  are overlapping. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td></td></tr>
+    <tr><td class="paramname">B</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>System.Boolean overlapping status.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b_8cs_source.html#l00067">67</a> of file <a class="el" href="_a_a_b_b_8cs_source.html">AABB.cs</a>.</p>
+
+</div>
+</div>
+<a id="a5372303fed38406efd00ede9ae347e49" name="a5372303fed38406efd00ede9ae347e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5372303fed38406efd00ede9ae347e49">&#9670;&nbsp;</a></span>NormalOfOverlapping()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static Vector3 AABB.NormalOfOverlapping </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td>
+          <td class="paramname"><em>A</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_a_a_b_b.html">AABB</a>&#160;</td>
+          <td class="paramname"><em>B</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Return a face normal of overlapping <a class="el" href="class_a_a_b_b.html" title="Axis Aligned Bounding Box">AABB</a>s. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">A</td><td></td></tr>
+    <tr><td class="paramname">B</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>face axis normal Vector3.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_a_a_b_b_8cs_source.html#l00093">93</a> of file <a class="el" href="_a_a_b_b_8cs_source.html">AABB.cs</a>.</p>
 
 </div>
 </div>
