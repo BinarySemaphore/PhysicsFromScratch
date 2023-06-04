@@ -2,16 +2,16 @@
 
 ## Table of Contents
 1. [Info](#info)
-  1. [Released Builds](#released-builds)
-  1. [Preface](#preface)
-  1. [Intent](#intent)
+   1. [Released Builds](#released-builds)
+   1. [Preface](#preface)
+   1. [Intent](#intent)
 1. [Setup and Usage](#setup-and-usage)
 1. [Examples](#examples)
 1. [Documentation](#documentation)
-  1. [Source Web Documentation (via GitHub Pages)](#source-web-documentation-via-github-pages-)
+   1. [Source Web Documentation](#source-web-documentation-via-github-pages)
 1. [Updating Web Documentation for GitHub Pages](#updating-web-documentation-for-github-pages)
-  1. [Generating HTML Web Docs](#generating-html-web-docs)
-  1. [Update GitHub Pages](#update-github-pages)
+   1. [Generating HTML Web Docs](#generating-html-web-docs)
+   1. [Update GitHub Pages](#update-github-pages)
 
 
 ## Info
