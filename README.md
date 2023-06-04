@@ -64,35 +64,15 @@ Walk through some examples one day.
 
 ### Generating HTML Web Docs
 Open Doxygen's [Doxywizard](https://www.doxygen.nl/index.html)
-* File > Open and open `Doxyfile` located in ["./Docs/"](../main/Docs/)
+* File > Open and open `Doxyfile` located in ["./Doxygen/"](../main/Doxygen)
 * Click the "Run" tab
 * Select "Run doxygen"
-* Everything in ["./Docs/html"](../main/Docs/html) should now be updated
+* Everything in ["./Doxygen/html/"](../main/Doxygen/html) should now be updated
 
-Commit the updated docs, push to your branch, and create a pull request
+Commit the updated docs, push to your branch, and create a pull request.
 
 ### Update GitHub Pages
-Note: *It can take 10 minutes for GitHub Pages to update.*
+Pages will automatically be updated when merged into `main` branch.
+The "./docs/" (*configured in GitHub to host pages*) directory is a symbolic link to "./Doxygen/html/".
 
-#### First Time Setup
-Create orphan branch for GitHub Pages:
-* `git checkout --orphan gh-pages`
- 
-#### Update `gh-pages` Branch
-Update GitHub Pages from `main` branch:
-* Checkout main, fetch and pull latest
-* Update `gh-pages` branch:
-  * `git merge main`
-   
-Clean up:
-* Remove everything except "./Docs/" directory
-  * Example: `rm -rf Assembly-CSharp.csproj Assets/ Library/ Logs/ Packages/ ProjectSettings/ PhysicsFromScratch.sln README.md UserSettings/ obj/`
-* Move everything from "./Docs/html/" into root directory:
-  * `mv Docs/html/* ./`
-  * `rm -rf Docs/`
-   
-Send it:
-* Commit and push `gh-pages` branch:
-  * `git add ./*`
-  * `git commit -a -m 'Updated Docs for GitHub Pages'`
-  * `git push origin gh-pages`
+Note: *It can take 10 minutes for GitHub Pages to update.*
