@@ -57,7 +57,7 @@ Walk through some examples one day.
 ## Documentation
 
 ### Source Web Documentation (via GitHub Pages)
-[Web Docs](../main/Docs/html/index.html)
+[Web Docs](https://binarysemaphore.github.io/PhysicsFromScratch/)
 
 
 ## Updating Web Documentation for GitHub Pages
