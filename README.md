@@ -64,14 +64,15 @@ Walk through some examples one day.
 
 ### Generating HTML Web Docs
 Open Doxygen's [Doxywizard](https://www.doxygen.nl/index.html)
-* File > Open and open `Doxyfile` located in ["./"](../main/)
+* File > Open and open `Doxyfile` located in ["./Doxygen/"](../main/Doxygen)
 * Click the "Run" tab
 * Select "Run doxygen"
-* Everything in ["./html/"](../main/Docs/html) should now be updated
+* Everything in ["./Doxygen/html/"](../main/Doxygen/html) should now be updated
 
 Commit the updated docs, push to your branch, and create a pull request.
 
 ### Update GitHub Pages
 Pages will automatically be updated when merged into `main` branch.
+The "./docs/" (*configured in GitHub to host pages*) directory is a symbolic link to "./Doxygen/html/".
 
 Note: *It can take 10 minutes for GitHub Pages to update.*
