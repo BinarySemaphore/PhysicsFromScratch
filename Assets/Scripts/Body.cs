@@ -63,7 +63,7 @@ public class Body : MonoBehaviour
         {
             // Update BB to current position
             this.bounding_box.center = this.transform.position;
-            if (this.velocity.magnitude > 0.01f) this.awake = true;
+            if (this.velocity.magnitude > 0.5f) this.awake = true;
             else return;
         }
 
@@ -94,7 +94,7 @@ public class Body : MonoBehaviour
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.001f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.1f && this.velocity.magnitude <= 3.0f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 2.0f)
@@ -203,7 +203,7 @@ public class Body : MonoBehaviour
 
         // Averages or whatever
         if (count_delta_positions > 0) total_detla_position /= count_delta_positions;
-        //if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
+        if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
 
         this.transform.position += total_detla_position;
         this.bounding_box.center = this.transform.position;

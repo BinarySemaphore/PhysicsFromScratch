@@ -157,21 +157,21 @@ public class Collision
         reactive_velocity_B = reactive_velocity_B / total_mass;
 
         // Update velocities: planar friction + reactive
-        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A - acting_velocity_A;
-        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - acting_velocity_B;
+        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A - 1.2f * acting_velocity_A;
+        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - 1.2f * acting_velocity_B;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_A);
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 
         // Undo collision in space along normal for most energetic body(s)
-        Vector3 delta_position_A = -1f * delta_time * acting_velocity_A;
-        Vector3 delta_position_B = -1f * delta_time * acting_velocity_B;
-        //Vector3 delta_position_A = A.last_postion - A.center;
-        //Vector3 delta_position_B = B.last_postion - B.center;
+        Vector3 delta_position_A = -1.25f * delta_time * acting_velocity_A;
+        Vector3 delta_position_B = -1.25f * delta_time * acting_velocity_B;
+        //Vector3 delta_position_A = A.last_postion - A.transform.position;
+        //Vector3 delta_position_B = B.last_postion - B.transform.position;
 
         float in_velocity_A = Vector3.Dot(B.transform.position - A.transform.position, acting_velocity_A);
         float in_velocity_B = Vector3.Dot(A.transform.position - B.transform.position, acting_velocity_B);
-        if (in_velocity_A >= 0) A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
-        if (in_velocity_B >= 0) B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
+        if (in_velocity_A > 0) A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
+        if (in_velocity_B > 0) B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
         /*if (acting_velocity_A.magnitude > acting_velocity_B.magnitude)
         {
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
