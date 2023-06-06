@@ -24,12 +24,11 @@ public class Accumulation
 /// <summary>
 /// Physics Body
 /// </summary>
-public class Body : OctreeItem
+public class Body : MonoBehaviour
 {
-    
-
+    public bool apply_gravity;
     public bool awake;
-    public int idle_count;
+    public float idle_time;
     public float mass;
     public float friction;
     public float elasticity;
@@ -37,26 +36,18 @@ public class Body : OctreeItem
     public Vector3 r_velocity;
     public Vector3 last_postion;
     public Quaternion last_rotation;
-    public GameObject entity;
+    public OctreeItem bounding_box;
     public List<Accumulation> accumulator;
     public Simulator sim;
 
-    /// <summary>
-    /// Create <see cref="Body"/> from <paramref name="entity"/>.
-    /// </summary>
-    /// <param name="entity"></param>
-    public Body(GameObject entity) : base(entity)
+    // Start is called before the first frame update
+    void Start()
     {
         this.awake = true;
-        this.idle_count = 0;
-        this.mass = 1.0f;
-        this.friction = 0.5f;
-        this.elasticity = 0.5f;
-        this.velocity = Vector3.zero;
-        this.r_velocity = Vector3.zero;
-        this.last_postion = this.center;
-        this.last_rotation = entity.transform.rotation;
-        this.entity = entity;
+        this.idle_time = 0;
+        this.last_postion = this.transform.position;
+        this.last_rotation = this.transform.rotation;
+        this.bounding_box = new OctreeItem(this.gameObject);
         this.accumulator = new List<Accumulation>();
     }
 
@@ -65,22 +56,25 @@ public class Body : OctreeItem
     /// Follow up updates with <see cref="Update_End"/>
     /// </summary>
     /// <param name="delta_time"></param>
-    public void Update(float delta_time)
+    public void UpdateBody(float delta_time)
     {
-        // Update BB to current position
-        this.center = this.entity.transform.position;
 
         if (!this.awake)
         {
-            if (this.velocity.magnitude > 0.1f) this.awake = true;
+            // Update BB to current position
+            this.bounding_box.center = this.transform.position;
+            if (this.velocity.magnitude > 0.01f) this.awake = true;
             else return;
         }
 
         // Apply velocities
         Vector3 applied_velocity = delta_time * this.velocity;
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
-        this.entity.transform.position += applied_velocity;
-        this.entity.transform.rotation = Quaternion.Euler(applied_r_velocity) * this.entity.transform.rotation;
+        this.transform.position += applied_velocity;
+        this.transform.rotation = Quaternion.Euler(applied_r_velocity) * this.transform.rotation;
+
+        // Update BB to current position
+        this.bounding_box.center = this.transform.position;
 
         // Check and handle collisions
         foreach (Collision collision in this.GetCollisions(delta_time))
@@ -89,34 +83,34 @@ public class Body : OctreeItem
         }
 
         // Clear subdivisions
-        this.ResetSubdivisions();
+        this.bounding_box.ResetSubdivisions();
     }
 
     /// <summary>
     /// Call once per simulation update after <see cref="Update(float)"/>
     /// </summary>
-    public void Update_End(float delta_time)
+    public void UpdateEnd(float delta_time)
     {
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.entity.transform.position).magnitude <= 0.001f) this.idle_count += 1;
-        else this.idle_count = 0;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.001f) this.idle_time += delta_time ;
+        else this.idle_time = 0;
 
-        if (this.idle_count > 10)
+        if (this.idle_time > 2.0f)
         {
-            this.idle_count = 0;
+            this.idle_time = 0;
             this.awake = false;
             this.velocity = Vector3.zero;
             this.r_velocity = Vector3.zero;
         }
 
-        this.last_postion = this.entity.transform.position;
+        this.last_postion = this.transform.position;
     }
 
     public void ApplyAcceleration(Vector3 acceleration, float delta_time, bool no_wake)
     {
-        //if (!this.awake && no_wake) return;
+        if (!this.awake && no_wake) return;
         Vector3 applied_acceleration = delta_time * acceleration;
         // TODO: Should use accumulator?
         this.velocity += applied_acceleration;
@@ -135,14 +129,14 @@ public class Body : OctreeItem
 
         // Get neighbors from subdivisions in octree
         List<Body> neighbors = new List<Body>();
-        foreach (Octree subdivision in this.subdivisions[this.subdivisions.Count - 1])
+        foreach (Octree subdivision in this.bounding_box.subdivisions[this.bounding_box.subdivisions.Count - 1])
         {
-            foreach (Body neighbor in subdivision.items)
+            foreach (OctreeItem neighbor in subdivision.items)
             {
-                if (neighbor != this) neighbors.Add(neighbor);
+                if (neighbor.body != this) neighbors.Add(neighbor.body);
             }
             // Remove self from subdivision items to prevent rechecking same pairs
-            subdivision.items.Remove(this);
+            subdivision.items.Remove(this.bounding_box);
         }
 
         // Find collisions
@@ -209,10 +203,10 @@ public class Body : OctreeItem
 
         // Averages or whatever
         if (count_delta_positions > 0) total_detla_position /= count_delta_positions;
-        if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
+        //if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
 
-        this.entity.transform.position += total_detla_position;
-        this.center = this.entity.transform.position;
+        this.transform.position += total_detla_position;
+        this.bounding_box.center = this.transform.position;
         this.velocity += total_delta_velocity;
         this.r_velocity += total_delta_r_velocity;
 

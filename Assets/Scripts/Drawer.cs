@@ -24,7 +24,7 @@ public class Drawer : MonoBehaviour
     void FixedUpdate()
     {
         this.DrawOctree(this.sim.octree_root);
-        foreach (OctreeItem item in this.sim.bodies)
+        foreach (OctreeItem item in this.sim.items)
         {
             this.DrawAABB(item);
         }
@@ -51,7 +51,9 @@ public class Drawer : MonoBehaviour
     /// <param name="current"></param>
     public void DrawOctree(Octree current)
     {
-        if (current != null) this.DrawAABB(current);
+        if (current == null) return;
+
+        this.DrawAABB(current);
         foreach (Octree child in current.children)
         {
             this.DrawOctree(child);
