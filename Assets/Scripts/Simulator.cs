@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Simulator : MonoBehaviour
 {
+    private bool initialized;
+
     public float simulation_speed;
     public string objects_tag;
     public string grounds_tag;
@@ -12,53 +14,57 @@ public class Simulator : MonoBehaviour
     [HideInInspector]
     public Octree octree_root;
     [HideInInspector]
+    public List<OctreeItem> items;
+    [HideInInspector]
     public List<Body> bodies;
 
     // Start is called before the first frame update
     void Start()
     {
-        this.Initalize();
+        this.initialized = false;
     }
 
     private void FixedUpdate()
     {
+        if (!this.initialized)
+        {
+            this.Initalize();
+            this.initialized = true;
+        }
         this.UpdateSim(Time.deltaTime * this.simulation_speed); // Time.deltaTime | 0.01f
         // TODO: Check if number of GameObjects with tag changed and update this.bodies
     }
 
     private void Initalize()
     {
+        this.items = new List<OctreeItem>();
         this.bodies = new List<Body>();
         foreach (GameObject game_object in GameObject.FindGameObjectsWithTag(this.objects_tag))
         {
-            AABB_Object info = game_object.GetComponent<AABB_Object>();
-            Body new_body = new Body(game_object);
-            new_body.mass = info.mass;
-            new_body.friction = info.friction;
-            new_body.elasticity = info.elasticity;
-            new_body.velocity = info.starting_velocity;
-            new_body.sim = this;
-            this.bodies.Add(new_body);
+            Body body = game_object.GetComponent<Body>();
+            body.sim = this;
+            this.bodies.Add(body);
+            this.items.Add(body.bounding_box);
         }
-        this.octree_root = new Octree(this.bodies);
+        this.octree_root = new Octree(this.items);
         Octree.Subdivide(this.octree_root);
     }
 
     private void UpdateSim(float delta_time)
     {
-        this.octree_root = new Octree(this.bodies);
+        this.octree_root = new Octree(this.items);
         Octree.Subdivide(this.octree_root);
         foreach (Body body in this.bodies)
         {
-            if (body.entity.GetComponent<AABB_Object>().apply_gravity)
+            if (body.apply_gravity)
             {
                 body.ApplyAcceleration(this.gravity, delta_time, true);
             }
-            body.Update(delta_time);
+            body.UpdateBody(delta_time);
         }
         foreach (Body body in this.bodies)
         {
-            body.Update_End(delta_time);
+            body.UpdateEnd(delta_time);
         }
     }
 }

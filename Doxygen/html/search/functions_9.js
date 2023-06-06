@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['octree_0',['Octree',['../a00057.html#a02e350d42b266df63bebf88c9a4990a5',1,'Octree.Octree(Vector3 center, Vector3 dimensions)'],['../a00057.html#ab224e29c44a8b9df1c623f20e55701ab',1,'Octree.Octree(List&lt; Body &gt; items)']]],
-  ['octreeitem_1',['OctreeItem',['../a00053.html#ad44c0295d2998ecba5183223bef4ee24',1,'OctreeItem']]],
-  ['octreesfromparent_2',['OctreesFromParent',['../a00057.html#a3a277cf853c47663cae1dcd50e6958d1',1,'Octree']]]
+  ['resetsubdivisions_0',['ResetSubdivisions',['../a00046.html#a8874ddbac1dbc78577665ce120f2b0fa',1,'OctreeItem']]],
+  ['resolveimpulsedynamicadynamicb_1',['ResolveImpulseDynamicADynamicB',['../a00038.html#a6567fe5854c74dd69c53e22001e756be',1,'Collision']]],
+  ['resolveimpulsedynamicagroundb_2',['ResolveImpulseDynamicAGroundB',['../a00038.html#a874f836ed15d601a47a7851f7347e741',1,'Collision']]]
 ];

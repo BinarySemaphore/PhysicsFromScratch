@@ -34,8 +34,8 @@ public class Collision
     {
         List<Collision> collisions = new List<Collision>();
         float velocity_down = -1 * delta_time * A.velocity.y;
-        float dims_y = 0.5f * Mathf.Abs((A.entity.transform.rotation * A.entity.transform.localScale).y);
-        Vector3 origin = A.center;
+        float dims_y = 0.5f * Mathf.Abs((A.transform.rotation * A.transform.localScale).y);
+        Vector3 origin = A.transform.position;
         origin.y += dims_y + velocity_down;
         float distance = 2 * (dims_y + velocity_down);
         if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance))
@@ -44,7 +44,7 @@ public class Collision
             {
                 collisions.Add(new Collision(
                     A, null,
-                    new Vector3(A.center.x, hit.point.y + dims_y, A.center.z),
+                    new Vector3(A.transform.position.x, hit.point.y + dims_y, A.transform.position.z),
                     hit.normal
                 ));
             }
@@ -63,15 +63,15 @@ public class Collision
         List<Collision> collisions = new List<Collision>();
         foreach (Body neighbor in neighbors)
         {
-            if (AABB.IsOverlapping(A, neighbor))
+            if (AABB.IsOverlapping(A.bounding_box, neighbor.bounding_box))
             {
-                AABB precise_box_A = new AABB(A.entity, AABB.Containment.smallest);
-                AABB precise_box_B = new AABB(neighbor.entity, AABB.Containment.smallest);
+                AABB precise_box_A = new AABB(A.gameObject, AABB.Containment.smallest);
+                AABB precise_box_B = new AABB(neighbor.gameObject, AABB.Containment.smallest);
                 if (AABB.IsOverlapping(precise_box_A, precise_box_B))
                 {
                     collisions.Add(new Collision(
                         A, neighbor,
-                        A.center + 0.5f * (neighbor.center - A.center),
+                        A.transform.position + 0.5f * (neighbor.transform.position - A.transform.position),
                         AABB.NormalOfOverlapping(precise_box_A, precise_box_B)
                     ));
                 }
@@ -106,8 +106,8 @@ public class Collision
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity);
 
         // Undo collision in space along normal
-        Vector3 delta_position = position - A.entity.transform.position;
-        A.entity.transform.position = position;
+        Vector3 delta_position = position - A.transform.position;
+        A.transform.position = position;
         //A.AddToAccumulator(Accumulation.Type.position, delta_position);
     }
 
@@ -163,10 +163,15 @@ public class Collision
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 
         // Undo collision in space along normal for most energetic body(s)
-        //Vector3 delta_position_A = -1.005f * delta_time * acting_velocity_A;
-        //Vector3 delta_position_B = -1.005f * delta_time * acting_velocity_B;
-        Vector3 delta_position_A = A.last_postion - A.entity.transform.position;
-        Vector3 delta_position_B = B.last_postion - B.entity.transform.position;
+        Vector3 delta_position_A = -1f * delta_time * acting_velocity_A;
+        Vector3 delta_position_B = -1f * delta_time * acting_velocity_B;
+        //Vector3 delta_position_A = A.last_postion - A.center;
+        //Vector3 delta_position_B = B.last_postion - B.center;
+
+        float in_velocity_A = Vector3.Dot(B.transform.position - A.transform.position, acting_velocity_A);
+        float in_velocity_B = Vector3.Dot(A.transform.position - B.transform.position, acting_velocity_B);
+        if (in_velocity_A >= 0) A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
+        if (in_velocity_B >= 0) B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
         /*if (acting_velocity_A.magnitude > acting_velocity_B.magnitude)
         {
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
@@ -175,10 +180,10 @@ public class Collision
         {
             B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
         }
-        else*/
+        else
         {
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
             B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
-        }
+        }*/
     }
 }

@@ -7,10 +7,12 @@ using UnityEngine;
 /// </summary>
 public class OctreeItem : AABB
 {
+    public Body body;
     public List<List<Octree>> subdivisions;
 
     public OctreeItem(GameObject entity) : base(entity, AABB.Containment.largest)
     {
+        body = entity.GetComponent<Body>();
         subdivisions = new List<List<Octree>>();
     }
 
@@ -33,7 +35,7 @@ public class Octree : AABB
 {
     public int index;
     public List<Octree> children;
-    public List<Body> items;
+    public List<OctreeItem> items;
 
     /// <summary>
     /// Manually creates empty Octree node
@@ -44,24 +46,24 @@ public class Octree : AABB
     {
         this.index = 0;
         this.children = new List<Octree>();
-        this.items = new List<Body>();
+        this.items = new List<OctreeItem>();
     }
 
     /// <summary>
     /// Creates Octree root containing all <paramref name="items"/>.
     /// </summary>
     /// <param name="items"></param>
-    public Octree(List<Body> items) : base(Vector3.zero, Vector3.zero)
+    public Octree(List<OctreeItem> items) : base(Vector3.zero, Vector3.zero)
     {
         Vector3 max = Vector3.zero;
         Vector3 min = Vector3.zero;
 
-        this.items = new List<Body>();
-        foreach (Body body in items)
+        this.items = new List<OctreeItem>();
+        foreach (OctreeItem item in items)
         {
-            this.items.Add(body);
-            Vector3 max_corner = body.center + body.dimensions;
-            Vector3 min_corner = body.center - body.dimensions;
+            this.items.Add(item);
+            Vector3 max_corner = item.center + item.dimensions;
+            Vector3 min_corner = item.center - item.dimensions;
 
             if (max == Vector3.zero)
             {
@@ -134,9 +136,9 @@ public class Octree : AABB
     public static void Subdivide(Octree current, int depth = 0)
     {
         // Update items' subdivision awareness
-        foreach (Body body in current.items)
+        foreach (OctreeItem item in current.items)
         {
-            body.AddSubdivision(depth, current);
+            item.AddSubdivision(depth, current);
         }
 
         // Check subdivision min constraints
@@ -146,12 +148,12 @@ public class Octree : AABB
         // Check if subdividing required
         foreach (Octree subdivision in Octree.OctreesFromParent(current))
         {
-            List<Body> found_items = subdivision.items;
-            foreach (Body body in current.items)
+            List<OctreeItem> found_items = subdivision.items;
+            foreach (OctreeItem item in current.items)
             {
-                if (AABB.IsOverlapping(body, subdivision))
+                if (AABB.IsOverlapping(item, subdivision))
                 {
-                    found_items.Add(body);
+                    found_items.Add(item);
                 }
             }
 

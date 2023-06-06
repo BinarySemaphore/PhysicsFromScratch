@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Physics From Scratch: Member List</title>
+<title>Physics From Scratch: OctreeItem Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -63,7 +63,7 @@ $(function() {
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('a00049.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('a00046.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -82,29 +82,189 @@ $(document).ready(function(){initNavTree('a00049.html',''); initResizable(); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Drawer Member List</div></div>
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="a00043.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">OctreeItem Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="a00049.html">Drawer</a>, including all inherited members.</p>
-<table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#a990d32dda14151868b27e5b537952fe1">cache_index</a></td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#af5ea54dd3edf700708c9283386075744">cache_objects</a></td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#a163429a90ca907e274bc1470ff1465dc">camera</a></td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#aa50706663da531ef082eceb899ed35f6">CleanCache</a>()</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#ab591671ff2a7d6a8444f4922dcdada37">DrawAABB</a>(AABB bounding_box)</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#a669eb2a20f81eb2f2d0125b51eab4c14">DrawBox</a>(List&lt; Vector3 &gt; corners, float width=1.0f)</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#a7ed577eab57bd6cbd61b46fe17240c6e">DrawCircle</a>(Vector3 center, float radius, int steps=20, float width=1.0f)</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#a0ef94e3bea892b1813a21bca2bd9c925">DrawOctree</a>(Octree current)</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#adfb04eb9a4d64f0d26ef24f40ccbcf6f">FixedUpdate</a>()</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#a02fd4914f9ffca3ddcdae69fddeca8d6">GetRenderer</a>()</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="a00049.html#a3cedb81f6ebe303e6af6348c28461c64">sim</a></td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="a00049.html#aca98e28a720ab65ccff2511be1596972">Start</a>()</td><td class="entry"><a class="el" href="a00049.html">Drawer</a></td><td class="entry"><span class="mlabel">private</span></td></tr>
-</table></div><!-- contents -->
+<p>Wraps <a class="el" href="a00026.html" title="Axis Aligned Bounding Box">AABB</a> for subdivision awareness.  
+ <a href="a00046.html#details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for OctreeItem:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="a00046.png" usemap="#OctreeItem_map" alt=""/>
+  <map id="OctreeItem_map" name="OctreeItem_map">
+<area href="a00026.html" title="Axis Aligned Bounding Box" alt="AABB" shape="rect" coords="0,0,73,24"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:ad44c0295d2998ecba5183223bef4ee24"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html#ad44c0295d2998ecba5183223bef4ee24">OctreeItem</a> (GameObject entity)</td></tr>
+<tr class="separator:ad44c0295d2998ecba5183223bef4ee24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21da9d4dba999140ee7d562ad89372a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html#a21da9d4dba999140ee7d562ad89372a7">AddSubdivision</a> (int depth, <a class="el" href="a00050.html">Octree</a> subdivision)</td></tr>
+<tr class="separator:a21da9d4dba999140ee7d562ad89372a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8874ddbac1dbc78577665ce120f2b0fa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html#a8874ddbac1dbc78577665ce120f2b0fa">ResetSubdivisions</a> ()</td></tr>
+<tr class="separator:a8874ddbac1dbc78577665ce120f2b0fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_a00026"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_a00026')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="a00026.html">AABB</a></td></tr>
+<tr class="memitem:a731974a295f03ceb441bfc05bfc77f78 inherit pub_methods_a00026"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a731974a295f03ceb441bfc05bfc77f78">AABB</a> (Vector3 <a class="el" href="a00026.html#a1561b4e35491cf02361333b7bce0ecc1">center</a>, Vector3 <a class="el" href="a00026.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a>)</td></tr>
+<tr class="memdesc:a731974a295f03ceb441bfc05bfc77f78 inherit pub_methods_a00026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Manually defined Axis Aligned Bounding Box.  <a href="a00026.html#a731974a295f03ceb441bfc05bfc77f78">More...</a><br /></td></tr>
+<tr class="separator:a731974a295f03ceb441bfc05bfc77f78 inherit pub_methods_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26b6ce986f5c0cf9b8c376031f2de018 inherit pub_methods_a00026"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a26b6ce986f5c0cf9b8c376031f2de018">AABB</a> (GameObject entity, <a class="el" href="a00026.html#a905a383c4185a0f82472fe6a09558b5f">Containment</a> type)</td></tr>
+<tr class="memdesc:a26b6ce986f5c0cf9b8c376031f2de018 inherit pub_methods_a00026"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="a00026.html" title="Axis Aligned Bounding Box">AABB</a> for <em>entity</em> .  <a href="a00026.html#a26b6ce986f5c0cf9b8c376031f2de018">More...</a><br /></td></tr>
+<tr class="separator:a26b6ce986f5c0cf9b8c376031f2de018 inherit pub_methods_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf954dc6f32d847f3776b65490cab5a6 inherit pub_methods_a00026"><td class="memItemLeft" align="right" valign="top">List&lt; Vector3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#adf954dc6f32d847f3776b65490cab5a6">GetDrawPoints</a> ()</td></tr>
+<tr class="memdesc:adf954dc6f32d847f3776b65490cab5a6 inherit pub_methods_a00026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get corner points for drawing.  <a href="a00026.html#adf954dc6f32d847f3776b65490cab5a6">More...</a><br /></td></tr>
+<tr class="separator:adf954dc6f32d847f3776b65490cab5a6 inherit pub_methods_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a22abc8aebd14b8ee97d516eea63b78d4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="a00034.html">Body</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html#a22abc8aebd14b8ee97d516eea63b78d4">body</a></td></tr>
+<tr class="separator:a22abc8aebd14b8ee97d516eea63b78d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad938eeb60d69d9019caed6469327f450"><td class="memItemLeft" align="right" valign="top">List&lt; List&lt; <a class="el" href="a00050.html">Octree</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00046.html#ad938eeb60d69d9019caed6469327f450">subdivisions</a></td></tr>
+<tr class="separator:ad938eeb60d69d9019caed6469327f450"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_a00026"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_a00026')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="a00026.html">AABB</a></td></tr>
+<tr class="memitem:a1561b4e35491cf02361333b7bce0ecc1 inherit pub_attribs_a00026"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a1561b4e35491cf02361333b7bce0ecc1">center</a> = Vector3.zero</td></tr>
+<tr class="separator:a1561b4e35491cf02361333b7bce0ecc1 inherit pub_attribs_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade07fca6147a2abb213f16df53c5a7de inherit pub_attribs_a00026"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#ade07fca6147a2abb213f16df53c5a7de">dimensions</a> = Vector3.zero</td></tr>
+<tr class="separator:ade07fca6147a2abb213f16df53c5a7de inherit pub_attribs_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_a00026"><td colspan="2" onclick="javascript:toggleInherit('pub_types_a00026')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="a00026.html">AABB</a></td></tr>
+<tr class="memitem:a905a383c4185a0f82472fe6a09558b5f inherit pub_types_a00026"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a905a383c4185a0f82472fe6a09558b5f">Containment</a> { <a class="el" href="a00026.html#a905a383c4185a0f82472fe6a09558b5faa9a92beab8ebfcf1e557fbf7fdaee928">smallest</a> = 0
+, <a class="el" href="a00026.html#a905a383c4185a0f82472fe6a09558b5faf39ed5b6d0275dcbc4a2f5de624d95ae">largest</a> = 1
+ }</td></tr>
+<tr class="separator:a905a383c4185a0f82472fe6a09558b5f inherit pub_types_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_a00026"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_a00026')"><img src="closed.png" alt="-"/>&#160;Static Public Member Functions inherited from <a class="el" href="a00026.html">AABB</a></td></tr>
+<tr class="memitem:a3682e25805a14373a2266e7d0b1e4088 inherit pub_static_methods_a00026"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a3682e25805a14373a2266e7d0b1e4088">IsOverlapping</a> (<a class="el" href="a00026.html">AABB</a> A, <a class="el" href="a00026.html">AABB</a> B)</td></tr>
+<tr class="memdesc:a3682e25805a14373a2266e7d0b1e4088 inherit pub_static_methods_a00026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if <em>A</em>  and <em>B</em>  are overlapping.  <a href="a00026.html#a3682e25805a14373a2266e7d0b1e4088">More...</a><br /></td></tr>
+<tr class="separator:a3682e25805a14373a2266e7d0b1e4088 inherit pub_static_methods_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5372303fed38406efd00ede9ae347e49 inherit pub_static_methods_a00026"><td class="memItemLeft" align="right" valign="top">static Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00026.html#a5372303fed38406efd00ede9ae347e49">NormalOfOverlapping</a> (<a class="el" href="a00026.html">AABB</a> A, <a class="el" href="a00026.html">AABB</a> B)</td></tr>
+<tr class="memdesc:a5372303fed38406efd00ede9ae347e49 inherit pub_static_methods_a00026"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a face normal of overlapping <a class="el" href="a00026.html" title="Axis Aligned Bounding Box">AABB</a>s.  <a href="a00026.html#a5372303fed38406efd00ede9ae347e49">More...</a><br /></td></tr>
+<tr class="separator:a5372303fed38406efd00ede9ae347e49 inherit pub_static_methods_a00026"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >Wraps <a class="el" href="a00026.html" title="Axis Aligned Bounding Box">AABB</a> for subdivision awareness. </p>
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00008">8</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad44c0295d2998ecba5183223bef4ee24" name="ad44c0295d2998ecba5183223bef4ee24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad44c0295d2998ecba5183223bef4ee24">&#9670;&nbsp;</a></span>OctreeItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">OctreeItem.OctreeItem </td>
+          <td>(</td>
+          <td class="paramtype">GameObject&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00013">13</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a21da9d4dba999140ee7d562ad89372a7" name="a21da9d4dba999140ee7d562ad89372a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21da9d4dba999140ee7d562ad89372a7">&#9670;&nbsp;</a></span>AddSubdivision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OctreeItem.AddSubdivision </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>depth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="a00050.html">Octree</a>&#160;</td>
+          <td class="paramname"><em>subdivision</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00019">19</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+
+</div>
+</div>
+<a id="a8874ddbac1dbc78577665ce120f2b0fa" name="a8874ddbac1dbc78577665ce120f2b0fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8874ddbac1dbc78577665ce120f2b0fa">&#9670;&nbsp;</a></span>ResetSubdivisions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void OctreeItem.ResetSubdivisions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00025">25</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a22abc8aebd14b8ee97d516eea63b78d4" name="a22abc8aebd14b8ee97d516eea63b78d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22abc8aebd14b8ee97d516eea63b78d4">&#9670;&nbsp;</a></span>body</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="a00034.html">Body</a> OctreeItem.body</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00010">10</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+
+</div>
+</div>
+<a id="ad938eeb60d69d9019caed6469327f450" name="ad938eeb60d69d9019caed6469327f450"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad938eeb60d69d9019caed6469327f450">&#9670;&nbsp;</a></span>subdivisions</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;List&lt;<a class="el" href="a00050.html">Octree</a>&gt; &gt; OctreeItem.subdivisions</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00011">11</a> of file <a class="el" href="a00014_source.html">Octree.cs</a>.</p>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>C:/Users/bueto/Documents/Dev/PhysicsFromScratch/Assets/Scripts/<a class="el" href="a00014_source.html">Octree.cs</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a class="el" href="a00046.html">OctreeItem</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
   </ul>
 </div>
