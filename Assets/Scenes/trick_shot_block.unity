@@ -332,7 +332,6 @@ GameObject:
   - component: {fileID: 605394386}
   - component: {fileID: 605394385}
   - component: {fileID: 605394384}
-  - component: {fileID: 605394383}
   - component: {fileID: 605394387}
   m_Layer: 0
   m_Name: Ground Cube
@@ -341,23 +340,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &605394383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 605394382}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b1b83a07e53f39429165e53fb91a6b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  apply_gravity: 0
-  mass: 1
-  friction: 0.2
-  elasticity: 1
-  starting_velocity: {x: 0, y: 0, z: 0}
 --- !u!23 &605394384
 MeshRenderer:
   m_ObjectHideFlags: 0
