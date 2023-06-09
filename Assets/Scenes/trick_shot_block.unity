@@ -219,6 +219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apply_gravity: 1
   awake: 0
+  high_mass_collision: 0
   idle_time: 0
   mass: 1
   friction: 0.2
@@ -354,6 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apply_gravity: 1
   awake: 0
+  high_mass_collision: 0
   idle_time: 0
   mass: 1
   friction: 0.2
@@ -617,6 +619,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apply_gravity: 1
   awake: 0
+  high_mass_collision: 0
   idle_time: 0
   mass: 1
   friction: 0.2
@@ -722,6 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apply_gravity: 1
   awake: 0
+  high_mass_collision: 0
   idle_time: 0
   mass: 1
   friction: 0.2
@@ -807,7 +811,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421504804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -17.82, y: 5.18, z: 0}
+  m_LocalPosition: {x: -19.05, y: 5.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -827,6 +831,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   apply_gravity: 1
   awake: 0
+  high_mass_collision: 0
   idle_time: 0
   mass: 1
   friction: 0.2

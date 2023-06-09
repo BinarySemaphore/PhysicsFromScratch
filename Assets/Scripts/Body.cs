@@ -28,6 +28,7 @@ public class Body : MonoBehaviour
 {
     public bool apply_gravity;
     public bool awake;
+    public int high_mass_collision;
     public float idle_time;
     public float mass;
     public float friction;
@@ -44,6 +45,7 @@ public class Body : MonoBehaviour
     void Start()
     {
         this.awake = true;
+        this.high_mass_collision = 0;
         this.idle_time = 0;
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation;
@@ -52,18 +54,19 @@ public class Body : MonoBehaviour
     }
 
     /// <summary>
-    /// Call first once per simulation update.
-    /// Follow up updates with <see cref="Update_End"/>
+    /// Update body based on velocity and check if should be awake if asleep.
     /// </summary>
+    /// <remarks>Call first for each body.</remarks>
     /// <param name="delta_time"></param>
-    public void UpdateBody(float delta_time)
+    public void UpdatePositions(float delta_time)
     {
-
+        if (this.high_mass_collision < 1) this.high_mass_collision = 0;
+        if (this.high_mass_collision >= 1) this.high_mass_collision /= 2;
         if (!this.awake)
         {
             // Update BB to current position
             this.bounding_box.center = this.transform.position;
-            if (this.velocity.magnitude > 0.5f) this.awake = true;
+            if (this.velocity.magnitude > 1.0f) this.awake = true;
             else return;
         }
 
@@ -75,6 +78,16 @@ public class Body : MonoBehaviour
 
         // Update BB to current position
         this.bounding_box.center = this.transform.position;
+    }
+
+    /// <summary>
+    /// Get collisions and accumulate resolved delta positions and velocities.
+    /// </summary>
+    /// <remarks>Call second for each body.</remarks>
+    /// <param name="delta_time"></param>
+    public void UpdateForCollisions(float delta_time)
+    {
+        if (!this.awake) return;
 
         // Check and handle collisions
         foreach (Collision collision in this.GetCollisions(delta_time))
@@ -87,17 +100,19 @@ public class Body : MonoBehaviour
     }
 
     /// <summary>
-    /// Call once per simulation update after <see cref="Update(float)"/>
+    /// Apply accumulations and check if body should remain awake.
     /// </summary>
-    public void UpdateEnd(float delta_time)
+    /// <remarks>Call third and final for each body.</remarks>
+    /// <param name="delta_time"></param>
+    public void UpdateAccumulations(float delta_time)
     {
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.1f && this.velocity.magnitude <= 3.0f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.1f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
-        if (this.idle_time > 2.0f)
+        if (this.idle_time > 5.0f)
         {
             this.idle_time = 0;
             this.awake = false;
@@ -155,18 +170,19 @@ public class Body : MonoBehaviour
     /// <param name="delta_time"></param>
     private void HandleCollision(Collision collision, float delta_time)
     {
+        float depth = collision.depth;
         Body A = this;
         Body B = collision.B;
 
         // Dyanamic A and Static B
         if (B == null)
         {
-            Collision.ResolveImpulseDynamicAGroundB(A, collision.location, collision.normal, delta_time);
+            Collision.ResolveImpulseDynamicAGroundB(A, collision.location, collision.normal, depth, delta_time);
         }
         // Dynamic A and B
         else
         {
-            Collision.ResolveImpulseDynamicADynamicB(A, B, collision.location, collision.normal, delta_time);
+            Collision.ResolveImpulseDynamicADynamicB(A, B, collision.location, collision.normal, depth, delta_time);
         }
     }
 

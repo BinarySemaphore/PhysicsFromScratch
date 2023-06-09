@@ -100,9 +100,21 @@ public class AABB
         float z_diff = combined_dims.z - Mathf.Abs(distance.z);
         float min_diff = Mathf.Min(x_diff, y_diff, z_diff);
 
-        if (x_diff == min_diff) normal.x = 1.0f;
-        else if (y_diff == min_diff) normal.y = 1.0f;
-        else if (z_diff == min_diff) normal.z = 1.0f;
+        if (x_diff == min_diff)
+        {
+            if (A.center.x >= B.center.x) normal.x = 1.0f;
+            else normal.x = -1.0f;
+        }
+        else if (y_diff == min_diff)
+        {
+            if (A.center.y >= B.center.y) normal.y = 1.0f;
+            else normal.y = -1.0f;
+        }
+        else if (z_diff == min_diff)
+        {
+            if (A.center.z >= B.center.z) normal.z = 1.0f;
+            else normal.z = -1.0f;
+        }
         
         return normal;
     }
