@@ -75,17 +75,20 @@ public class Collision
                 {
                     float depth = 0f;
                     Vector3 normal = AABB.NormalOfOverlapping(precise_box_A, precise_box_B);
+                    Vector3 dims_A = A.transform.rotation * A.transform.localScale;
+                    Vector3 dims_B = neighbor.transform.rotation * neighbor.transform.localScale;
+                    Vector3 total_dims = dims_A + dims_B;
                     if (normal.x > 0.5f || normal.x < -0.5f)
                     {
-                        depth = 0.5f * (neighbor.transform.localScale.x + A.transform.localScale.x) - Mathf.Abs(neighbor.transform.position.x - A.transform.position.x);
+                        depth = 0.5f * total_dims.x - Mathf.Abs(neighbor.transform.position.x - A.transform.position.x);
                     }
                     else if (normal.y > 0.5f || normal.y < -0.5f)
                     {
-                        depth = 0.5f * (neighbor.transform.localScale.y + A.transform.localScale.y) - Mathf.Abs(neighbor.transform.position.y - A.transform.position.y);
+                        depth = 0.5f * total_dims.y - Mathf.Abs(neighbor.transform.position.y - A.transform.position.y);
                     }
                     else if (normal.z > 0.5f || normal.z < -0.5f)
                     {
-                        depth = 0.5f * (neighbor.transform.localScale.z + A.transform.localScale.z) - Mathf.Abs(neighbor.transform.position.z - A.transform.position.z);
+                        depth = 0.5f * total_dims.z - Mathf.Abs(neighbor.transform.position.z - A.transform.position.z);
                     }
                     collisions.Add(new Collision(
                         A, neighbor,
@@ -183,6 +186,23 @@ public class Collision
         Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - 1.1f * acting_velocity_B;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_A);
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
+
+        // Update rotational velocities
+        /*
+        Vector3 applied_offset_A = A.transform.position - position;
+        Vector3 applied_offset_B = B.transform.position - position;
+
+        float radius_A = applied_offset_A.magnitude;
+        float radius_B = applied_offset_B.magnitude;
+        
+        Vector3 delta_r_velocity_A = Vector3.Scale(Vector3.Cross(delta_velocity_A, applied_offset_A), new Vector3(radius_A / A.moment.x, radius_A / A.moment.y, radius_A / A.moment.z));
+        //delta_r_velocity_A *= Mathf.PI / 180f;
+        Vector3 delta_r_velocity_B = Vector3.Scale(Vector3.Cross(delta_velocity_B, applied_offset_B), new Vector3(radius_B / B.moment.x, radius_B / B.moment.y, radius_B / B.moment.z));
+        //delta_r_velocity_B *= Mathf.PI / 180f;
+
+        A.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_A);
+        B.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_B);
+        */
 
         // Resolve collision spacially using depth and percent based on mass or if one object is in a rough spot (high_mass_collision)
         if (B.awake)

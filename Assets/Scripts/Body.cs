@@ -33,6 +33,7 @@ public class Body : MonoBehaviour
     public float mass;
     public float friction;
     public float elasticity;
+    public Vector3 moment;
     public Vector3 velocity;
     public Vector3 r_velocity;
     public Vector3 last_postion;
@@ -47,6 +48,11 @@ public class Body : MonoBehaviour
         this.awake = true;
         this.high_mass_collision = 0;
         this.idle_time = 0;
+        this.moment = new Vector3(
+            0.0833f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
+        );
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation;
         this.bounding_box = new OctreeItem(this.gameObject);
@@ -109,7 +115,7 @@ public class Body : MonoBehaviour
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.1f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.01f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 5.0f)
@@ -194,6 +200,7 @@ public class Body : MonoBehaviour
     {
         int count_delta_positions = 0;
         int count_delta_velocity = 0;
+        int count_delta_r_velocity = 0;
         Vector3 total_detla_position = Vector3.zero;
         Vector3 total_delta_velocity = Vector3.zero;
         Vector3 total_delta_r_velocity = Vector3.zero;
@@ -212,6 +219,7 @@ public class Body : MonoBehaviour
                     total_delta_velocity += a.value;
                     break;
                 case Accumulation.Type.r_velocity:
+                    count_delta_r_velocity += 1;
                     total_delta_r_velocity += a.value;
                     break;
             }
@@ -220,6 +228,7 @@ public class Body : MonoBehaviour
         // Averages or whatever
         if (count_delta_positions > 0) total_detla_position /= count_delta_positions;
         if (count_delta_velocity > 0) total_delta_velocity /= count_delta_velocity;
+        if (count_delta_r_velocity > 0) total_delta_r_velocity /= count_delta_r_velocity;
 
         this.transform.position += total_detla_position;
         this.bounding_box.center = this.transform.position;
