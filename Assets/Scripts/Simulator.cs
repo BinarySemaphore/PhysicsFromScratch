@@ -31,7 +31,7 @@ public class Simulator : MonoBehaviour
             this.Initalize();
             this.initialized = true;
         }
-        this.UpdateSim(Time.deltaTime * this.simulation_speed); // Time.deltaTime | 0.01f
+        this.UpdateSim(Time.deltaTime * this.simulation_speed);
         // TODO: Check if number of GameObjects with tag changed and update this.bodies
     }
 
@@ -60,11 +60,15 @@ public class Simulator : MonoBehaviour
             {
                 body.ApplyAcceleration(this.gravity, delta_time, true);
             }
-            body.UpdateBody(delta_time);
+            body.UpdatePositions(delta_time);
         }
         foreach (Body body in this.bodies)
         {
-            body.UpdateEnd(delta_time);
+            body.UpdateForCollisions(delta_time);
+        }
+        foreach (Body body in this.bodies)
+        {
+            body.UpdateAccumulations(delta_time);
         }
     }
 }

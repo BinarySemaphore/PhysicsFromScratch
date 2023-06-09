@@ -102,12 +102,15 @@ Inheritance diagram for Body:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a217c7100477c9bc9a2269e1122cf6ebb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a217c7100477c9bc9a2269e1122cf6ebb">UpdateBody</a> (float delta_time)</td></tr>
-<tr class="memdesc:a217c7100477c9bc9a2269e1122cf6ebb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call first once per simulation update. Follow up updates with Update_End  <a href="a00034.html#a217c7100477c9bc9a2269e1122cf6ebb">More...</a><br /></td></tr>
-<tr class="separator:a217c7100477c9bc9a2269e1122cf6ebb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a301076d238b039b8154f3348d545b020"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a301076d238b039b8154f3348d545b020">UpdateEnd</a> (float delta_time)</td></tr>
-<tr class="memdesc:a301076d238b039b8154f3348d545b020"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call once per simulation update after Update(float)  <a href="a00034.html#a301076d238b039b8154f3348d545b020">More...</a><br /></td></tr>
-<tr class="separator:a301076d238b039b8154f3348d545b020"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbd34131156fb6411e663a5e33c6a6b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#afbd34131156fb6411e663a5e33c6a6b7">UpdatePositions</a> (float delta_time)</td></tr>
+<tr class="memdesc:afbd34131156fb6411e663a5e33c6a6b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update body based on velocity and check if should be awake if asleep.  <a href="a00034.html#afbd34131156fb6411e663a5e33c6a6b7">More...</a><br /></td></tr>
+<tr class="separator:afbd34131156fb6411e663a5e33c6a6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f6291e5c166a4e73b183102e25312af"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a9f6291e5c166a4e73b183102e25312af">UpdateForCollisions</a> (float delta_time)</td></tr>
+<tr class="memdesc:a9f6291e5c166a4e73b183102e25312af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get collisions and accumulate resolved delta positions and velocities.  <a href="a00034.html#a9f6291e5c166a4e73b183102e25312af">More...</a><br /></td></tr>
+<tr class="separator:a9f6291e5c166a4e73b183102e25312af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae554f6a91dd049cf9838f7902df52959"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#ae554f6a91dd049cf9838f7902df52959">UpdateAccumulations</a> (float delta_time)</td></tr>
+<tr class="memdesc:ae554f6a91dd049cf9838f7902df52959"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply accumulations and check if body should remain awake.  <a href="a00034.html#ae554f6a91dd049cf9838f7902df52959">More...</a><br /></td></tr>
+<tr class="separator:ae554f6a91dd049cf9838f7902df52959"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3e4d179f6cf4afa3d41fa58709946f22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a3e4d179f6cf4afa3d41fa58709946f22">ApplyAcceleration</a> (Vector3 acceleration, float delta_time, bool no_wake)</td></tr>
 <tr class="separator:a3e4d179f6cf4afa3d41fa58709946f22"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a516047aa6caf8289357c26b98ece17e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a516047aa6caf8289357c26b98ece17e2">AddToAccumulator</a> (<a class="el" href="a00030.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a> type, Vector3 value)</td></tr>
@@ -120,6 +123,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad6ef8cd252c5b497d53c6a853592fac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab41f09d3fc6d5d5a4728af394726eebc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#ab41f09d3fc6d5d5a4728af394726eebc">awake</a></td></tr>
 <tr class="separator:ab41f09d3fc6d5d5a4728af394726eebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192ae2e3949fb4c29d8acf9482dbffbd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a192ae2e3949fb4c29d8acf9482dbffbd">high_mass_collision</a></td></tr>
+<tr class="separator:a192ae2e3949fb4c29d8acf9482dbffbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f644c7040124712052f0704ffa8f68b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a7f644c7040124712052f0704ffa8f68b">idle_time</a></td></tr>
 <tr class="separator:a7f644c7040124712052f0704ffa8f68b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa4333a34245af2219c8ba3ebb807e7f9"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#aa4333a34245af2219c8ba3ebb807e7f9">mass</a></td></tr>
@@ -151,7 +156,7 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:a6754ec2a7e6c29cd7eea1c75a64ff84f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use octree local subdivision to find dynamic collisions. Use ... to find static collisions.  <a href="a00034.html#a6754ec2a7e6c29cd7eea1c75a64ff84f">More...</a><br /></td></tr>
 <tr class="separator:a6754ec2a7e6c29cd7eea1c75a64ff84f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4d077009f24bead47ca592dcdcba4a54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a4d077009f24bead47ca592dcdcba4a54">HandleCollision</a> (<a class="el" href="a00038.html">Collision</a> collision, float delta_time)</td></tr>
-<tr class="memdesc:a4d077009f24bead47ca592dcdcba4a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call collision resolution depending on type of collision. <a class="el" href="a00038.html#a6567fe5854c74dd69c53e22001e756be" title="Resolve collision by applying Body.AccumulationType to Body.">Collision.ResolveImpulseDynamicADynamicB(Body, Body, Vector3, Vector3, float)</a> and ...  <a href="a00034.html#a4d077009f24bead47ca592dcdcba4a54">More...</a><br /></td></tr>
+<tr class="memdesc:a4d077009f24bead47ca592dcdcba4a54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Call collision resolution depending on type of collision. Collision.ResolveImpulseDynamicADynamicB(Body, Body, Vector3, Vector3, float) and ...  <a href="a00034.html#a4d077009f24bead47ca592dcdcba4a54">More...</a><br /></td></tr>
 <tr class="separator:a4d077009f24bead47ca592dcdcba4a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a196d75d2e171ee20e66d37d33b493304"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00034.html#a196d75d2e171ee20e66d37d33b493304">ApplyAccumulations</a> ()</td></tr>
 <tr class="memdesc:a196d75d2e171ee20e66d37d33b493304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Apply accumulations of <a class="el" href="a00030.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a>.  <a href="a00034.html#a196d75d2e171ee20e66d37d33b493304">More...</a><br /></td></tr>
@@ -198,7 +203,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00223">223</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00239">239</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -234,7 +239,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00111">111</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00126">126</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -264,7 +269,7 @@ Private Member Functions</h2></td></tr>
 <p>Apply accumulations of <a class="el" href="a00030.html#a9c35953ecf0e42f3721e122295f5ca4c">Accumulation.Type</a>. </p>
 <p >Called in Update_End(float)</p>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00177">177</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00193">193</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -301,7 +306,7 @@ Private Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>List&lt;Collision&gt; collisions</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00126">126</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00141">141</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -339,7 +344,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Call collision resolution depending on type of collision. <a class="el" href="a00038.html#a6567fe5854c74dd69c53e22001e756be" title="Resolve collision by applying Body.AccumulationType to Body.">Collision.ResolveImpulseDynamicADynamicB(Body, Body, Vector3, Vector3, float)</a> and ... </p>
+<p>Call collision resolution depending on type of collision. Collision.ResolveImpulseDynamicADynamicB(Body, Body, Vector3, Vector3, float) and ... </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">collision</td><td></td></tr>
@@ -348,7 +353,7 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00156">156</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00171">171</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -375,18 +380,18 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00044">44</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00045">45</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
-<a id="a217c7100477c9bc9a2269e1122cf6ebb" name="a217c7100477c9bc9a2269e1122cf6ebb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a217c7100477c9bc9a2269e1122cf6ebb">&#9670;&nbsp;</a></span>UpdateBody()</h2>
+<a id="ae554f6a91dd049cf9838f7902df52959" name="ae554f6a91dd049cf9838f7902df52959"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae554f6a91dd049cf9838f7902df52959">&#9670;&nbsp;</a></span>UpdateAccumulations()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Body.UpdateBody </td>
+          <td class="memname">void Body.UpdateAccumulations </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
@@ -395,7 +400,8 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Call first once per simulation update. Follow up updates with Update_End </p>
+<p>Apply accumulations and check if body should remain awake. </p>
+<p >Call third and final for each body.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">delta_time</td><td></td></tr>
@@ -403,18 +409,18 @@ Private Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00059">59</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00107">107</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
-<a id="a301076d238b039b8154f3348d545b020" name="a301076d238b039b8154f3348d545b020"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a301076d238b039b8154f3348d545b020">&#9670;&nbsp;</a></span>UpdateEnd()</h2>
+<a id="a9f6291e5c166a4e73b183102e25312af" name="a9f6291e5c166a4e73b183102e25312af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f6291e5c166a4e73b183102e25312af">&#9670;&nbsp;</a></span>UpdateForCollisions()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Body.UpdateEnd </td>
+          <td class="memname">void Body.UpdateForCollisions </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
@@ -423,9 +429,45 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Call once per simulation update after Update(float) </p>
+<p>Get collisions and accumulate resolved delta positions and velocities. </p>
+<p >Call second for each body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta_time</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00092">92</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00088">88</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+
+</div>
+</div>
+<a id="afbd34131156fb6411e663a5e33c6a6b7" name="afbd34131156fb6411e663a5e33c6a6b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbd34131156fb6411e663a5e33c6a6b7">&#9670;&nbsp;</a></span>UpdatePositions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Body.UpdatePositions </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Update body based on velocity and check if should be awake if asleep. </p>
+<p >Call first for each body.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delta_time</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00061">61</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -442,7 +484,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00040">40</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00041">41</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -490,7 +532,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00039">39</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00040">40</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -506,7 +548,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00034">34</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00035">35</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -522,7 +564,23 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00033">33</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00034">34</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+
+</div>
+</div>
+<a id="a192ae2e3949fb4c29d8acf9482dbffbd" name="a192ae2e3949fb4c29d8acf9482dbffbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192ae2e3949fb4c29d8acf9482dbffbd">&#9670;&nbsp;</a></span>high_mass_collision</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Body.high_mass_collision</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00031">31</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -538,7 +596,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00031">31</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00032">32</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -554,7 +612,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00037">37</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00038">38</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -570,7 +628,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00038">38</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00039">39</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -586,7 +644,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00032">32</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00033">33</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -602,7 +660,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00036">36</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00037">37</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -618,7 +676,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00041">41</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00042">42</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>
@@ -634,7 +692,7 @@ Private Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00035">35</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00005_source.html#l00036">36</a> of file <a class="el" href="a00005_source.html">Body.cs</a>.</p>
 
 </div>
 </div>

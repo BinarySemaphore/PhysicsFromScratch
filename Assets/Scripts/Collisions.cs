@@ -6,6 +6,7 @@ public class Collision
 {
     public Body A;
     public Body B;
+    public float depth;
     public Vector3 location;
     public Vector3 normal;
 
@@ -16,10 +17,11 @@ public class Collision
     /// <param name="B"></param>
     /// <param name="location"></param>
     /// <param name="normal"></param>
-    public Collision(Body A, Body B, Vector3 location, Vector3 normal)
+    public Collision(Body A, Body B, Vector3 location, Vector3 normal, float depth)
     {
         this.A = A;
         this.B = B;
+        this.depth = depth;
         this.location = location;
         this.normal = normal;
     }
@@ -42,10 +44,12 @@ public class Collision
         {
             if (hit.collider.tag == A.sim.grounds_tag)
             {
+                float depth = hit.point.y - (A.transform.position.y - dims_y);
                 collisions.Add(new Collision(
                     A, null,
-                    new Vector3(A.transform.position.x, hit.point.y + dims_y, A.transform.position.z),
-                    hit.normal
+                    hit.point,
+                    hit.normal,
+                    depth
                 ));
             }
         }
@@ -69,10 +73,25 @@ public class Collision
                 AABB precise_box_B = new AABB(neighbor.gameObject, AABB.Containment.smallest);
                 if (AABB.IsOverlapping(precise_box_A, precise_box_B))
                 {
+                    float depth = 0f;
+                    Vector3 normal = AABB.NormalOfOverlapping(precise_box_A, precise_box_B);
+                    if (normal.x > 0.5f || normal.x < -0.5f)
+                    {
+                        depth = 0.5f * (neighbor.transform.localScale.x + A.transform.localScale.x) - Mathf.Abs(neighbor.transform.position.x - A.transform.position.x);
+                    }
+                    else if (normal.y > 0.5f || normal.y < -0.5f)
+                    {
+                        depth = 0.5f * (neighbor.transform.localScale.y + A.transform.localScale.y) - Mathf.Abs(neighbor.transform.position.y - A.transform.position.y);
+                    }
+                    else if (normal.z > 0.5f || normal.z < -0.5f)
+                    {
+                        depth = 0.5f * (neighbor.transform.localScale.z + A.transform.localScale.z) - Mathf.Abs(neighbor.transform.position.z - A.transform.position.z);
+                    }
                     collisions.Add(new Collision(
                         A, neighbor,
                         A.transform.position + 0.5f * (neighbor.transform.position - A.transform.position),
-                        AABB.NormalOfOverlapping(precise_box_A, precise_box_B)
+                        normal,
+                        depth
                     ));
                 }
             }
@@ -87,7 +106,7 @@ public class Collision
     /// <param name="position"></param>
     /// <param name="normal"></param>
     /// <param name="delta_time"></param>
-    public static void ResolveImpulseDynamicAGroundB(Body A, Vector3 position, Vector3 normal, float delta_time)
+    public static void ResolveImpulseDynamicAGroundB(Body A, Vector3 position, Vector3 normal, float depth, float delta_time)
     {
         float friction = A.friction;
         float elasticity = A.elasticity;
@@ -106,9 +125,10 @@ public class Collision
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity);
 
         // Undo collision in space along normal
-        Vector3 delta_position = position - A.transform.position;
-        A.transform.position = position;
-        //A.AddToAccumulator(Accumulation.Type.position, delta_position);
+        Vector3 delta_position = new Vector3(0f, depth, 0f);
+        //A.transform.position += delta_position;
+        A.AddToAccumulator(Accumulation.Type.position, delta_position);
+        A.high_mass_collision = 1000;
     }
 
     /// <summary>
@@ -119,9 +139,11 @@ public class Collision
     /// <param name="position"></param>
     /// <param name="normal"></param>
     /// <param name="detla_time"></param>
-    public static void ResolveImpulseDynamicADynamicB(Body A, Body B, Vector3 position, Vector3 normal, float delta_time)
+    public static void ResolveImpulseDynamicADynamicB(Body A, Body B, Vector3 position, Vector3 normal, float depth, float delta_time)
     {
-        float total_mass = A.mass + B.mass;
+        float mass_A = A.mass;
+        float mass_B = B.mass;
+        float total_mass = mass_A + mass_B;
         float friction = Mathf.Sqrt(A.friction * B.friction);
         float elasticity = Mathf.Sqrt(A.elasticity * B.elasticity);
 
@@ -136,15 +158,15 @@ public class Collision
 
         // Get velocity change due to impact reaction
         // Get momentums in relative to collision
-        Vector3 momentum_A = A.mass * acting_velocity_A;
-        Vector3 momentum_B = B.mass * acting_velocity_B;
+        Vector3 momentum_A = mass_A * acting_velocity_A;
+        Vector3 momentum_B = mass_B * acting_velocity_B;
         Vector3 total_momentum = momentum_A + momentum_B;
 
         /*
          * (m1 * v1 + m2 * v2 + m2 * e * (v2 - v1)) / (m1 + m2)
          * (Elasticity * m2 * (v2 - v1) + Total Momentum) / Total Mass
          */
-        Vector3 reactive_velocity_A = elasticity * B.mass * (acting_velocity_B - acting_velocity_A);
+        Vector3 reactive_velocity_A = elasticity * mass_B * (acting_velocity_B - acting_velocity_A);
         reactive_velocity_A += total_momentum;
         reactive_velocity_A = reactive_velocity_A / total_mass;
 
@@ -152,38 +174,45 @@ public class Collision
          * (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / (m1 + m2)
          * (Elasticity * m1 * (v1 - v2) + Total KE) / Total Mass
          */
-        Vector3 reactive_velocity_B = elasticity * A.mass * (acting_velocity_A - acting_velocity_B);
+        Vector3 reactive_velocity_B = elasticity * mass_A * (acting_velocity_A - acting_velocity_B);
         reactive_velocity_B += total_momentum;
         reactive_velocity_B = reactive_velocity_B / total_mass;
 
         // Update velocities: planar friction + reactive
-        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A - acting_velocity_A;
-        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - acting_velocity_B;
+        Vector3 delta_velocity_A = planar_friction_A + reactive_velocity_A - 1.1f * acting_velocity_A;
+        Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - 1.1f * acting_velocity_B;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_A);
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 
-        // Undo collision in space along normal for most energetic body(s)
-        Vector3 delta_position_A = -1f * delta_time * acting_velocity_A;
-        Vector3 delta_position_B = -1f * delta_time * acting_velocity_B;
-        //Vector3 delta_position_A = A.last_postion - A.center;
-        //Vector3 delta_position_B = B.last_postion - B.center;
-
-        float in_velocity_A = Vector3.Dot(B.transform.position - A.transform.position, acting_velocity_A);
-        float in_velocity_B = Vector3.Dot(A.transform.position - B.transform.position, acting_velocity_B);
-        if (in_velocity_A >= 0) A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
-        if (in_velocity_B >= 0) B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
-        /*if (acting_velocity_A.magnitude > acting_velocity_B.magnitude)
+        // Resolve collision spacially using depth and percent based on mass or if one object is in a rough spot (high_mass_collision)
+        if (B.awake)
         {
+            float percent_A = mass_B / total_mass;
+            float percent_B = -1f * mass_A / total_mass;
+            if (A.high_mass_collision > B.high_mass_collision)
+            {
+                percent_A = 0f;
+                percent_B = -1f;
+            }
+            else if (B.high_mass_collision > A.high_mass_collision)
+            {
+                percent_A = 1f;
+                percent_B = 0f;
+            }
+            Vector3 delta_position_A = percent_A * 1.1f * depth * normal;
+            Vector3 delta_position_B = percent_B * 1.1f * depth * normal;
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
-        }
-        else if (acting_velocity_B.magnitude > acting_velocity_A.magnitude)
-        {
             B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
         }
         else
         {
+            Vector3 delta_position_A = depth * normal;
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
-            B.AddToAccumulator(Accumulation.Type.position, delta_position_B);
-        }*/
+            if (A.high_mass_collision < 1) A.high_mass_collision = 10;
+        }
+
+        // Transfer high mass collision
+        if (A.high_mass_collision > B.high_mass_collision) B.high_mass_collision = A.high_mass_collision - 1;
+        if (B.high_mass_collision > A.high_mass_collision) A.high_mass_collision = B.high_mass_collision - 1;
     }
 }
