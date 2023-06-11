@@ -100,7 +100,6 @@ public class OBB
             }
         }
 
-
         // Get normal from least overlapping axis
         normal = axis_tests[smallest_intersecting_distance_index].normalized;
         normal *= normals[smallest_intersecting_distance_index];
@@ -109,6 +108,8 @@ public class OBB
         depth = -1f * smallest_intersecting_distance;
 
         // Get position
+        position = OBB.GetPositionOfOverlap(A, B);
+        /*
         position = center_to_position[0];
         for (int i = 1; i < 15; i++)
         {
@@ -116,6 +117,7 @@ public class OBB
         }
         position /= 4;
         position += B.center;
+        */
         
         return true;
     }
@@ -133,7 +135,7 @@ public class OBB
     /// <param name="normal"></param>
     /// <param name="center"></param>
     /// <returns></returns>
-    public static float DistanceOverAxis(OBB A, OBB B, Vector3 axis, out int normal, out float center)
+    private static float DistanceOverAxis(OBB A, OBB B, Vector3 axis, out int normal, out float center)
     {
         normal = 1;
         center = 0.0f;
@@ -178,5 +180,171 @@ public class OBB
         }
 
         return coverage - combined_fill;
+    }
+
+    private static Vector3 GetPositionOfOverlap(OBB A, OBB B)
+    {
+        int count = 0;
+        Vector3 location = Vector3.zero;
+        Vector3 normal = Vector3.zero;
+
+        // Check edges with front: 0-1, 1-3, 3-2, 2-0 | back: 4-5, 5-7, 7-6, 6-0 | cross: 0-4, 1-5, 2-6, 3-7
+        int[][][] edge_pair_indecies = new int[][][]
+        {
+            new int[][]
+            {
+                new int[] { 0, 1 },
+                new int[] { 1, 3 },
+                new int[] { 3, 2 },
+                new int[] { 2, 0 }
+            },
+            new int[][]
+            {
+                new int[] { 4, 5 },
+                new int[] { 5, 7 },
+                new int[] { 7, 6 },
+                new int[] { 6, 0 }
+            },
+            new int[][]
+            {
+                new int[] { 0, 4 },
+                new int[] { 1, 5 },
+                new int[] { 2, 6 },
+                new int[] { 3, 7 }
+            }
+        };
+        int[][] face_indecies = new int[][]
+        {
+            new int[] { 0, 1, 3, 2 }, // front
+            new int[] { 4, 5, 7, 6 }, // back
+            new int[] { 0, 1, 5, 4 }, // top
+            new int[] { 0, 4, 6, 2 }, // right
+            new int[] { 6, 7, 3, 2 }, // bottom
+            new int[] { 5, 1, 3, 7 }  // left
+        };
+
+        // Check A faces against B edges
+        Vector3 found_location;
+        Vector3 found_normal;
+        Vector3 face_p1;
+        Vector3 face_p2;
+        Vector3 face_p3;
+        Vector3 face_p4;
+        Vector3 edge_p1;
+        Vector3 edge_p2;
+        foreach (int[] face in face_indecies)
+        {
+            face_p1 = B.vertices[face[0]];
+            face_p2 = B.vertices[face[1]];
+            face_p3 = B.vertices[face[2]];
+            face_p4 = B.vertices[face[3]];
+
+            foreach (int[][] face_edges in edge_pair_indecies)
+            {
+                foreach (int[] edge_pair in face_edges)
+                {
+                    edge_p1 = A.vertices[edge_pair[0]];
+                    edge_p2 = A.vertices[edge_pair[1]];
+
+                    if (OBB.RayIntersectingQuad(edge_p1, edge_p2, face_p1, face_p2, face_p3, face_p4, out found_location, out found_normal))
+                    {
+                        count += 1;
+                        location += found_location;
+                        normal += found_normal;
+                    }
+                }
+            }
+        }
+
+        // Check B faces against A edges
+        foreach (int[] face in face_indecies)
+        {
+            face_p1 = A.vertices[face[0]];
+            face_p2 = A.vertices[face[1]];
+            face_p3 = A.vertices[face[2]];
+            face_p4 = A.vertices[face[3]];
+
+            foreach (int[][] face_edges in edge_pair_indecies)
+            {
+                foreach (int[] edge_pair in face_edges)
+                {
+                    edge_p1 = B.vertices[edge_pair[0]];
+                    edge_p2 = B.vertices[edge_pair[1]];
+
+                    if (OBB.RayIntersectingQuad(edge_p1, edge_p2, face_p1, face_p2, face_p3, face_p4, out found_location, out found_normal))
+                    {
+                        count += 1;
+                        location += found_location;
+                        normal += found_normal;
+                    }
+                }
+            }
+        }
+
+        // Average the locations and normals
+        location /= count;
+        normal /= count;
+        /*
+        int[] face = face_indecies[3];
+        int[][] edge = edge_pair_indecies[0];
+        int[] edge_pair = edge[0];
+        if (RayIntersectingQuad(
+            A.vertices[edge_pair[0]], A.vertices[edge_pair[1]],
+            B.vertices[face[0]], B.vertices[face[1]], B.vertices[face[2]], B.vertices[face[3]],
+            out location, out normal))
+        {
+            return location;
+        }
+        */
+
+        return location;
+    }
+
+    private static bool RayIntersectingQuad(Vector3 start, Vector3 end, Vector3 q1, Vector3 q2, Vector3 q3, Vector3 q4, out Vector3 location, out Vector3 normal)
+    {
+        location = Vector3.zero;
+
+        float limit = (end - start).magnitude;
+        Vector3 ray_direction = end - start;
+        Vector3 plane_normal = Vector3.Cross(q2 - q1, q3 - q1);
+        normal = plane_normal;
+
+        // Get start_end vector projected onto plane described by q1, q2, q3
+        float plane_equation = q1.x * plane_normal.x + q1.y * plane_normal.y + q1.z * plane_normal.z;
+        float plane_solve_ray_start = plane_equation - start.x * plane_normal.x - start.y * plane_normal.y - start.z * plane_normal.z;
+        float plane_solve_ray_direction = ray_direction.x * plane_normal.x + ray_direction.y * plane_normal.y + ray_direction.z * plane_normal.z;
+        float solve_ray = plane_solve_ray_start / plane_solve_ray_direction;
+
+        // Check if there is a solution to projection within limit
+        if (solve_ray < 0.0f || solve_ray > limit) return false;
+
+        // Get the actual point on the plane
+        ray_direction = solve_ray * ray_direction.normalized;
+        location = start + ray_direction;
+
+        // Check if projection is within quad (sum of anglea from each location to point on edge)
+        float theta = 0.0f;
+        Vector3 check_1, check_2;
+
+        check_1 = q1 - location;
+        check_2 = q2 - location;
+        theta += Mathf.Acos(Vector3.Dot(check_1.normalized, check_2.normalized));
+
+        check_1 = q2 - location;
+        check_2 = q3 - location;
+        theta += Mathf.Acos(Vector3.Dot(check_1.normalized, check_2.normalized));
+
+        check_1 = q3 - location;
+        check_2 = q4 - location;
+        theta += Mathf.Acos(Vector3.Dot(check_1.normalized, check_2.normalized));
+
+        check_1 = q4 - location;
+        check_2 = q1 - location;
+        theta += Mathf.Acos(Vector3.Dot(check_1.normalized, check_2.normalized));
+
+        // Check if sum of all angles (theta) is close to 360 (2pi)
+        if (theta > 2 * Mathf.PI - 0.001f && theta < 2 * Mathf.PI + 0.001f) return true;
+
+        return false;
     }
 }
