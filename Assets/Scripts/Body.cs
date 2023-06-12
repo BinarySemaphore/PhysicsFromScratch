@@ -37,7 +37,7 @@ public class Body : MonoBehaviour
     public Vector3 velocity;
     public Vector3 r_velocity;
     public Vector3 last_postion;
-    public Quaternion last_rotation;
+    public Vector3 last_rotation;
     public OctreeItem bounding_box;
     public List<Accumulation> accumulator;
     public Simulator sim;
@@ -54,7 +54,7 @@ public class Body : MonoBehaviour
             0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
         );
         this.last_postion = this.transform.position;
-        this.last_rotation = this.transform.rotation;
+        this.last_rotation = this.transform.rotation.eulerAngles;
         this.bounding_box = new OctreeItem(this.gameObject);
         this.accumulator = new List<Accumulation>();
     }
@@ -115,7 +115,8 @@ public class Body : MonoBehaviour
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.01f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.05f &&
+            (this.last_rotation - this.transform.rotation.eulerAngles).magnitude <= 0.05f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 5.0f)
@@ -127,6 +128,7 @@ public class Body : MonoBehaviour
         }
 
         this.last_postion = this.transform.position;
+        this.last_rotation = this.transform.rotation.eulerAngles;
     }
 
     public void ApplyAcceleration(Vector3 acceleration, float delta_time, bool no_wake)

@@ -120,7 +120,9 @@ public class OBB
         depth = -1f * smallest_intersecting_distance;
 
         // Get position
-        position = OBB.GetPositionOfOverlap(A, B);
+        Vector3 new_normal;
+        position = OBB.GetPositionOfOverlap(A, B, out new_normal);
+        //if (new_normal != Vector3.zero) normal = new_normal;
         /*
         position = center_to_position[0];
         for (int i = 1; i < 15; i++)
@@ -201,10 +203,12 @@ public class OBB
     /// <param name="A"></param>
     /// <param name="B"></param>
     /// <returns><see cref="Vector3"/> world position.</returns>
-    private static Vector3 GetPositionOfOverlap(OBB A, OBB B)
+    private static Vector3 GetPositionOfOverlap(OBB A, OBB B, out Vector3 normal)
     {
         int count = 0;
         Vector3 location = Vector3.zero;
+        Vector3 normals = Vector3.zero;
+        normal = Vector3.zero;
 
         // Check edges with front: 0-1, 1-3, 3-2, 2-0 | back: 4-5, 5-7, 7-6, 6-0 | cross: 0-4, 1-5, 2-6, 3-7
         int[][][] edge_pair_indecies = new int[][][]
@@ -292,6 +296,7 @@ public class OBB
                     {
                         count += 1;
                         location += found_location;
+                        normals += found_normal;
                     }
                 }
             }
@@ -302,6 +307,7 @@ public class OBB
 
         // Average the locations and normals
         location /= count;
+        normal = (normals / count).normalized;
 
         return location;
     }
