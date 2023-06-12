@@ -11,6 +11,7 @@ public class Drawer : MonoBehaviour
     private List<GameObject> cache_objects;
 
     public new Camera camera;
+    public List<GameObject> boxes;
     public Simulator sim;
 
     // Start is called before the first frame update
@@ -28,6 +29,31 @@ public class Drawer : MonoBehaviour
         {
             this.DrawAABB(item);
         }
+        /*
+        List<OBB> obbs = new List<OBB>();
+        foreach (GameObject box in this.boxes)
+        {
+            OBB bb = new OBB(box.transform.position, box.transform.rotation, box.transform.localScale);
+            this.DrawBox(bb.GetVerticies(), width: 0.1f);
+            obbs.Add(bb);
+        }
+
+        Vector3 position;
+        Vector3 normal;
+        float depth;
+        for (int i = 0; i < obbs.Count - 1; i++)
+        {
+            for (int j = i + 1; j < obbs.Count; j++)
+            {
+                if (OBB.IsOverlapping(obbs[i], obbs[j], out position, out normal, out depth))
+                {
+                    this.DrawCircle(position, 0.75f, width: 0.1f);
+                    this.DrawLine(position, position + normal, width: 0.1f);
+                    Debug.Log($"Depth: {depth}");
+                }
+            }
+        }
+        */
         this.CleanCache();
     }
 
@@ -58,6 +84,16 @@ public class Drawer : MonoBehaviour
         {
             this.DrawOctree(child);
         }
+    }
+
+    void DrawLine(Vector3 start, Vector3 end, float width = 1.0f)
+    {
+        LineRenderer renderer = this.GetRenderer();
+        renderer.positionCount = 2;
+        renderer.startWidth = width;
+        renderer.endWidth = width;
+        renderer.SetPosition(0, start);
+        renderer.SetPosition(1, end);
     }
 
     /// <summary>

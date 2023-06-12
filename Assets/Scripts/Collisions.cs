@@ -69,27 +69,16 @@ public class Collision
         {
             if (AABB.IsOverlapping(A.bounding_box, neighbor.bounding_box))
             {
-                AABB precise_box_A = new AABB(A.gameObject, AABB.Containment.smallest);
-                AABB precise_box_B = new AABB(neighbor.gameObject, AABB.Containment.smallest);
-                if (AABB.IsOverlapping(precise_box_A, precise_box_B))
+                float depth;
+                Vector3 location;
+                Vector3 normal;
+                OBB precise_box_A = new OBB(A.transform.position, A.transform.rotation, A.transform.localScale);
+                OBB precise_box_B = new OBB(neighbor.transform.position, neighbor.transform.rotation, neighbor.transform.localScale);
+                if (OBB.IsOverlapping(precise_box_A, precise_box_B, out location, out normal, out depth))
                 {
-                    float depth = 0f;
-                    Vector3 normal = AABB.NormalOfOverlapping(precise_box_A, precise_box_B);
-                    if (normal.x > 0.5f || normal.x < -0.5f)
-                    {
-                        depth = 0.5f * (neighbor.transform.localScale.x + A.transform.localScale.x) - Mathf.Abs(neighbor.transform.position.x - A.transform.position.x);
-                    }
-                    else if (normal.y > 0.5f || normal.y < -0.5f)
-                    {
-                        depth = 0.5f * (neighbor.transform.localScale.y + A.transform.localScale.y) - Mathf.Abs(neighbor.transform.position.y - A.transform.position.y);
-                    }
-                    else if (normal.z > 0.5f || normal.z < -0.5f)
-                    {
-                        depth = 0.5f * (neighbor.transform.localScale.z + A.transform.localScale.z) - Mathf.Abs(neighbor.transform.position.z - A.transform.position.z);
-                    }
                     collisions.Add(new Collision(
                         A, neighbor,
-                        A.transform.position + 0.5f * (neighbor.transform.position - A.transform.position),
+                        location,
                         normal,
                         depth
                     ));
