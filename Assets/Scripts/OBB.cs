@@ -8,6 +8,12 @@ public class OBB
     private Quaternion rotation;
     private Vector3[] vertices;
 
+    /// <summary>
+    /// Creates Oriented Bounding Box for precise collision detection and information.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    /// <param name="dimensions"></param>
     public OBB(Vector3 position, Quaternion rotation, Vector3 dimensions)
     {
         this.center = position;
@@ -16,6 +22,12 @@ public class OBB
         this.vertices = this.GetVertices(position, rotation);
     }
 
+    /// <summary>
+    /// Calculate the corner verticies of the <see cref="OBB"/>.
+    /// </summary>
+    /// <param name="position"></param>
+    /// <param name="rotation"></param>
+    /// <returns><see cref="Vector3"/> array of the vertices.</returns>
     private Vector3[] GetVertices(Vector3 position, Quaternion rotation)
     {
         Vector3 pos = 0.5f * this.dimensions;
@@ -182,6 +194,13 @@ public class OBB
         return coverage - combined_fill;
     }
 
+    /// <summary>
+    /// Find average position of overlapping <paramref name="A"/> and <paramref name="B"/> using each edge and face.
+    /// </summary>
+    /// <remarks>Should only use if overlapping state of <paramref name="A"/> and <paramref name="B"/> are already known to be true.</remarks>
+    /// <param name="A"></param>
+    /// <param name="B"></param>
+    /// <returns><see cref="Vector3"/> world position.</returns>
     private static Vector3 GetPositionOfOverlap(OBB A, OBB B)
     {
         int count = 0;
@@ -287,6 +306,23 @@ public class OBB
         return location;
     }
 
+    /// <summary>
+    /// Finds intersection along line defined by <paramref name="start"/> and <paramref name="end"/> with quad given with q-points.
+    /// <para>Outs:<list type="bullet">
+    /// <item><paramref name="location"/>: World location of the intersection if return true.</item>
+    /// <item><paramref name="normal"/>: Normal of plane from intersection if return true.</item>
+    /// </list></para>
+    /// </summary>
+    /// <remarks>Line and quad extension available to allow exceeding limits.</remarks>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <param name="q1"></param>
+    /// <param name="q2"></param>
+    /// <param name="q3"></param>
+    /// <param name="q4"></param>
+    /// <param name="location"></param>
+    /// <param name="normal"></param>
+    /// <returns><see cref="System.Boolean"/> state of intersection.</returns>
     private static bool RayIntersectingQuad(Vector3 start, Vector3 end, Vector3 q1, Vector3 q2, Vector3 q3, Vector3 q4, out Vector3 location, out Vector3 normal)
     {
         location = Vector3.zero;
