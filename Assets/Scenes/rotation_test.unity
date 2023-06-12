@@ -661,7 +661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b179944fa611e448328b258096d808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simulation_speed: 1
+  simulation_speed: 0.25
   objects_tag: Sim1
   grounds_tag: Sim_Ground
   gravity: {x: 0, y: -9.81, z: 0}
@@ -710,6 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1675468230}
+  boxes: []
   sim: {fileID: 1450649418}
 --- !u!4 &1495528055
 Transform:
