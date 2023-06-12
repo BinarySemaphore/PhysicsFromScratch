@@ -104,8 +104,8 @@ public class OBB
 
             center_to_position[i] = center_on_axis * axis_tests[i];
 
-            // Update smallest intersecting distances and index
-            if (distance_results[i] != 0f && distance_results[i] > smallest_intersecting_distance)
+            // Update smallest intersecting distances and index (want to use near zero for comparison otherwise extremly small numbers will mess up normal from cross axis tests).
+            if (distance_results[i] <= -0.000001f && distance_results[i] > smallest_intersecting_distance)
             {
                 smallest_intersecting_distance_index = i;
                 smallest_intersecting_distance = distance_results[i];

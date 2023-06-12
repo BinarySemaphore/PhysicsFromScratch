@@ -24,13 +24,12 @@ public class Drawer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        /*
         this.DrawOctree(this.sim.octree_root);
         foreach (OctreeItem item in this.sim.items)
         {
             this.DrawAABB(item);
         }
-        */
+        /*
         List<OBB> obbs = new List<OBB>();
         foreach (GameObject box in this.boxes)
         {
@@ -54,6 +53,7 @@ public class Drawer : MonoBehaviour
                 }
             }
         }
+        */
         this.CleanCache();
     }
 
