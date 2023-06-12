@@ -186,7 +186,6 @@ public class OBB
     {
         int count = 0;
         Vector3 location = Vector3.zero;
-        Vector3 normal = Vector3.zero;
 
         // Check edges with front: 0-1, 1-3, 3-2, 2-0 | back: 4-5, 5-7, 7-6, 6-0 | cross: 0-4, 1-5, 2-6, 3-7
         int[][][] edge_pair_indecies = new int[][][]
@@ -203,7 +202,7 @@ public class OBB
                 new int[] { 4, 5 },
                 new int[] { 5, 7 },
                 new int[] { 7, 6 },
-                new int[] { 6, 0 }
+                new int[] { 6, 4 }
             },
             new int[][]
             {
@@ -275,27 +274,16 @@ public class OBB
                     {
                         count += 1;
                         location += found_location;
-                        normal += found_normal;
                     }
                 }
             }
         }
 
+        // If all checks missed A and B are perfectly overlapping
+        if (count == 0) return 0.5f * (A.center + B.center);
+
         // Average the locations and normals
         location /= count;
-        normal /= count;
-        /*
-        int[] face = face_indecies[3];
-        int[][] edge = edge_pair_indecies[0];
-        int[] edge_pair = edge[0];
-        if (RayIntersectingQuad(
-            A.vertices[edge_pair[0]], A.vertices[edge_pair[1]],
-            B.vertices[face[0]], B.vertices[face[1]], B.vertices[face[2]], B.vertices[face[3]],
-            out location, out normal))
-        {
-            return location;
-        }
-        */
 
         return location;
     }
@@ -304,23 +292,49 @@ public class OBB
     {
         location = Vector3.zero;
 
+        float line_extension = 0.1f; // extends line limit before and after (zero is exact)
+        float quad_extension = 0.1f; // extends quad range (zero is exact)
+
         float limit = (end - start).magnitude;
-        Vector3 ray_direction = end - start;
-        Vector3 plane_normal = Vector3.Cross(q2 - q1, q3 - q1);
+        Vector3 line_normal = (end - start).normalized;
+        Vector3 plane_normal = Vector3.Cross(q2 - q1, q3 - q1).normalized;
         normal = plane_normal;
 
-        // Get start_end vector projected onto plane described by q1, q2, q3
-        float plane_equation = q1.x * plane_normal.x + q1.y * plane_normal.y + q1.z * plane_normal.z;
-        float plane_solve_ray_start = plane_equation - start.x * plane_normal.x - start.y * plane_normal.y - start.z * plane_normal.z;
-        float plane_solve_ray_direction = ray_direction.x * plane_normal.x + ray_direction.y * plane_normal.y + ray_direction.z * plane_normal.z;
-        float solve_ray = plane_solve_ray_start / plane_solve_ray_direction;
+        /*
+         * Line = a1, a2
+         * Plane = q1, q2, q3
+         *
+         * points on the line:
+         * n = normal(a2 - a1)
+         * p = a1 + d * n | where d is distance from a1.
+         *
+         * points on the plane:
+         * N = normal(crossProduct(q2 - q1, q3 - q1))
+         * 0 = dotProduct(P - q1, N)
+         *
+         * Solve for d (distance to plane from a1):
+         * P = p (a point on the line).
+         * 0 = N.x * P.x - N.x * q1.x + N.y * P.y - N.y * q1.y + N.z * P.z - N.z * q1.z
+         * N.x * q1.x + N.y * q1.y + N.z * q1.z = N.x * P.x + N.y * P.y + N.z * P.z
+         * dotProduct(N, q1) = N.x * (a1.x + d * n.x) + N.y * (a1.y + d * n.y) + N.z * (a1.z + d * n.z)
+         * dotProduct(N, q1) = N.x * a1.x + N.x * d * n.x + N.y * a1.y + N.y * d * n.y + N.z * a1.z + N.z * d * n.z
+         * dotProduct(N, q1) - N.x * a1.x - N.y * a1.y - N.z * a1.z = N.x * d * n.x + N.y * d * n.y + N.z * d * n.z
+         * dotProduct(N, q1) - dotProduct(N, a1) = d * (N.x * n.x + N.y * n.y + N.z * n.z)
+         * d = (dotProduct(N, q1) - dotProduct(N, a1)) / dotProduct(N, n)
+         */
 
-        // Check if there is a solution to projection within limit
-        if (solve_ray < 0.0f || solve_ray > limit) return false;
+        // Check if parallel
+        float direction_compare = Vector3.Dot(line_normal, plane_normal);
+        if (direction_compare == 0f) return false;
 
-        // Get the actual point on the plane
-        ray_direction = solve_ray * ray_direction.normalized;
-        location = start + ray_direction;
+        // Get distance to plane from line start
+        float distance = (Vector3.Dot(q1, plane_normal) - Vector3.Dot(start, plane_normal)) / direction_compare;
+
+        // Check if distance is within limit (length of the line from start and end)
+        if (distance < -line_extension || distance > limit + line_extension) return false;
+
+        // Get the point on the plane along the line
+        location = start + distance * line_normal;
 
         // Check if projection is within quad (sum of anglea from each location to point on edge)
         float theta = 0.0f;
@@ -343,7 +357,7 @@ public class OBB
         theta += Mathf.Acos(Vector3.Dot(check_1.normalized, check_2.normalized));
 
         // Check if sum of all angles (theta) is close to 360 (2pi)
-        if (theta > 2 * Mathf.PI - 0.001f && theta < 2 * Mathf.PI + 0.001f) return true;
+        if (theta >= 2 * Mathf.PI - quad_extension && theta <= 2 * Mathf.PI + quad_extension) return true;
 
         return false;
     }
