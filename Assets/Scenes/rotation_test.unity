@@ -165,7 +165,7 @@ MonoBehaviour:
   velocity: {x: 10, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &370184892
 MeshRenderer:
@@ -460,7 +460,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &776165387
 MeshRenderer:
@@ -567,7 +567,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &1433731992
 MeshRenderer:
@@ -661,7 +661,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b179944fa611e448328b258096d808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  simulation_speed: 0.25
+  iterations: 1
+  simulation_speed: 1
   objects_tag: Sim1
   grounds_tag: Sim_Ground
   gravity: {x: 0, y: -9.81, z: 0}

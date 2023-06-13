@@ -161,10 +161,11 @@ MonoBehaviour:
   mass: 1
   friction: 0.2
   elasticity: 0.5
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &345139513
 MeshRenderer:
@@ -173,7 +174,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 345139511}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -550,10 +551,11 @@ MonoBehaviour:
   mass: 1
   friction: 0.2
   elasticity: 0.5
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &1433731992
 MeshRenderer:
@@ -562,7 +564,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1433731990}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1

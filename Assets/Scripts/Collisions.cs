@@ -52,7 +52,7 @@ public class Collision
             Vector3 origin = vertex;
             origin.y += 1f + velocity_down;
 
-            float distance_to_check = 1f + 2f * velocity_down;
+            float distance_to_check = 1f + velocity_down;
 
             if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance_to_check))
             {
@@ -122,7 +122,8 @@ public class Collision
         Vector3 velocity_A_at_pos = A.velocity;
 
         // Add velocity from rotation relative to position of collision
-        Vector3 velocity_from_rotation = delta_time * Vector3.Cross(A.r_velocity, -position_to_center);
+        Vector3 velocity_from_rotation = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_center);
+        velocity_from_rotation *= distance_to_center * delta_time;
         velocity_A_at_pos += velocity_from_rotation;
 
         Vector3 acting_velocity = Vector3.Project(velocity_A_at_pos, normal);
@@ -139,8 +140,9 @@ public class Collision
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity);
 
         // Update rotational velocities
-        Vector3 delta_r_velocity = Vector3.Scale(Vector3.Cross(delta_velocity, position_to_center), new Vector3(distance_to_center / A.moment.x, distance_to_center / A.moment.y, distance_to_center / A.moment.z));
-        //delta_r_velocity_A *= Mathf.PI / 180f;
+        Vector3 torque = Vector3.Cross(delta_velocity, position_to_center);
+        torque = Quaternion.Inverse(A.transform.rotation) * torque;
+        Vector3 delta_r_velocity = Vector3.Scale(torque, new Vector3(distance_to_center / A.moment.x, distance_to_center / A.moment.y, distance_to_center / A.moment.z));
         A.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity);
 
         // Undo collision in space along normal
@@ -175,8 +177,10 @@ public class Collision
         Vector3 velocity_B_at_pos = B.velocity;
 
         // Add velocity from rotation relative to position of collision
-        Vector3 velocity_from_rotation_A = delta_time * Vector3.Cross(A.r_velocity, -position_to_A);
-        Vector3 velocity_from_rotation_B = delta_time * Vector3.Cross(B.r_velocity, -position_to_B);
+        Vector3 velocity_from_rotation_A = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_A);
+        velocity_from_rotation_A *= distance_to_A * delta_time;
+        Vector3 velocity_from_rotation_B = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_B);
+        velocity_from_rotation_B *= distance_to_B * delta_time;
         velocity_A_at_pos += velocity_from_rotation_A;
         velocity_B_at_pos += velocity_from_rotation_B;
 
@@ -206,7 +210,7 @@ public class Collision
 
         /*
          * (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / (m1 + m2)
-         * (Elasticity * m1 * (v1 - v2) + Total KE) / Total Mass
+         * (Elasticity * m1 * (v1 - v2) + Total Momentum) / Total Mass
          */
         Vector3 reactive_velocity_B = elasticity * mass_A * (acting_velocity_A - acting_velocity_B);
         reactive_velocity_B += total_momentum;
@@ -219,10 +223,12 @@ public class Collision
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
 
         // Update rotational velocities
-        Vector3 delta_r_velocity_A = Vector3.Scale(Vector3.Cross(delta_velocity_A, position_to_A), new Vector3(distance_to_A / A.moment.x, distance_to_A / A.moment.y, distance_to_A / A.moment.z));
-        //delta_r_velocity_A *= Mathf.PI / 180f;
-        Vector3 delta_r_velocity_B = Vector3.Scale(Vector3.Cross(delta_velocity_B, position_to_B), new Vector3(distance_to_B / B.moment.x, distance_to_B / B.moment.y, distance_to_B / B.moment.z));
-        //delta_r_velocity_B *= Mathf.PI / 180f;
+        Vector3 torque_A = Vector3.Cross(delta_velocity_A, position_to_A);
+        torque_A = Quaternion.Inverse(A.transform.rotation) * torque_A;
+        Vector3 torque_B = Vector3.Cross(delta_velocity_B, position_to_B);
+        torque_B = Quaternion.Inverse(B.transform.rotation) * torque_B;
+        Vector3 delta_r_velocity_A = Vector3.Scale(torque_A, new Vector3(distance_to_A / A.moment.x, distance_to_A / A.moment.y, distance_to_A / A.moment.z));
+        Vector3 delta_r_velocity_B = Vector3.Scale(torque_B, new Vector3(distance_to_B / B.moment.x, distance_to_B / B.moment.y, distance_to_B / B.moment.z));
         A.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_A);
         B.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_B);
 

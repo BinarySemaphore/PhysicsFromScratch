@@ -80,7 +80,7 @@ public class Body : MonoBehaviour
         Vector3 applied_velocity = delta_time * this.velocity;
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
         this.transform.position += applied_velocity;
-        this.transform.rotation = Quaternion.Euler(applied_r_velocity) * this.transform.rotation;
+        this.transform.Rotate(applied_r_velocity, Space.Self);
 
         // Update BB to current position
         this.bounding_box.center = this.transform.position;
@@ -116,7 +116,7 @@ public class Body : MonoBehaviour
         if (!this.awake) return;
 
         if ((this.last_postion - this.transform.position).magnitude <= 0.05f &&
-            (this.last_rotation - this.transform.rotation.eulerAngles).magnitude <= 0.05f) this.idle_time += delta_time ;
+            (this.last_rotation - this.transform.rotation.eulerAngles).magnitude <= 0.1f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 5.0f)
