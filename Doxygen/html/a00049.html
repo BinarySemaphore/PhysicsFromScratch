@@ -118,9 +118,9 @@ Static Private Member Functions</h2></td></tr>
 <tr class="memitem:ab7764da70c90e335e01127c383873d47"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html#ab7764da70c90e335e01127c383873d47">DistanceOverAxis</a> (<a class="el" href="a00049.html">OBB</a> A, <a class="el" href="a00049.html">OBB</a> B, Vector3 axis, out int normal, out float <a class="el" href="a00049.html#aca8da4ded65521ed88994e786cc58b2e">center</a>)</td></tr>
 <tr class="memdesc:ab7764da70c90e335e01127c383873d47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find edge to edge distance between <em>A</em>  and <em>B</em>  along <em>axis</em> .  <a href="a00049.html#ab7764da70c90e335e01127c383873d47">More...</a><br /></td></tr>
 <tr class="separator:ab7764da70c90e335e01127c383873d47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a5a8fc9da7636986b044c9d11d4ced1"><td class="memItemLeft" align="right" valign="top">static Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html#a0a5a8fc9da7636986b044c9d11d4ced1">GetPositionOfOverlap</a> (<a class="el" href="a00049.html">OBB</a> A, <a class="el" href="a00049.html">OBB</a> B)</td></tr>
-<tr class="memdesc:a0a5a8fc9da7636986b044c9d11d4ced1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find average position of overlapping <em>A</em>  and <em>B</em>  using each edge and face.  <a href="a00049.html#a0a5a8fc9da7636986b044c9d11d4ced1">More...</a><br /></td></tr>
-<tr class="separator:a0a5a8fc9da7636986b044c9d11d4ced1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99e7afd0e8e6c4dc6df61b61bc7fc8c0"><td class="memItemLeft" align="right" valign="top">static Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html#a99e7afd0e8e6c4dc6df61b61bc7fc8c0">GetPositionOfOverlap</a> (<a class="el" href="a00049.html">OBB</a> A, <a class="el" href="a00049.html">OBB</a> B, out Vector3 normal)</td></tr>
+<tr class="memdesc:a99e7afd0e8e6c4dc6df61b61bc7fc8c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Find average position of overlapping <em>A</em>  and <em>B</em>  using each edge and face.  <a href="a00049.html#a99e7afd0e8e6c4dc6df61b61bc7fc8c0">More...</a><br /></td></tr>
+<tr class="separator:a99e7afd0e8e6c4dc6df61b61bc7fc8c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff722340c97d606623e6b50ca77e7b92"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00049.html#aff722340c97d606623e6b50ca77e7b92">RayIntersectingQuad</a> (Vector3 start, Vector3 end, Vector3 q1, Vector3 q2, Vector3 q3, Vector3 q4, out Vector3 location, out Vector3 normal)</td></tr>
 <tr class="memdesc:aff722340c97d606623e6b50ca77e7b92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds intersection along line defined by <em>start</em>  and <em>end</em>  with quad given with q-points.  <a href="a00049.html#aff722340c97d606623e6b50ca77e7b92">More...</a><br /></td></tr>
 <tr class="separator:aff722340c97d606623e6b50ca77e7b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -258,12 +258,12 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00150">150</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00152">152</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
 
 </div>
 </div>
-<a id="a0a5a8fc9da7636986b044c9d11d4ced1" name="a0a5a8fc9da7636986b044c9d11d4ced1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a5a8fc9da7636986b044c9d11d4ced1">&#9670;&nbsp;</a></span>GetPositionOfOverlap()</h2>
+<a id="a99e7afd0e8e6c4dc6df61b61bc7fc8c0" name="a99e7afd0e8e6c4dc6df61b61bc7fc8c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99e7afd0e8e6c4dc6df61b61bc7fc8c0">&#9670;&nbsp;</a></span>GetPositionOfOverlap()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +281,13 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="a00049.html">OBB</a>&#160;</td>
-          <td class="paramname"><em>B</em>&#160;</td>
+          <td class="paramname"><em>B</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">out Vector3&#160;</td>
+          <td class="paramname"><em>normal</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -307,7 +313,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Vector3 world position.</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00204">204</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00206">206</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
 
 </div>
 </div>
@@ -548,7 +554,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>System.Boolean state of intersection.</dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00326">326</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00014_source.html#l00332">332</a> of file <a class="el" href="a00014_source.html">OBB.cs</a>.</p>
 
 </div>
 </div>

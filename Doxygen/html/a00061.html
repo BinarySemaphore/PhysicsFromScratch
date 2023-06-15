@@ -99,6 +99,8 @@ Inheritance diagram for Simulator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:a309f7707407ae98c59e09dcfe8893acd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a309f7707407ae98c59e09dcfe8893acd">iterations</a></td></tr>
+<tr class="separator:a309f7707407ae98c59e09dcfe8893acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ee95f46ecac4704d07d9f08abb35c55"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a5ee95f46ecac4704d07d9f08abb35c55">simulation_speed</a></td></tr>
 <tr class="separator:a5ee95f46ecac4704d07d9f08abb35c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a0d2992ddba3afe4f0ce227d6edc19"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a86a0d2992ddba3afe4f0ce227d6edc19">objects_tag</a></td></tr>
@@ -122,8 +124,10 @@ Private Member Functions</h2></td></tr>
 <tr class="separator:a1454c4cad65d3974a5a18169a5afdf38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae875733c01b3076498715b22aaad32d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#ae875733c01b3076498715b22aaad32d0">Initalize</a> ()</td></tr>
 <tr class="separator:ae875733c01b3076498715b22aaad32d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a551c9b517e70a1ae8a079a09a78b04fc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#a551c9b517e70a1ae8a079a09a78b04fc">UpdateSim</a> (float delta_time)</td></tr>
-<tr class="separator:a551c9b517e70a1ae8a079a09a78b04fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad15a684feaa4ef4cac9e8ee4e83aaa91"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#ad15a684feaa4ef4cac9e8ee4e83aaa91">UpdateSim</a> (float delta_time, int <a class="el" href="a00061.html#a309f7707407ae98c59e09dcfe8893acd">iterations</a>)</td></tr>
+<tr class="separator:ad15a684feaa4ef4cac9e8ee4e83aaa91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac891571589c40d7801e46b49e99b75e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="a00061.html#ac891571589c40d7801e46b49e99b75e0">UpdateIteration</a> (float delta_time)</td></tr>
+<tr class="separator:ac891571589c40d7801e46b49e99b75e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -157,7 +161,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00027">27</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00028">28</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -184,7 +188,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00038">38</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00039">39</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -211,12 +215,12 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00022">22</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00023">23</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
-<a id="a551c9b517e70a1ae8a079a09a78b04fc" name="a551c9b517e70a1ae8a079a09a78b04fc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a551c9b517e70a1ae8a079a09a78b04fc">&#9670;&nbsp;</a></span>UpdateSim()</h2>
+<a id="ac891571589c40d7801e46b49e99b75e0" name="ac891571589c40d7801e46b49e99b75e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac891571589c40d7801e46b49e99b75e0">&#9670;&nbsp;</a></span>UpdateIteration()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -225,7 +229,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Simulator.UpdateSim </td>
+          <td class="memname">void Simulator.UpdateIteration </td>
           <td>(</td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>delta_time</em></td><td>)</td>
@@ -239,7 +243,45 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00053">53</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00063">63</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="ad15a684feaa4ef4cac9e8ee4e83aaa91" name="ad15a684feaa4ef4cac9e8ee4e83aaa91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad15a684feaa4ef4cac9e8ee4e83aaa91">&#9670;&nbsp;</a></span>UpdateSim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Simulator.UpdateSim </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delta_time</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>iterations</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00054">54</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -256,7 +298,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00019">19</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00020">20</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -272,7 +314,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00012">12</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00013">13</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -288,7 +330,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00011">11</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00012">12</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -328,7 +370,23 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00017">17</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00018">18</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+
+</div>
+</div>
+<a id="a309f7707407ae98c59e09dcfe8893acd" name="a309f7707407ae98c59e09dcfe8893acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a309f7707407ae98c59e09dcfe8893acd">&#9670;&nbsp;</a></span>iterations</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Simulator.iterations</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00009">9</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -344,7 +402,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00010">10</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00011">11</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -360,7 +418,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00015">15</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00016">16</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
@@ -376,7 +434,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00009">9</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="a00020_source.html#l00010">10</a> of file <a class="el" href="a00020_source.html">Simulator.cs</a>.</p>
 
 </div>
 </div>
