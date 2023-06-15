@@ -49,9 +49,9 @@ public class Body : MonoBehaviour
         this.high_mass_collision = 0;
         this.idle_time = 0;
         this.moment = new Vector3(
-            0.0833f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
-            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
-            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
+            0.0533f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
+            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
+            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
         );
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation.eulerAngles;

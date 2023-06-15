@@ -348,7 +348,7 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.3
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
@@ -740,7 +740,7 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.3
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
