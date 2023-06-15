@@ -24,36 +24,41 @@ public class Drawer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        this.DrawOctree(this.sim.octree_root);
-        foreach (OctreeItem item in this.sim.items)
+        if (this.sim != null)
         {
-            this.DrawAABB(item);
-        }
-        /*
-        List<OBB> obbs = new List<OBB>();
-        foreach (GameObject box in this.boxes)
-        {
-            OBB bb = new OBB(box.transform.position, box.transform.rotation, box.transform.localScale);
-            this.DrawBox(bb.GetVerticies(), width: 0.1f);
-            obbs.Add(bb);
-        }
-
-        Vector3 position;
-        Vector3 normal;
-        float depth;
-        for (int i = 0; i < obbs.Count - 1; i++)
-        {
-            for (int j = i + 1; j < obbs.Count; j++)
+            this.DrawOctree(this.sim.octree_root);
+            foreach (OctreeItem item in this.sim.items)
             {
-                if (OBB.IsOverlapping(obbs[i], obbs[j], out position, out normal, out depth))
+                this.DrawAABB(item);
+            }
+        }
+        else
+        {
+            List<OBB> obbs = new List<OBB>();
+            foreach (GameObject box in this.boxes)
+            {
+                OBB bb = new OBB(box.transform.position, box.transform.rotation, box.transform.localScale);
+                this.DrawBox(bb.GetVerticies(), width: 0.1f);
+                obbs.Add(bb);
+            }
+
+            Vector3 position;
+            Vector3 normal;
+            float depth;
+            for (int i = 0; i < obbs.Count - 1; i++)
+            {
+                for (int j = i + 1; j < obbs.Count; j++)
                 {
-                    this.DrawCircle(position, 0.75f, width: 0.1f);
-                    this.DrawLine(position, position + normal, width: 0.1f);
-                    Debug.Log($"Depth: {depth}");
+                    if (OBB.IsOverlapping(obbs[i], obbs[j], out position, out normal, out depth))
+                    {
+                        this.DrawCircle(position, 0.75f, width: 0.1f);
+                        this.DrawLine(position, position + normal, width: 0.1f);
+                        Debug.Log($"Depth: {depth}");
+                    }
                 }
             }
         }
-        */
+
         this.CleanCache();
     }
 

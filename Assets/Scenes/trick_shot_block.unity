@@ -223,11 +223,12 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.1
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!1 &549393994
 GameObject:
@@ -359,11 +360,12 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.1
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!23 &578422053
 MeshRenderer:
@@ -623,11 +625,12 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.1
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!1 &1284332696
 GameObject:
@@ -729,11 +732,12 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
+  elasticity: 0.1
+  moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 0}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!1 &1421504804
 GameObject:
@@ -835,11 +839,12 @@ MonoBehaviour:
   idle_time: 0
   mass: 1
   friction: 0.2
-  elasticity: 0.5
-  velocity: {x: 12, y: 0, z: 0}
+  elasticity: 0.1
+  moment: {x: 0, y: 0, z: 0}
+  velocity: {x: 23, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
-  last_rotation: {x: 0, y: 0, z: 0, w: 1}
+  last_rotation: {x: 0, y: 0, z: 0}
   sim: {fileID: 0}
 --- !u!1 &1450649417
 GameObject:
@@ -870,6 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b179944fa611e448328b258096d808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iterations: 1
   simulation_speed: 1
   objects_tag: Sim1
   grounds_tag: Sim_Ground
@@ -919,6 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   camera: {fileID: 1675468230}
+  boxes: []
   sim: {fileID: 1450649418}
 --- !u!4 &1495528055
 Transform:

@@ -6,6 +6,7 @@ public class Simulator : MonoBehaviour
 {
     private bool initialized;
 
+    public int iterations;
     public float simulation_speed;
     public string objects_tag;
     public string grounds_tag;
@@ -31,7 +32,7 @@ public class Simulator : MonoBehaviour
             this.Initalize();
             this.initialized = true;
         }
-        this.UpdateSim(Time.deltaTime * this.simulation_speed);
+        this.UpdateSim(Time.deltaTime * this.simulation_speed, iterations);
         // TODO: Check if number of GameObjects with tag changed and update this.bodies
     }
 
@@ -50,7 +51,16 @@ public class Simulator : MonoBehaviour
         Octree.Subdivide(this.octree_root);
     }
 
-    private void UpdateSim(float delta_time)
+    private void UpdateSim(float delta_time, int iterations)
+    {
+        float iterative_delta_time = delta_time / (float)iterations;
+        for (int i = 0; i < iterations; i++)
+        {
+            this.UpdateIteration(iterative_delta_time);
+        }
+    }
+
+    private void UpdateIteration(float delta_time)
     {
         this.octree_root = new Octree(this.items);
         Octree.Subdivide(this.octree_root);

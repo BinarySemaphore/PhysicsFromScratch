@@ -37,22 +37,38 @@ public class Collision
         List<Collision> collisions = new List<Collision>();
         float velocity_down = -1 * delta_time * A.velocity.y;
         float dims_y = 0.5f * Mathf.Abs((A.transform.rotation * A.transform.localScale).y);
-        Vector3 origin = A.transform.position;
-        origin.y += dims_y + velocity_down;
-        float distance = 2 * (dims_y + velocity_down);
-        if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance))
+        //float distance = 2 * (dims_y + velocity_down);
+        //Vector3 origin = A.transform.position;
+        //origin.y += dims_y + velocity_down;
+        OBB precise_box = new OBB(A.transform.position, A.transform.rotation, A.transform.localScale);
+
+        // 
+        foreach (Vector3 vertex in precise_box.GetVerticies())
         {
-            if (hit.collider.tag == A.sim.grounds_tag)
+            float distance_to_origin = A.transform.position.y - vertex.y;
+            // Skip if above A's center point
+            if (distance_to_origin < 0f) continue;
+
+            Vector3 origin = vertex;
+            origin.y += 1f + velocity_down;
+
+            float distance_to_check = 1f + velocity_down;
+
+            if (Physics.Raycast(origin, Vector3.down, out RaycastHit hit, distance_to_check))
             {
-                float depth = hit.point.y - (A.transform.position.y - dims_y);
-                collisions.Add(new Collision(
-                    A, null,
-                    hit.point,
-                    hit.normal,
-                    depth
-                ));
+                if (hit.collider.CompareTag(A.sim.grounds_tag))
+                {
+                    float depth = hit.point.y - vertex.y;
+                    collisions.Add(new Collision(
+                        A, null,
+                        hit.point,
+                        hit.normal,
+                        depth
+                    ));
+                }
             }
         }
+
         return collisions;
     }
 
@@ -100,8 +116,18 @@ public class Collision
         float friction = A.friction;
         float elasticity = A.elasticity;
 
-        Vector3 acting_velocity = Vector3.Project(A.velocity, normal);
-        Vector3 planar_velocity = A.velocity - acting_velocity;
+        Vector3 position_to_center = A.transform.position - position;
+        float distance_to_center = position_to_center.magnitude;
+
+        Vector3 velocity_A_at_pos = A.velocity;
+
+        // Add velocity from rotation relative to position of collision
+        Vector3 velocity_from_rotation = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_center);
+        velocity_from_rotation *= distance_to_center * delta_time;
+        velocity_A_at_pos += velocity_from_rotation;
+
+        Vector3 acting_velocity = Vector3.Project(velocity_A_at_pos, normal);
+        Vector3 planar_velocity = velocity_A_at_pos - acting_velocity;
 
         // Get velocity change due to friction
         Vector3 planar_friction = -1.0f * friction * planar_velocity;
@@ -112,6 +138,12 @@ public class Collision
         // Update velocities: planar friction + reactive - acting
         Vector3 delta_velocity = planar_friction + reactive_velocity - acting_velocity;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity);
+
+        // Update rotational velocities
+        Vector3 torque = Vector3.Cross(delta_velocity, position_to_center);
+        torque = Quaternion.Inverse(A.transform.rotation) * torque;
+        Vector3 delta_r_velocity = Vector3.Scale(torque, new Vector3(distance_to_center / A.moment.x, distance_to_center / A.moment.y, distance_to_center / A.moment.z));
+        A.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity);
 
         // Undo collision in space along normal
         Vector3 delta_position = new Vector3(0f, depth, 0f);
@@ -136,10 +168,27 @@ public class Collision
         float friction = Mathf.Sqrt(A.friction * B.friction);
         float elasticity = Mathf.Sqrt(A.elasticity * B.elasticity);
 
-        Vector3 acting_velocity_A = Vector3.Project(A.velocity, normal);
-        Vector3 planar_velocity_A = A.velocity - acting_velocity_A;
-        Vector3 acting_velocity_B = Vector3.Project(B.velocity, normal);
-        Vector3 planar_velocity_B = B.velocity - acting_velocity_B;
+        Vector3 position_to_A = A.transform.position - position;
+        Vector3 position_to_B = B.transform.position - position;
+        float distance_to_A = position_to_A.magnitude;
+        float distance_to_B = position_to_B.magnitude;
+
+        Vector3 velocity_A_at_pos = A.velocity;
+        Vector3 velocity_B_at_pos = B.velocity;
+
+        // Add velocity from rotation relative to position of collision
+        Vector3 velocity_from_rotation_A = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_A);
+        velocity_from_rotation_A *= distance_to_A * delta_time;
+        Vector3 velocity_from_rotation_B = Vector3.Cross(A.transform.rotation * A.r_velocity, -position_to_B);
+        velocity_from_rotation_B *= distance_to_B * delta_time;
+        velocity_A_at_pos += velocity_from_rotation_A;
+        velocity_B_at_pos += velocity_from_rotation_B;
+
+        // Get velocities contributing and perpendicular to collision
+        Vector3 acting_velocity_A = Vector3.Project(velocity_A_at_pos, normal);
+        Vector3 planar_velocity_A = velocity_A_at_pos - acting_velocity_A;
+        Vector3 acting_velocity_B = Vector3.Project(velocity_B_at_pos, normal);
+        Vector3 planar_velocity_B = velocity_B_at_pos - acting_velocity_B;
 
         // Get velocity change due to friction
         Vector3 planar_friction_A = -1.0f * friction * planar_velocity_A;
@@ -161,7 +210,7 @@ public class Collision
 
         /*
          * (m1 * v1 + m2 * v2 + m1 * e * (v1 - v2)) / (m1 + m2)
-         * (Elasticity * m1 * (v1 - v2) + Total KE) / Total Mass
+         * (Elasticity * m1 * (v1 - v2) + Total Momentum) / Total Mass
          */
         Vector3 reactive_velocity_B = elasticity * mass_A * (acting_velocity_A - acting_velocity_B);
         reactive_velocity_B += total_momentum;
@@ -172,6 +221,16 @@ public class Collision
         Vector3 delta_velocity_B = planar_friction_B + reactive_velocity_B - 1.1f * acting_velocity_B;
         A.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_A);
         B.AddToAccumulator(Accumulation.Type.velocity, delta_velocity_B);
+
+        // Update rotational velocities
+        Vector3 torque_A = Vector3.Cross(delta_velocity_A, position_to_A);
+        torque_A = Quaternion.Inverse(A.transform.rotation) * torque_A;
+        Vector3 torque_B = Vector3.Cross(delta_velocity_B, position_to_B);
+        torque_B = Quaternion.Inverse(B.transform.rotation) * torque_B;
+        Vector3 delta_r_velocity_A = Vector3.Scale(torque_A, new Vector3(distance_to_A / A.moment.x, distance_to_A / A.moment.y, distance_to_A / A.moment.z));
+        Vector3 delta_r_velocity_B = Vector3.Scale(torque_B, new Vector3(distance_to_B / B.moment.x, distance_to_B / B.moment.y, distance_to_B / B.moment.z));
+        A.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_A);
+        B.AddToAccumulator(Accumulation.Type.r_velocity, delta_r_velocity_B);
 
         // Resolve collision spacially using depth and percent based on mass or if one object is in a rough spot (high_mass_collision)
         if (B.awake)
