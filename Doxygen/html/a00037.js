@@ -18,8 +18,9 @@ var a00037 =
     [ "high_mass_collision", "a00037.html#a192ae2e3949fb4c29d8acf9482dbffbd", null ],
     [ "idle_time", "a00037.html#a7f644c7040124712052f0704ffa8f68b", null ],
     [ "last_postion", "a00037.html#aa216568efddbd22ad71c2ec4b15e9bde", null ],
-    [ "last_rotation", "a00037.html#a775cba97ccfe8919965afc24169913d8", null ],
+    [ "last_rotation", "a00037.html#a338fbde8c1b715f7b9adda41e34debaa", null ],
     [ "mass", "a00037.html#aa4333a34245af2219c8ba3ebb807e7f9", null ],
+    [ "moment", "a00037.html#a73ce43a4c017676a18833006d30b066a", null ],
     [ "r_velocity", "a00037.html#a46c9d4ae9df322bd247b2f88ca0d4d31", null ],
     [ "sim", "a00037.html#a5a7e511aae37ad7e91b0c9992802941c", null ],
     [ "velocity", "a00037.html#a061d7b3b40c5561884c00b9ec432c9ad", null ]
