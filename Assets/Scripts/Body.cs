@@ -48,6 +48,10 @@ public class Body : MonoBehaviour
         this.awake = true;
         this.high_mass_collision = 0;
         this.idle_time = 0;
+        /*
+         * https://en.wikipedia.org/wiki/List_of_moments_of_inertia
+         * This should be 1/12 * mass * (width^2 + height^2) but 1/20 seems to look better.
+         */
         this.moment = new Vector3(
             0.0533f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
             0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
