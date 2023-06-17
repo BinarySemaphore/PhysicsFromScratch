@@ -4098,6 +4098,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
+  max_delta_time: 0.01
   simulation_speed: 1
   objects_tag: Sim1
   grounds_tag: Sim_Ground

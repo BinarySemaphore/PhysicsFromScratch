@@ -841,7 +841,7 @@ MonoBehaviour:
   friction: 0.2
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
-  velocity: {x: 23, y: 0, z: 0}
+  velocity: {x: 10, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
   last_rotation: {x: 0, y: 0, z: 0}
@@ -876,6 +876,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
+  max_delta_time: 0.01
   simulation_speed: 1
   objects_tag: Sim1
   grounds_tag: Sim_Ground

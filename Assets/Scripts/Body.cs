@@ -26,6 +26,8 @@ public class Accumulation
 /// </summary>
 public class Body : MonoBehaviour
 {
+    public Vector3 inv_moment;
+
     public bool apply_gravity;
     public bool awake;
     public int high_mass_collision;
@@ -53,10 +55,11 @@ public class Body : MonoBehaviour
          * This should be 1/12 * mass * (width^2 + height^2) but 1/20 seems to look better.
          */
         this.moment = new Vector3(
-            0.0533f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
-            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
-            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
+            0.0833f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
         );
+        this.inv_moment = new Vector3(1f / this.moment.x, 1f / this.moment.y, 1f / this.moment.z);
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation.eulerAngles;
         this.bounding_box = new OctreeItem(this.gameObject);
@@ -84,7 +87,7 @@ public class Body : MonoBehaviour
         Vector3 applied_velocity = delta_time * this.velocity;
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
         this.transform.position += applied_velocity;
-        this.transform.Rotate(applied_r_velocity, Space.Self);
+        this.transform.Rotate((180f / Mathf.PI) * applied_r_velocity, Space.World);
 
         // Update BB to current position
         this.bounding_box.center = this.transform.position;
@@ -119,8 +122,8 @@ public class Body : MonoBehaviour
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.05f &&
-            (this.last_rotation - this.transform.rotation.eulerAngles).magnitude <= 0.1f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.01f &&
+            Body.Vector3DeltaAngle(this.last_rotation, this.transform.rotation.eulerAngles).magnitude <= 0.1f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 5.0f)
@@ -133,6 +136,15 @@ public class Body : MonoBehaviour
 
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation.eulerAngles;
+    }
+
+    public static Vector3 Vector3DeltaAngle(Vector3 a, Vector3 b)
+    {
+        Vector3 result = new Vector3(
+            Mathf.DeltaAngle(a.x, b.x),
+            Mathf.DeltaAngle(a.y, b.y),
+            Mathf.DeltaAngle(a.z, b.z));
+        return result;
     }
 
     public void ApplyAcceleration(Vector3 acceleration, float delta_time, bool no_wake)
