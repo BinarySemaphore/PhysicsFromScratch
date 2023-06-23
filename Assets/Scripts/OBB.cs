@@ -100,7 +100,7 @@ public class OBB
             // Any separation axis with distance larger than zero percludes actual overlap
             if (distance_results[i] > 0f) return false;
 
-            // Update smallest intersecting distances and index (want to use near zero for comparison otherwise extremly small numbers will mess up normal from cross axis tests).
+            // Check if axis_test is non-zero and update smallest intersecting distances and index
             if (axis_tests[i].magnitude > 0.5f && distance_results[i] > smallest_intersecting_distance)
             {
                 smallest_intersecting_distance_index = i;
@@ -266,7 +266,6 @@ public class OBB
                 }
             }
         }
-
         // Check B faces against A edges
         foreach (int[] face in face_indecies)
         {
