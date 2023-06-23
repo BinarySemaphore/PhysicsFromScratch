@@ -217,12 +217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaaed32b9f93bd468f70ee7481663b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv_mass: 0
+  inv_moment: {x: 0, y: 0, z: 0}
   apply_gravity: 1
   awake: 0
   high_mass_collision: 0
   idle_time: 0
   mass: 1
-  friction: 0.2
+  friction: 0.8
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -354,12 +356,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaaed32b9f93bd468f70ee7481663b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv_mass: 0
+  inv_moment: {x: 0, y: 0, z: 0}
   apply_gravity: 1
   awake: 0
   high_mass_collision: 0
   idle_time: 0
   mass: 1
-  friction: 0.2
+  friction: 0.8
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -619,12 +623,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaaed32b9f93bd468f70ee7481663b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv_mass: 0
+  inv_moment: {x: 0, y: 0, z: 0}
   apply_gravity: 1
   awake: 0
   high_mass_collision: 0
   idle_time: 0
   mass: 1
-  friction: 0.2
+  friction: 0.8
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -726,12 +732,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaaed32b9f93bd468f70ee7481663b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv_mass: 0
+  inv_moment: {x: 0, y: 0, z: 0}
   apply_gravity: 1
   awake: 0
   high_mass_collision: 0
   idle_time: 0
   mass: 1
-  friction: 0.2
+  friction: 0.8
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
@@ -815,7 +823,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421504804}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.05, y: 5.18, z: 0}
+  m_LocalPosition: {x: -18.5, y: 8.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
@@ -833,15 +841,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eaaed32b9f93bd468f70ee7481663b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inv_mass: 0
+  inv_moment: {x: 0, y: 0, z: 0}
   apply_gravity: 1
   awake: 0
   high_mass_collision: 0
   idle_time: 0
   mass: 1
-  friction: 0.2
+  friction: 0.8
   elasticity: 0.1
   moment: {x: 0, y: 0, z: 0}
-  velocity: {x: 23, y: 0, z: 0}
+  velocity: {x: 20, y: 0, z: 0}
   r_velocity: {x: 0, y: 0, z: 0}
   last_postion: {x: 0, y: 0, z: 0}
   last_rotation: {x: 0, y: 0, z: 0}
@@ -876,6 +886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iterations: 1
+  max_delta_time: 0.01
   simulation_speed: 1
   objects_tag: Sim1
   grounds_tag: Sim_Ground

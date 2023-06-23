@@ -31,6 +31,13 @@ public class Drawer : MonoBehaviour
             {
                 this.DrawAABB(item);
             }
+            foreach (Body body in this.sim.bodies)
+            {
+                foreach (Collision collision in body.collisions_encountered)
+                {
+                    this.DrawCollision(collision, width: 0.1f);
+                }
+            }
         }
         else
         {
@@ -123,7 +130,7 @@ public class Drawer : MonoBehaviour
         }
     }
 
-    void DrawBox(List<Vector3> corners, float width=1.0f)
+    void DrawBox(List<Vector3> corners, float width = 1.0f)
     {
         LineRenderer renderer = this.GetRenderer();
         renderer.positionCount = 16;
@@ -135,6 +142,29 @@ public class Drawer : MonoBehaviour
         {
             renderer.SetPosition(i, corners[indices[i]]);
         }
+    }
+
+    void DrawCollision(Collision collision, float width = 1.0f)
+    {
+        Vector3 position_to_A = collision.A.transform.position - collision.location;
+        Vector3 velocity_A_from_rotation = Vector3.Cross(position_to_A, collision.A.r_velocity);
+        Vector3 velocity_A_at_position = collision.A.velocity + velocity_A_from_rotation;
+        float acting_velocity_A = Vector3.Dot(velocity_A_at_position, collision.normal);
+        float relative_velocity = acting_velocity_A;
+
+        if (collision.B != null)
+        {
+            Vector3 position_to_B = collision.B.transform.position - collision.location;
+            Vector3 velocity_B_from_rotation = Vector3.Cross(position_to_B, collision.B.r_velocity);
+            Vector3 velocity_B_at_position = collision.B.velocity + velocity_B_from_rotation;
+            float acting_velocity_B = Vector3.Dot(velocity_B_at_position, collision.normal);
+            relative_velocity -= acting_velocity_B;
+        }
+
+        this.DrawBox(collision.A.GetPreciseCollider().GetVerticies(), width: width);
+        this.DrawCircle(collision.location, 0.5f, width: width);
+        this.DrawLine(collision.location, collision.location + collision.normal, width: width);
+        this.DrawLine(collision.location, collision.location + relative_velocity * Vector3.up, width: width);
     }
 
     /// <summary>

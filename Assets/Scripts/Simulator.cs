@@ -7,6 +7,7 @@ public class Simulator : MonoBehaviour
     private bool initialized;
 
     public int iterations;
+    public float max_delta_time;
     public float simulation_speed;
     public string objects_tag;
     public string grounds_tag;
@@ -32,7 +33,9 @@ public class Simulator : MonoBehaviour
             this.Initalize();
             this.initialized = true;
         }
-        this.UpdateSim(Time.deltaTime * this.simulation_speed, iterations);
+        float delta_time = Time.fixedDeltaTime;
+        delta_time = Mathf.Clamp(delta_time, 0.000001f, this.max_delta_time);
+        this.UpdateSim(delta_time * this.simulation_speed, iterations);
         // TODO: Check if number of GameObjects with tag changed and update this.bodies
     }
 

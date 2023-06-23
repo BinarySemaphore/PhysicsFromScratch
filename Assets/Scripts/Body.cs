@@ -26,6 +26,11 @@ public class Accumulation
 /// </summary>
 public class Body : MonoBehaviour
 {
+    private bool precise_collider_needs_update;
+    private OBB precise_collider;
+    public float inv_mass;
+    public Vector3 inv_moment;
+
     public bool apply_gravity;
     public bool awake;
     public int high_mass_collision;
@@ -41,18 +46,24 @@ public class Body : MonoBehaviour
     public OctreeItem bounding_box;
     public List<Accumulation> accumulator;
     public Simulator sim;
+    public List<Collision> collisions_encountered;
 
     // Start is called before the first frame update
     void Start()
     {
+        this.collisions_encountered = new List<Collision>();
+        this.precise_collider_needs_update = true;
         this.awake = true;
         this.high_mass_collision = 0;
         this.idle_time = 0;
+        this.inv_mass = 1 / this.mass;
+        // https://en.wikipedia.org/wiki/List_of_moments_of_inertia
         this.moment = new Vector3(
-            0.0533f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
-            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
-            0.0533f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
+            0.0833f * this.mass * (this.transform.localScale.y * this.transform.localScale.y + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.z * this.transform.localScale.z),
+            0.0833f * this.mass * (this.transform.localScale.x * this.transform.localScale.x + this.transform.localScale.y * this.transform.localScale.y)
         );
+        this.inv_moment = new Vector3(1f / this.moment.x, 1f / this.moment.y, 1f / this.moment.z);
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation.eulerAngles;
         this.bounding_box = new OctreeItem(this.gameObject);
@@ -78,12 +89,16 @@ public class Body : MonoBehaviour
 
         // Apply velocities
         Vector3 applied_velocity = delta_time * this.velocity;
+        //if (this.r_velocity.x != 0f && this.r_velocity.x > -0.5f && this.r_velocity.x < 0.5f) this.r_velocity.x = (1f - 2f * Mathf.Abs(this.r_velocity.x)) * this.r_velocity.x;
+        //if (this.r_velocity.y != 0f && this.r_velocity.y > -0.5f && this.r_velocity.y < 0.5f) this.r_velocity.y = (1f - 2f * Mathf.Abs(this.r_velocity.y)) * this.r_velocity.y;
+        //if (this.r_velocity.z != 0f && this.r_velocity.z > -0.5f && this.r_velocity.z < 0.5f) this.r_velocity.z = (1f - 2f * Mathf.Abs(this.r_velocity.z)) * this.r_velocity.z; 
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
         this.transform.position += applied_velocity;
-        this.transform.Rotate(applied_r_velocity, Space.Self);
+        this.transform.Rotate((180f / Mathf.PI) * applied_r_velocity, Space.World);
 
         // Update BB to current position
         this.bounding_box.center = this.transform.position;
+        this.precise_collider_needs_update = true;
     }
 
     /// <summary>
@@ -95,9 +110,11 @@ public class Body : MonoBehaviour
     {
         if (!this.awake) return;
 
+        this.collisions_encountered.Clear();
         // Check and handle collisions
         foreach (Collision collision in this.GetCollisions(delta_time))
         {
+            this.collisions_encountered.Add(collision);
             this.HandleCollision(collision, delta_time);
         }
 
@@ -115,8 +132,8 @@ public class Body : MonoBehaviour
         this.ApplyAccumulations();
         if (!this.awake) return;
 
-        if ((this.last_postion - this.transform.position).magnitude <= 0.05f &&
-            (this.last_rotation - this.transform.rotation.eulerAngles).magnitude <= 0.1f) this.idle_time += delta_time ;
+        if ((this.last_postion - this.transform.position).magnitude <= 0.01f &&
+            Body.Vector3DeltaAngle(this.last_rotation, this.transform.rotation.eulerAngles).magnitude <= 0.1f) this.idle_time += delta_time ;
         else this.idle_time = 0;
 
         if (this.idle_time > 5.0f)
@@ -129,6 +146,35 @@ public class Body : MonoBehaviour
 
         this.last_postion = this.transform.position;
         this.last_rotation = this.transform.rotation.eulerAngles;
+        this.precise_collider_needs_update = true;
+    }
+
+    public static Vector3 Vector3DeltaAngle(Vector3 a, Vector3 b)
+    {
+        Vector3 result = new Vector3(
+            Mathf.DeltaAngle(a.x, b.x),
+            Mathf.DeltaAngle(a.y, b.y),
+            Mathf.DeltaAngle(a.z, b.z));
+        return result;
+    }
+
+    public OBB GetPreciseCollider()
+    {
+        if (this.precise_collider_needs_update)
+        {
+            this.precise_collider = new OBB(this.transform.position, this.transform.rotation, this.transform.localScale);
+            this.precise_collider_needs_update = false;
+        }
+        return this.precise_collider;
+    }
+
+    public Vector3 GetRelativeMoment()
+    {
+        Vector3 relative_moment = this.transform.rotation * this.moment;
+        relative_moment.x = Mathf.Abs(relative_moment.x);
+        relative_moment.y = Mathf.Abs(relative_moment.y);
+        relative_moment.z = Mathf.Abs(relative_moment.z);
+        return relative_moment;
     }
 
     public void ApplyAcceleration(Vector3 acceleration, float delta_time, bool no_wake)
@@ -178,19 +224,20 @@ public class Body : MonoBehaviour
     /// <param name="delta_time"></param>
     private void HandleCollision(Collision collision, float delta_time)
     {
-        float depth = collision.depth;
         Body A = this;
         Body B = collision.B;
 
         // Dyanamic A and Static B
         if (B == null)
         {
-            Collision.ResolveImpulseDynamicAGroundB(A, collision.location, collision.normal, depth, delta_time);
+            Collision.RespondDynamicAGroundB(A, collision.location, collision.normal, collision.depth, delta_time);
+            //Collision.RespondHeckerDynamicAGroundB(A, collision.location, collision.normal, collision.depth, delta_time);
         }
         // Dynamic A and B
         else
         {
-            Collision.ResolveImpulseDynamicADynamicB(A, B, collision.location, collision.normal, depth, delta_time);
+            Collision.RespondDynamicADynamicB(A, B, collision.location, collision.normal, collision.depth, delta_time);
+            //Collision.RespondHeckerDynamicADynamicB(A, B, collision.location, collision.normal, collision.depth, delta_time);
         }
     }
 
