@@ -236,7 +236,7 @@ public class Body : MonoBehaviour
         // Dynamic A and B
         else
         {
-            Collision.RespondCombinedDynamicADynamicB(A, B, collision.location, collision.normal, collision.depth, delta_time);
+            Collision.RespondDynamicADynamicB(A, B, collision.location, collision.normal, collision.depth, delta_time);
             //Collision.RespondHeckerDynamicADynamicB(A, B, collision.location, collision.normal, collision.depth, delta_time);
         }
     }

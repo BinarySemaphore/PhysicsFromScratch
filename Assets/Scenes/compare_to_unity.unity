@@ -881,7 +881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b179944fa611e448328b258096d808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iterations: 2
+  iterations: 6
   max_delta_time: 0.01
   simulation_speed: 1
   objects_tag: Sim1
