@@ -262,6 +262,7 @@ public class OBB
                     {
                         count += 1;
                         location += found_location;
+                        normals -= found_normal;
                     }
                 }
             }
