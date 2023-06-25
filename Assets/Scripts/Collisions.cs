@@ -138,8 +138,6 @@ public class Collision
         float acting_velocity_A = Vector3.Dot(velocity_A_at_position, normal);
         float relative_velocity = acting_velocity_A;
 
-        if (relative_velocity > -2f) elasticity = 0f;
-
         if (relative_velocity < 0f)
         {
             float inv_distance_to_A = 1f / position_to_A.magnitude;
@@ -149,17 +147,22 @@ public class Collision
             float linear_percent_A = Mathf.Abs(Vector3.Dot(direction_to_A, normal));
             float angular_percent_A = 1f - linear_percent_A;
 
-            // Get relative moment of inertia at position along normal
-            float moment_A = Vector3.Dot(A.GetRelativeMoment(), normal);
+            float reactive_velocity_A = 0f;
 
-            // Get total momentum and mass using distributions
-            float total_inertial_mass = linear_percent_A * A.mass +
-                                        angular_percent_A * moment_A;
+            if (relative_velocity <= -2f)
+            {
+                // Get relative moment of inertia at position along normal
+                float moment_A = Vector3.Dot(A.GetRelativeMoment(), normal);
 
-            //Get velocity change due to impact reaction
-            // -e(v1 - v2) / total_mass  <- B is static and has infinite mass which cancel m2 and total_momentum aproaches zero from total_inertial_mass
-            float reactive_velocity_A = -elasticity * relative_velocity;
-            reactive_velocity_A /= total_inertial_mass;
+                // Get total momentum and mass using distributions
+                float total_inertial_mass = linear_percent_A * A.mass +
+                                            angular_percent_A * moment_A;
+
+                //Get velocity change due to impact reaction
+                // -e(v1 - v2) / total_mass  <- B is static and has infinite mass which cancel m2 and total_momentum aproaches zero from total_inertial_mass
+                reactive_velocity_A = -elasticity * relative_velocity;
+                reactive_velocity_A /= total_inertial_mass;
+            }
 
             //Get velocity change due to friction
             Vector3 planar_friction_A = -1f * friction * (velocity_A_at_position - acting_velocity_A * normal);
@@ -169,7 +172,7 @@ public class Collision
 
             Vector3 delta_linear_velocity_A = linear_percent_A * delta_velocity_A;
 
-            Vector3 delta_angular_velocity_A = delta_linear_velocity_A * inv_distance_to_A;
+            Vector3 delta_angular_velocity_A = delta_velocity_A * inv_distance_to_A;
             delta_angular_velocity_A = Vector3.Cross(delta_angular_velocity_A, direction_to_A);
             // Settle anglular velocity when balanced on CM with normal
             if (A.r_velocity.magnitude < 0.1f && linear_percent_A > 0.9999f && relative_velocity > -2f) delta_angular_velocity_A = 0.5f * delta_angular_velocity_A - 0.5f * A.r_velocity;
@@ -262,8 +265,6 @@ public class Collision
         float acting_velocity_B = Vector3.Dot(velocity_B_at_position, normal);
         float relative_velocity = acting_velocity_A - acting_velocity_B;
 
-        if (relative_velocity > -2f) elasticity = 0f;
-
         if (relative_velocity < 0f)
         {
             float inv_distance_to_A = 1f / position_to_A.magnitude;
@@ -281,26 +282,32 @@ public class Collision
             float moment_A = Vector3.Dot(A.GetRelativeMoment(), normal);
             float moment_B = Vector3.Dot(B.GetRelativeMoment(), normal);
 
-            // Get total momentum and mass using distributions
-            float total_momentum = 0.5f * (linear_percent_A + linear_percent_B) *
-                                   (A.mass * acting_velocity_A + B.mass * acting_velocity_B) +
-                                   0.5f * (angular_percent_A + angular_percent_B) *
-                                   (moment_A * acting_velocity_A + moment_B * acting_velocity_B);
-            float total_inertial_mass = linear_percent_A * A.mass + linear_percent_B * B.mass +
-                                        angular_percent_A * moment_A + angular_percent_B * moment_B;
+            float reactive_velocity_A = 0f;
+            float reactive_velocity_B = 0f;
 
-            // Get velocity change due to impact reaction
-            // (-em2(v1 - v2) + total_momentum) / total_mass
-            float reactive_velocity_A = -elasticity * relative_velocity *
-                                        (linear_percent_B * B.mass + angular_percent_B * moment_B) +
-                                        total_momentum;
-            reactive_velocity_A /= total_inertial_mass;
+            if (relative_velocity <= -2f)
+            {
+                // Get total momentum and mass using distributions
+                float total_momentum = 0.5f * (linear_percent_A + linear_percent_B) *
+                                       (A.mass * acting_velocity_A + B.mass * acting_velocity_B) +
+                                       0.5f * (angular_percent_A + angular_percent_B) *
+                                       (moment_A * acting_velocity_A + moment_B * acting_velocity_B);
+                float total_inertial_mass = linear_percent_A * A.mass + linear_percent_B * B.mass +
+                                            angular_percent_A * moment_A + angular_percent_B * moment_B;
 
-            // (em1(v1 - v2) + total_momentum) / total_mass
-            float reactive_velocity_B = elasticity * relative_velocity *
-                                        (linear_percent_A * A.mass + angular_percent_A * moment_A) +
-                                        total_momentum;
-            reactive_velocity_B /= total_inertial_mass;
+                // Get velocity change due to impact reaction
+                // (-em2(v1 - v2) + total_momentum) / total_mass
+                reactive_velocity_A = -elasticity * relative_velocity *
+                                            (linear_percent_B * B.mass + angular_percent_B * moment_B) +
+                                            total_momentum;
+                reactive_velocity_A /= total_inertial_mass;
+
+                // (em1(v1 - v2) + total_momentum) / total_mass
+                reactive_velocity_B = elasticity * relative_velocity *
+                                            (linear_percent_A * A.mass + angular_percent_A * moment_A) +
+                                            total_momentum;
+                reactive_velocity_B /= total_inertial_mass;
+            }
 
             // Get velocity change due to friction
             Vector3 planar_friction_A = -1f * friction * (velocity_A_at_position - acting_velocity_A * normal);
@@ -314,12 +321,12 @@ public class Collision
             Vector3 delta_linear_velocity_B = linear_percent_B * delta_velocity_B;
 
             // Get angular velocity required
-            Vector3 delta_angular_velocity_A = delta_linear_velocity_A * inv_distance_to_A;
+            Vector3 delta_angular_velocity_A = delta_velocity_A * inv_distance_to_A;
             delta_angular_velocity_A = Vector3.Cross(delta_angular_velocity_A, direction_to_A);
             // Settle anglular velocity when balanced on CM with normal
             if (A.r_velocity.magnitude < 0.1f && linear_percent_A > 0.9999f && relative_velocity > -2f) delta_angular_velocity_A = 0.5f * delta_angular_velocity_A - 0.5f * A.r_velocity;
 
-            Vector3 delta_angular_velocity_B = delta_linear_velocity_B * inv_distance_to_B;
+            Vector3 delta_angular_velocity_B = delta_velocity_B * inv_distance_to_B;
             delta_angular_velocity_B = Vector3.Cross(delta_angular_velocity_B, direction_to_B);
             // Settle anglular velocity when balanced on CM with normal
             if (B.r_velocity.magnitude < 0.1f && linear_percent_B > 0.9999f && relative_velocity > -2f) delta_angular_velocity_B = 0.5f * delta_angular_velocity_B - 0.5f * B.r_velocity;
