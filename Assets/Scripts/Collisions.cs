@@ -131,6 +131,7 @@ public class Collision
         float elasticity = A.elasticity;
 
         Vector3 position_to_A = A.transform.position - position;
+        position_to_A = Collision.VectorZeroOnDiget(position_to_A, 1);
 
         Vector3 velocity_A_from_rotation = Vector3.Cross(position_to_A, A.r_velocity);
         Vector3 velocity_A_at_position = A.velocity + velocity_A_from_rotation;
@@ -140,7 +141,8 @@ public class Collision
 
         if (relative_velocity < 0f)
         {
-            float inv_distance_to_A = 1f / position_to_A.magnitude;
+            float inv_distance_to_A = 0f;
+            if (position_to_A != Vector3.zero) inv_distance_to_A = 1f / position_to_A.magnitude;
             Vector3 direction_to_A = position_to_A * inv_distance_to_A;
 
             // Get distribution percents along the normal and direction to center of mass
@@ -175,6 +177,7 @@ public class Collision
             Vector3 delta_angular_velocity_A = delta_velocity_A * inv_distance_to_A;
             delta_angular_velocity_A = Vector3.Cross(delta_angular_velocity_A, direction_to_A);
             // Settle anglular velocity when balanced on CM with normal
+            delta_angular_velocity_A = Collision.VectorZeroOnDiget(delta_angular_velocity_A, 2);
             if (A.r_velocity.magnitude < 0.1f && linear_percent_A > 0.9999f && relative_velocity > -2f) delta_angular_velocity_A = 0.5f * delta_angular_velocity_A - 0.5f * A.r_velocity;
 
             // Update linear velocities
@@ -187,7 +190,7 @@ public class Collision
         // Undo collision in space along the normal direction
         Vector3 delta_position = Collision.disp_offset * depth * normal;
         A.AddToAccumulator(Accumulation.Type.position, delta_position);
-        A.high_mass_collision = 1000;
+        A.high_mass_collision = 5000;
     }
 
     /// <summary>
@@ -255,6 +258,8 @@ public class Collision
 
         Vector3 position_to_A = A.transform.position - position;
         Vector3 position_to_B = B.transform.position - position;
+        position_to_A = Collision.VectorZeroOnDiget(position_to_A, 1);
+        position_to_B = Collision.VectorZeroOnDiget(position_to_B, 1);
 
         Vector3 velocity_A_from_rotation = Vector3.Cross(position_to_A, A.r_velocity);
         Vector3 velocity_B_from_rotation = Vector3.Cross(position_to_B, B.r_velocity);
@@ -267,8 +272,11 @@ public class Collision
 
         if (relative_velocity < 0f)
         {
-            float inv_distance_to_A = 1f / position_to_A.magnitude;
-            float inv_distance_to_B = 1f / position_to_B.magnitude;
+            float inv_distance_to_A = 0f;
+            float inv_distance_to_B = 0f;
+            if (position_to_A != Vector3.zero) inv_distance_to_A = 1f / position_to_A.magnitude;
+            if (position_to_B != Vector3.zero) inv_distance_to_B = 1f / position_to_B.magnitude;
+
             Vector3 direction_to_A = position_to_A * inv_distance_to_A;
             Vector3 direction_to_B = position_to_B * inv_distance_to_B;
 
@@ -324,11 +332,13 @@ public class Collision
             Vector3 delta_angular_velocity_A = delta_velocity_A * inv_distance_to_A;
             delta_angular_velocity_A = Vector3.Cross(delta_angular_velocity_A, direction_to_A);
             // Settle anglular velocity when balanced on CM with normal
+            delta_angular_velocity_A = Collision.VectorZeroOnDiget(delta_angular_velocity_A, 2);
             if (A.r_velocity.magnitude < 0.1f && linear_percent_A > 0.9999f && relative_velocity > -2f) delta_angular_velocity_A = 0.5f * delta_angular_velocity_A - 0.5f * A.r_velocity;
 
             Vector3 delta_angular_velocity_B = delta_velocity_B * inv_distance_to_B;
             delta_angular_velocity_B = Vector3.Cross(delta_angular_velocity_B, direction_to_B);
             // Settle anglular velocity when balanced on CM with normal
+            delta_angular_velocity_B = Collision.VectorZeroOnDiget(delta_angular_velocity_B, 2);
             if (B.r_velocity.magnitude < 0.1f && linear_percent_B > 0.9999f && relative_velocity > -2f) delta_angular_velocity_B = 0.5f * delta_angular_velocity_B - 0.5f * B.r_velocity;
 
             // Update linear velocities
@@ -364,11 +374,25 @@ public class Collision
         {
             Vector3 delta_position_A = Collision.disp_offset * depth * normal;
             A.AddToAccumulator(Accumulation.Type.position, delta_position_A);
-            if (A.high_mass_collision < 1) A.high_mass_collision = 10;
+            if (A.high_mass_collision < 100) A.high_mass_collision = 100;
         }
 
         // Transfer high mass collision
         if (A.high_mass_collision > B.high_mass_collision) B.high_mass_collision = A.high_mass_collision - 1;
         if (B.high_mass_collision > A.high_mass_collision) A.high_mass_collision = B.high_mass_collision - 1;
+    }
+
+    public static Vector3 VectorZeroOnDiget(Vector3 vector, int digets)
+    {
+        float shift = Mathf.Pow(10f, digets);
+        Vector3 result = shift * vector;
+        if (result.x < 1f && result.x > -1f) result.x = 0f;
+        if (result.y < 1f && result.y > -1f) result.y = 0f;
+        if (result.z < 1f && result.z > -1f) result.z = 0f;
+        result.x = Mathf.Round(result.x);
+        result.y = Mathf.Round(result.y);
+        result.z = Mathf.Round(result.z);
+        result /= shift;
+        return result;
     }
 }

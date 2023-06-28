@@ -77,8 +77,8 @@ public class Body : MonoBehaviour
     /// <param name="delta_time"></param>
     public void UpdatePositions(float delta_time)
     {
-        if (this.high_mass_collision < 1) this.high_mass_collision = 0;
-        if (this.high_mass_collision >= 1) this.high_mass_collision /= 2;
+        if (this.high_mass_collision <= 1) this.high_mass_collision = 0;
+        if (this.high_mass_collision > 1) this.high_mass_collision /= 2;
         if (!this.awake)
         {
             // Update BB to current position
@@ -89,9 +89,6 @@ public class Body : MonoBehaviour
 
         // Apply velocities
         Vector3 applied_velocity = delta_time * this.velocity;
-        //if (this.r_velocity.x != 0f && this.r_velocity.x > -0.5f && this.r_velocity.x < 0.5f) this.r_velocity.x = (1f - 2f * Mathf.Abs(this.r_velocity.x)) * this.r_velocity.x;
-        //if (this.r_velocity.y != 0f && this.r_velocity.y > -0.5f && this.r_velocity.y < 0.5f) this.r_velocity.y = (1f - 2f * Mathf.Abs(this.r_velocity.y)) * this.r_velocity.y;
-        //if (this.r_velocity.z != 0f && this.r_velocity.z > -0.5f && this.r_velocity.z < 0.5f) this.r_velocity.z = (1f - 2f * Mathf.Abs(this.r_velocity.z)) * this.r_velocity.z; 
         Vector3 applied_r_velocity = delta_time * this.r_velocity;
         this.transform.position += applied_velocity;
         this.transform.Rotate((180f / Mathf.PI) * applied_r_velocity, Space.World);
